@@ -191,7 +191,7 @@ gulp.task('build-specs', ['templatecache'], function(done) {
  * This is separate so we can run tests on
  * optimize before handling image or fonts
  */
-gulp.task('build', ['optimize', 'images', 'fonts'], function() {
+gulp.task('build', ['styles','optimize', 'images', 'fonts'], function() {
   log('Building everything');
 
   var msg = {
@@ -231,12 +231,12 @@ gulp.task('optimize', ['inject'], function() {
     .pipe(assets) // Gather all assets from the html with useref
     // Get the css
     .pipe(cssFilter)
-    .pipe($.minifyCss())
+    //.pipe($.minifyCss())
     .pipe(cssFilter.restore())
     // Get the custom javascript
     .pipe(jsAppFilter)
     .pipe($.ngAnnotate({ add: true }))
-    .pipe($.uglify())
+    //.pipe($.uglify())
     .pipe(getHeader())
     .pipe(jsAppFilter.restore())
     // Get the vendor javascript
