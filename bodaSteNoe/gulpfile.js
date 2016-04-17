@@ -130,11 +130,11 @@ gulp.task('wiredep', function() {
   var options = config.getWiredepDefaultOptions();
 
   // Only include stubs if flag is enabled
-  var js = args.stubs ? [].concat(config.js, config.stubsjs) : [].concat(config.js, config.vendorJs);
-    
+  var js = args.stubs ? [].concat(config.js, config.stubsjs) : config.js;
   return gulp
     .src(config.index)
     .pipe(wiredep(options))
+    //.pipe(inject(config.customJs, 'customJs', config.jsOrder))
     .pipe(inject(js, '', config.jsOrder))
     .pipe(gulp.dest(config.client));
 });
@@ -209,7 +209,8 @@ gulp.task('build', ['optimize', 'images', 'fonts'], function() {
  * and inject them into the new index.html
  * @return {Stream}
  */
-gulp.task('optimize', ['inject', 'test'], function() {
+//, 'test'
+gulp.task('optimize', ['inject'], function() {
   log('Optimizing the js, css, and html');
 
   var assets = $.useref.assets({ searchPath: './' });
@@ -217,9 +218,12 @@ gulp.task('optimize', ['inject', 'test'], function() {
   var cssFilter = $.filter('**/*.css');
   var jsAppFilter = $.filter('**/' + config.optimized.app);
   var jslibFilter = $.filter('**/' + config.optimized.lib);
+  //var views = config.client + 'app/views/**/*.html';
 
   var templateCache = config.temp + config.templateCache.file;
-  
+  // gulp
+  //   .src(views)
+  //   .pipe(gulp.dest(config.build + '/app/views/'));
   return gulp
     .src(config.index)
     .pipe($.plumber())
@@ -404,6 +408,8 @@ function inject(src, label, order) {
   var options = { read: false };
   if (label) {
     options.name = 'inject:' + label;
+    options.starttag = '<!-- inject:' + label + ' -->';
+    options.relative = true;
   }
 
   return $.inject(orderSrc(src, order), options);

@@ -29,7 +29,7 @@ module.exports = function() {
     ],
     build: './build/',
     client: client,
-    css: temp + 'styles.css',
+    css: temp + 'style.css',
     fonts: bower.directory + 'font-awesome/fonts/**/*.*',
     html: client + '**/*.html',
     htmltemplates: clientApp + '**/*.html',
@@ -39,10 +39,15 @@ module.exports = function() {
     js: [
       clientApp + '**/*.module.js',
       clientApp + '**/*.js',
-      '!' + clientApp + '**/*.spec.js'
+      '!' + clientApp + '**/*.spec.js',
+      client + 'js/*.js',
+      client + 'js/slideshow/supersized.js',
+      client + 'js/slideshow/*.js'
     ],
-    vendorJs: [
-      client + 'js/*.js'
+    customJs:[
+      client + 'js/*.js',
+      client + 'js/slideshow/supersized.js',
+      client + 'js/slideshow/*.js'
     ],
     jsOrder: [
       '**/app.module.js',
@@ -85,7 +90,7 @@ module.exports = function() {
     templateCache: {
       file: 'templates.js',
       options: {
-        module: 'app.core',
+        module: 'app',
         root: 'app/',
         standalone: false
       }
