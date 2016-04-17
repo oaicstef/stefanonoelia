@@ -59,12 +59,11 @@
 							<a href="#home" class="nav-logo"><img src="images/logo.svg" alt="" /></a>
 
 							<!-- BEGIN MAIN MENU -->
-							<nav class="navbar">
-								<button id="nav-mobile-btn"><i class="fa fa-bars"></i></button>
+							<nav class="navbar" id="navigationbar">
+								<button id="nav-mobile-btn" data-toggle="collapse" data-target="#navigationbar"><i class="fa fa-bars"></i></button>
 
 								<ul class="nav navbar-nav">
-									<li><a href="#home" >Home</a>
-									</li>
+									<li><a href="#home">Home</a></li>
 
 									<li class="dropdown">
 										<a href="#ourstory">Our Story</a>
@@ -108,8 +107,6 @@
 		<!-- END HEADER -->
 
 		<!-- BEGIN HOME SECTION -->
-		<!--<section id="home" class="divider-bottom-1" ng-include="'app/views/home.html'">
-		</section>-->
 		<section id="home" class="divider-bottom-1">
 			<div class="container">
 				<div class="row">
@@ -214,32 +211,32 @@
 
 		<!-- BEGIN THE WEDDING SECTION -->
 		<section id="thewedding" class="bg-color pattern divider-bottom-3">
-	<div class="container">
-		<div class="row">
-			<div class="col-sm-12">
-				<h1 class="section-title">The Wedding</h1>
-			</div>
-		</div>
-		<div class="row center">
-			<div class="invite" data-animation-direction="from-left" data-animation-delay="100">
-				<div class="invite_authors">
-					Noelia
-					<span><i class="icon icon-arrow-right"></i>And<i class="icon icon-arrow-left"></i></span> Stefano
-				</div>
-
-				<div class="invite_info">
-					Os invitamos a celebrar nuestro matrimonio
-					<div class="separate"> </div>
-					Vi invitiamo a celebrare il nostro matrimonio
-					<div class="date">
-						19 . 08 . 2016
+			<div class="container">
+				<div class="row">
+					<div class="col-sm-12">
+						<h1 class="section-title">The Wedding</h1>
 					</div>
-					<div class="hour">16:30h</div>
+				</div>
+				<div class="row center">
+					<div class="invite" data-animation-direction="from-left" data-animation-delay="100">
+						<div class="invite_authors">
+							Noelia
+							<span><i class="icon icon-arrow-right"></i>And<i class="icon icon-arrow-left"></i></span> Stefano
+						</div>
+
+						<div class="invite_info">
+							Os invitamos a celebrar nuestro matrimonio
+							<div class="separate"> </div>
+							Vi invitiamo a celebrare il nostro matrimonio
+							<div class="date">
+								19 . 08 . 2016
+							</div>
+							<div class="hour">16:30h</div>
+						</div>
+					</div>
 				</div>
 			</div>
-		</div>
-	</div>
-</section>
+		</section>
 		<!-- END THE WEDDING SECTION -->
 
 		<!-- BEGIN WEDDING LOCATION SECTION -->
@@ -275,7 +272,7 @@
 		<!--<section id="rsvp" class="bg-color pattern" ng-include="'app/views/contact.html'">
 
 		</section>-->
-		 <!--END CONTACTS SECTION -->
+		<!--END CONTACTS SECTION -->
 
 		<!-- BEGIN FOOTER -->
 		<footer id="footer" class="bg-color pattern">
