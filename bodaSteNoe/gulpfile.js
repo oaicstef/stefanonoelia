@@ -78,6 +78,8 @@ gulp.task('styles', ['clean-styles'], function() {
 gulp.task('fonts', ['clean-fonts'], function() {
   log('Copying fonts');
 
+  gulp.src(config.client + 'web.config')
+      .pipe(gulp.dest(config.build));
   return gulp
     .src(config.fonts)
     .pipe(gulp.dest(config.build + 'fonts'));
