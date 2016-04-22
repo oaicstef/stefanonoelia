@@ -3,3 +3,6 @@
 ################################################################################
 
 /stenoe/packages
+/Api/Api/bin
+/Api/Api/obj/Debug
+/Api/packages
