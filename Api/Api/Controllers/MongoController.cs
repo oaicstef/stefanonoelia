@@ -24,6 +24,12 @@ namespace Api.Controllers
             
         }
 
+        [HttpGet]
+        public async Task<IHttpActionResult> Get()
+        {
+            return Ok();
+        }
+
         [Route()]
         [HttpPost]
         public async Task<IHttpActionResult> InsertConfirmation(Confirmation data)
