@@ -791,7 +791,8 @@ var Lilac;
                         showError,
                         showSuccess,
                         stopSpin,
-                        spinIcon = [];
+                        spinIcon = [],
+                        confirmationResponse = '';
 
                     $fields.each(function () {
                         var $field = $(this);
@@ -827,6 +828,7 @@ var Lilac;
                                 } else if ($field.hasClass('radio-lilac')) {
                                     html += "&field" + len + "_label=" + $field.data("value");
                                     html += "&field" + len + "_value=" + $('.active', $field).data("value");
+                                    confirmationResponse = $('.active', $field).data("value");
                                     len += 1;
                                 } else {
                                     html += "&field" + len + "_label=" + $field.attr("name");
@@ -903,16 +905,20 @@ var Lilac;
                         });
                         $submit_btn.addClass('disabled');
 
+                        var dataForm = $form.serializeArray();
+                        dataForm.push({ name:'confirmationResponse', value:confirmationResponse });
+                        
                         $.ajax({
                             type: 'POST',
-                            url: 'contact.php',
-                            data: html,
+                            url: apiUrl + 'api/mongo',
+                            data: dataForm,
                             success: function (msg) {
                                 stopSpin();
 
                                 if (msg === 'ok') {
                                     showSuccess();
                                     $form[0].reset();
+                                    $('#guest_list').html("");
                                 } else {
                                     showError();
                                 }
