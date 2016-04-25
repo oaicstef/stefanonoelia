@@ -9,6 +9,9 @@
 /*global google, window, RichMarker, jQuery, mobileMenuTitle, hero100PercentHeight, twitter_username, map_canvas_id, map_color, map_initial_zoom, map_initial_latitude, map_initial_longitude, use_default_map_style, contact_form_success_msg, contact_form_error_msg, c_days, c_hours, c_minutes, c_seconds, countdownEndMsg, Waypoint, Freewall, map_markers  */
 
 var Lilac;
+function media(data){
+    var i =0;    
+}
 
 (function ($) {
     "use strict";

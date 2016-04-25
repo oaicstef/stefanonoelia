@@ -1,4 +1,6 @@
 module.exports = function() {
+  var $ = require('gulp-load-plugins')({ lazy: true });
+  var args = require('yargs').argv;
   var client = './src/client/';
   var server = './src/server/';
   var clientApp = client + 'app/';
@@ -14,7 +16,8 @@ module.exports = function() {
     ignorePath: '../..'
   };
   var nodeModules = 'node_modules';
-
+  var buildDir = args.buildDir ? args.buildDir : './build/';
+  $.util.log($.util.colors.blue(buildDir + '---------------------------------------------------------------------'));
   var config = {
     /**
      * File paths
@@ -27,7 +30,7 @@ module.exports = function() {
       '!' + client + 'twitter/**/*.js',
       '!' + client + 'instagram/**/*.js',
     ],
-    build: './build/',
+    build: buildDir,
     client: client,
     css: temp + 'style.css',
     fonts: [
