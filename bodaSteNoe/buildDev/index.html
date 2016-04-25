@@ -15,6 +15,17 @@
 			display: none!important;
 		}
 	</style>
+	<style type="text/css">
+
+.file_input_textbox {height:25px;width:200px;float:left; }
+.file_input_div     {position: relative;width:80px;height:26px;overflow: hidden; }
+.file_input_button  {width: 80px;position:absolute;top:0px;
+                     border:1px solid #F0F0EE;padding:2px 8px 2px 8px; font-weight:bold; height:25px; margin:0px; margin-right:5px; }
+.file_input_button_hover{width:80px;position:absolute;top:0px;
+                     border:1px solid #0A246A; background-color:#B2BBD0;padding:2px 8px 2px 8px; height:25px; margin:0px; font-weight:bold; margin-right:5px; }
+.file_input_hidden  {font-size:45px;position:absolute;right:0px;top:0px;cursor:pointer;
+                     opacity:0;filter:alpha(opacity=0);-ms-filter:"alpha(opacity=0)";-khtml-opacity:0;-moz-opacity:0; }
+</style>
 	<title ng-bind="title">
 		steNoe
 	</title>
@@ -126,19 +137,15 @@
 			</div>
 		</section>
 		<!-- END HOME SECTION -->
-<section id="camera">
-	<ng-camera
-  type="photo"
-  enabled="true"
-  width="640"
-  height="480"
-  countdown="3"
-  ng-model="media"
-  overlay-src="http://example.com/photo-frame.png"
-  capture="callback(media)"
-  capture-message="Go!"></ng-camera>
-  
-  <input type="file" accept="image/*" capture="camera">
+<input type="file" accept="image/*" capture="camera" value="Take picture"></input>
+<input type="text" id="fileName" class="file_input_textbox" readonly="readonly">
+ <div class="file_input_div">
+  <input id="fileInputButton" type="button" value="Browse" class="file_input_button" />
+  <input type="file" class="file_input_hidden" 
+      onchange="javascript: document.getElementById('fileName').value = this.value" 
+      onmouseover="document.getElementById('fileInputButton').className='file_input_button_hover';"
+      onmouseout="document.getElementById('fileInputButton').className='file_input_button';" />
+</div>
 </section>
 		<section id="ourstory">
 			<div class="container">
