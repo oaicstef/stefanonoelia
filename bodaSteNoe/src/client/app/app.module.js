@@ -1,6 +1,6 @@
 (function() {
   'use strict';
 
-  angular.module('app', ['omr.directives']);
+  angular.module('app', ['angularPicasaAlbum']);
 
 })();

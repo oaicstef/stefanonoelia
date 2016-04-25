@@ -1,9 +1,9 @@
 <?php
 header('Content-type: application/json');
 
-$user_id = 'xxxxxxxx';
-$access_token = 'xxxxxxxx.xxxxxxx.xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx';
-$hashtag = 'sarahandmark';
+$user_id = '343055137';
+$access_token = '343055137.1677ed0.82fe8f3fe22d409887cb02784daab5d2';
+$hashtag = 'noeste2016';
 
 $api_url = 'https://api.instagram.com/v1/tags/' . $hashtag . '/media/recent?access_token=' . $access_token;
 
