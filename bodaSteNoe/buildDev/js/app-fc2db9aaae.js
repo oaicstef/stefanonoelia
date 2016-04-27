@@ -8,7 +8,7 @@
 (function() {
   'use strict';
 
-  angular.module('app', ['angularPicasaAlbum']);
+  angular.module('app', []);
 
 })();
 
