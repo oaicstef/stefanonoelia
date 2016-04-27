@@ -509,7 +509,7 @@ function startBrowserSync(isDev, specRunner) {
   }
 
   var options = {
-    proxy: 'localhost:' + port,
+    proxy: 'https://localhost:' + port,
     port: 3000,
     files: isDev ? [
       config.client + '**/*.*',
@@ -527,7 +527,8 @@ function startBrowserSync(isDev, specRunner) {
     logLevel: 'info',
     logPrefix: 'hottowel',
     notify: true,
-    reloadDelay: 0 //1000
+    reloadDelay: 0, //1000,
+    https: true
   };
   if (specRunner) {
     options.startPath = config.specRunnerFile;
