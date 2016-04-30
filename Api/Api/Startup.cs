@@ -13,7 +13,7 @@ namespace Api
         {
             var config = new HttpConfiguration();
             WebApiConfig.Register(config);
-
+            
             app.UseCors(CorsOptions.AllowAll);
             app.UseWebApi(config);
         }

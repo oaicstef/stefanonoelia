@@ -21,5 +21,7 @@ namespace Api.Models
 
         [JsonProperty("confirmationResponse")]
         public string ConfirmationResponse { get; set; }
+
+        public string Message { get; set; }
     }
 }

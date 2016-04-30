@@ -58,5 +58,7 @@ namespace Api.Controllers
             await collection.InsertOneAsync(conf);
             return Ok("ok");
         }
+
+
     }
 }

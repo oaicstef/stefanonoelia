@@ -564,17 +564,16 @@ function media(data){
                 var $tis = this;
 
                 $('.instagram').html('<div class="heartbeat"></div>');
-                var hashTag = 'noeste2016';
-                var access_token = '343055137.1677ed0.82fe8f3fe22d409887cb02784daab5d2';
-                var instagramUrl = 'https://api.instagram.com/v1/tags/' + hashTag + '/media/recent?access_token=' + access_token;
+                
+                var instagramUrl = apiUrl + 'api/instagram';
                 
                 $.ajax({
-                    type: 'post',
+                    type: 'get',
                     url: instagramUrl,
                     contentType: 'application/json',
                     dataType: 'json',
                     success: function (json) {
-                        var feed = $.parseJSON(json),
+                        var feed = json,//$.parseJSON(json),
                             len = $(".instagram").length,
                             index = 0,
                             feedLen = 0,
