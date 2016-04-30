@@ -593,7 +593,7 @@ function media(data){
 
                         $tis.createPrettyPhoto();
                     },
-                    error: function () {
+                    error: function (error) {
                         console.log("Error getting Instagram feed");
                     }
                 });
@@ -930,7 +930,7 @@ function media(data){
 
                                 $tis.sendingMail = false;
                             },
-                            error: function () {
+                            error: function (error) {
                                 stopSpin();
 
                                 showError();

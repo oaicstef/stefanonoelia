@@ -30,6 +30,6 @@ var	mobileMenuTitle = "Menu",					//The title of the mobile menu
 	c_minutes = "MIN.",							//Countdown "Minutes" label
 	c_seconds = "SEC.",							//Countdown "Seconds" label
 	countdownEndMsg = "Event Started!",			//Message to display when the countdown reaches the end
-	//apiUrl = "http://localhost:35825/";
+	// apiUrl = "http://localhost:35825/";
 	apiUrl = "http://stenoeapi.azurewebsites.net/";
 	

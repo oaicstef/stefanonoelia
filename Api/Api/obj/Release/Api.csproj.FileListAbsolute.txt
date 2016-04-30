@@ -47,3 +47,6 @@ E:\Users\Stefano\Source\Repos\stefanonoelia\Api\Api\bin\Microsoft.Owin.Cors.xml
 E:\Users\Stefano\Source\Repos\stefanonoelia\Api\Api\bin\Microsoft.Owin.Host.SystemWeb.xml
 E:\Users\Stefano\Source\Repos\stefanonoelia\Api\Api\bin\Microsoft.Owin.Hosting.xml
 E:\Users\Stefano\Source\Repos\stefanonoelia\Api\Api\bin\System.Web.Http.Owin.xml
+E:\Users\Stefano\Source\Repos\stefanonoelia\Api\Api\bin\Google.GData.Client.dll
+E:\Users\Stefano\Source\Repos\stefanonoelia\Api\Api\bin\Google.GData.Extensions.dll
+E:\Users\Stefano\Source\Repos\stefanonoelia\Api\Api\bin\Google.GData.Photos.dll
