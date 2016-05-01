@@ -2906,17 +2906,16 @@ function media(data){
                 var $tis = this;
 
                 $('.instagram').html('<div class="heartbeat"></div>');
-                var hashTag = 'noeste2016';
-                var access_token = '343055137.1677ed0.82fe8f3fe22d409887cb02784daab5d2';
-                var instagramUrl = 'https://api.instagram.com/v1/tags/' + hashTag + '/media/recent?access_token=' + access_token;
+                
+                var instagramUrl = apiUrl + 'api/instagram';
                 
                 $.ajax({
-                    type: 'post',
+                    type: 'get',
                     url: instagramUrl,
                     contentType: 'application/json',
                     dataType: 'json',
                     success: function (json) {
-                        var feed = $.parseJSON(json),
+                        var feed = json,//$.parseJSON(json),
                             len = $(".instagram").length,
                             index = 0,
                             feedLen = 0,
@@ -2936,7 +2935,7 @@ function media(data){
 
                         $tis.createPrettyPhoto();
                     },
-                    error: function () {
+                    error: function (error) {
                         console.log("Error getting Instagram feed");
                     }
                 });
@@ -3273,7 +3272,7 @@ function media(data){
 
                                 $tis.sendingMail = false;
                             },
-                            error: function () {
+                            error: function (error) {
                                 stopSpin();
 
                                 showError();
@@ -3510,16 +3509,16 @@ var	mobileMenuTitle = "Menu",					//The title of the mobile menu
 	hero100PercentHeight = false,				//If true, the hero section (home) will be set with a minimum height of 100% window height. If false, hero height will be the height of its content.
 	
 	//TWITTER VARIABLE
-	twitter_username = "Envato",				//Replace with your own Twitter username
+	twitter_username = "oaicstef",				//Replace with your own Twitter username
 	
 	
 	//GOOGLE MAP VARIABLES
 	map_canvas_id = "map_canvas",				//The HTML "id" of the map canvas
-	map_color = "#ad9fb3",						//Google map color
-	map_initial_zoom = 15,						//The initial zoom when Google map loads
-	map_initial_latitude = 33.779613,			//Google map initial Latitude. If "null", the latitude of the first marked will be used
-	map_initial_longitude = -118.066904,		//Google map initial Longitude. If "null", the longitude of the first marked will be used
-	use_default_map_style = false,				//If true, default map style will be used
+	map_color = "#f58b8a",						//Google map color
+	map_initial_zoom = 13,						//The initial zoom when Google map loads
+	map_initial_latitude = 38.2264595,			//Google map initial Latitude. If "null", the latitude of the first marked will be used
+	map_initial_longitude = 15.2398074,		//Google map initial Longitude. If "null", the longitude of the first marked will be used
+	use_default_map_style = true,				//If true, default map style will be used
 	
 	
 	//CONTACT FORM VARIABLES
@@ -3532,7 +3531,7 @@ var	mobileMenuTitle = "Menu",					//The title of the mobile menu
 	c_hours = "HOURS",							//Countdown "Hours" label
 	c_minutes = "MIN.",							//Countdown "Minutes" label
 	c_seconds = "SEC.",							//Countdown "Seconds" label
-	countdownEndMsg = "Event Started!",			//Message to display when the countdown reaches the end
-	//apiUrl = "http://localhost:35825/";
+	countdownEndMsg = "Que la boda empieze! / Che il matrimonio inizi!",			//Message to display when the countdown reaches the end
+	// apiUrl = "http://localhost:35825/";
 	apiUrl = "http://stenoeapi.azurewebsites.net/";
 	

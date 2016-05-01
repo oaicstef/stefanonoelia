@@ -38,13 +38,15 @@ namespace Api.Controllers
             {
                 return BadRequest();
             }
+
             
 
             var conf = data.ToObject<Confirmation>();
+            
             var oldConf = await collection.FindAsync(c => c.Email.Equals(conf.Email));
             if ((await oldConf.ToListAsync()).Count > 0)
             {
-                return BadRequest("Already exists");
+                conf.Name += "------REPEATED-----";
             }
 
             foreach (var prop in data.Properties()
