@@ -70,7 +70,7 @@
 	<!-- endbuild -->
 </head>
 
-<body>
+<body ng-controller="MainController">
 	<div id="preloader">
 		<div class="heartbeat"></div>
 	</div>
@@ -95,13 +95,13 @@
 									<li><a href="#home">Home</a></li>
 
 									<li class="dropdown">
-										<a href="#ourstory">Our Story</a>
+										<a href="#ourstory">{{ 'Our Story' | translate }}</a>
 									</li>
 
 									<li class="dropdown">
-										<a href="#thewedding">The Wedding</a>
+										<a href="#thewedding">{{ 'The Wedding' | translate }}</a>
 										<ul class="dropdown-menu">
-											<li><a href="#location">The Wedding Location</a></li>
+											<li><a href="#location">{{ 'The Wedding Location' | translate }} </a></li>
 											<!--<li><a href="#bridesmaidsgroomsmen">Bridesmaids & Groomsmen</a></li>
 											<li><a href="#weddinggifts">Wedding Gifts</a></li>
 											<li class="dropdown-submenu">
@@ -123,7 +123,7 @@
 										</ul>
 									</li>-->
 
-									<li><a href="#rsvp">Confirmation</a></li>
+									<li><a href="#rsvp">{{ 'Confirmation' | translate }}</a></li>
 									<!--<li><a href="#music">Music</a></li>-->
 								</ul>
 							</nav>
@@ -142,7 +142,7 @@
 				<div class="row">
 					<div class="col-sm-12">
 						<div class="hero-title curve">Noelia & Stefano</div>
-						<div class="hero-text">Are getting Married in</div>
+						<div class="hero-text">{{ 'Are getting Married in' | translate }}</div>
 						<div class="hero-divider"></div>
 
 						<div class="countdown"></div>
@@ -161,22 +161,7 @@
 					<div class="col-sm-12">
 						<h1 class="section-title">Our Love Story...</h1>
 						<p class="section-desc">
-							Como casi todos ya sabeis, nuestra historia viene de lejos, pues hace 10 anos que el destino quiso que nuestras miradas se
-							cruzaron en un pub tipico de la ciudad de Leiden (Holanda). Poco despues llegaron las tardes de te y lavanderia, mientras
-							charlabamos, reiamos y nos comiamos unas cuantas stroopwafels. Asi se nos pasaban las tardes lluviosas de inviernos.
-							Poco a poco y sin darnos cuenta lo que empezo como una amistad se convirtio en verdadero AMOR. Desde entonces hemos
-							continuado juntos sin importar el idioma o la distancia que hubiera entre los dos... Por todo esto nos sentimos muy
-							felices y orgullosos de poder compartir junto a vosotros uno de los dias mas especiales de nuestra vida. Gracias a
-							todos por estar ahi.
-						</p>
-						<p class="section-desc">
-							Come giá tutti saprete, la nostra storia é lunga, tutto inizió 10 anni fa quando il destino volle che i nostri sguardi s'incrociassero
-							in un pub tipico di Leiden (Olanda). Poco dopo arrivarono i pomeriggi di tee e lavatrici, mentre chiaccheravamo, ridevamo
-							e mangiavamo varie stroopwafels. Cosí passavano i pomeriggi piovosi d'inverno. Poco a poco e senza accorgerci ció
-							che inizió come una semplice amicizia si trasformó in vero AMORE. Da allora siamo stati insieme, senza dare importanza
-							alla lingua o alla distanza che ci rendevano le cose difficili... Per tutto questo siamo molto felici e orgogliosi
-							di poter condividere insieme a tutti voi uno dei giorni piú speciali della nostra vita. Grazie a tutti per celebrarlo
-							con noi.'
+							{{ 'StoryDescription' | translate }}
 						</p>
 					</div>
 				</div>
@@ -244,7 +229,7 @@
 			<div class="container">
 				<div class="row">
 					<div class="col-sm-12">
-						<h1 class="section-title">The Wedding</h1>
+						<h1 class="section-title">{{ 'The Wedding' | translate }}</h1>
 					</div>
 				</div>
 				<div class="row center">
@@ -254,10 +239,7 @@
 							<span><i class="icon icon-arrow-right"></i>And<i class="icon icon-arrow-left"></i></span> Stefano
 						</div>
 
-						<div class="invite_info">
-							Os invitamos a celebrar nuestro matrimonio
-							<div class="separate"> </div>
-							Vi invitiamo a celebrare il nostro matrimonio
+						<div class="invite_info"> {{ 'INVITE.INFO' | translate }}
 							<div class="date">
 								19 . 08 . 2016
 							</div>
@@ -274,7 +256,7 @@
 			<div class="container">
 				<div class="row">
 					<div class="col-sm-12">
-						<h2 class="section-title">The Wedding Location</h2>
+						<h2 class="section-title">{{ 'The Wedding Location' | translate }}</h2>
 					</div>
 				</div>
 			</div>
@@ -331,7 +313,7 @@
 						</div>
 
 						<div class="center">
-							<a href="#rsvp" class="btn ribbon btn-color scrollto"><i class="icon icon-arrow-right"></i>Conferma / Confirmanos<i class="icon icon-arrow-left"></i></a>
+							<a href="#rsvp" class="btn ribbon btn-color scrollto"><i class="icon icon-arrow-right"></i>{{ 'Confirm' | translate }}<i class="icon icon-arrow-left"></i></a>
 						</div>
 					</div>
 				</div>
@@ -361,6 +343,46 @@
 		</section>-->
 		<!-- END BLOG SECTION -->
 
+		<section id="music" class="bg-color pattern">
+    <div class="container">
+        <div class="row">
+            <div class="col-sm-12">
+                <h1 class="section-title">{{ 'Choose a Song' | translate }}</h1>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-sm-8 center">
+
+                <form id="form-music" method="post" action="#">
+                    <div class="form-wrap">
+                        <section class="highlighted">
+                            <div class="col-sm-6">
+                                <input type="text" name="Name" placeholder="IL TUO NOME / TU NOMBRE" 
+								class="form-control required fromName" />
+                            </div>
+                        </section>
+                        <section>
+                            <div class="col-md-8">
+                                <input type="text" name="songTitle" id="songTitle" 
+								placeholder="TITULO CANCION / TITOLO CANZONE" class="form-control fromSongTitle" />
+                            </div>
+                            <div class="col-md-4">
+                                <button id="add_song" class="btn btn-color add_button" data-input="songTitle" data-wrapper="songs_list">+ Add</button>
+                            </div>
+                            <div id="songs_list" class="add_list col-md-12" data-count="0">
+
+                            </div>
+                        </section>
+                    </div>
+                    <div class="center">
+                        <button type="submit" class="btn ribbon btn-color submitMusic_form"><span class="line_above"></span><i class="icon icon-arrow-right"></i>Invia / Enviar<i class="icon icon-arrow-left"></i></button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</section>
+		
 		<!-- BEGIN CONTACTS SECTION -->
 		<section id="rsvp" class="bg-color pattern">
 			<div class="container">
@@ -495,6 +517,8 @@
 	<script src="/bower_components/toastr/toastr.js"></script>
 	<script src="/bower_components/angular-animate/angular-animate.js"></script>
 	<script src="/bower_components/angular-bootstrap/ui-bootstrap-tpls.js"></script>
+	<script src="/bower_components/angular-translate/angular-translate.js"></script>
+	<script src="/bower_components/angular-translate-loader-static-files/angular-translate-loader-static-files.js"></script>
 	<!-- endbower -->
 	<!-- endbuild -->
 	<script src="/bower_components/angular-google-picasa-gallery/angular-picasa-album.js"></script>
@@ -508,8 +532,8 @@
 	<script src="/src/client/js/slideshow/1supersized.js"></script>
 	<script src="/src/client/js/slideshow/2slideshow.js"></script>
 	<script src="/src/client/js/common.js"></script>
-	<script src="/src/client/app/contactController.js"></script>
 	<script src="/src/client/js/freewall.js"></script>
+	<script src="/src/client/app/mainController.js"></script>
 	<script src="/src/client/js/map.markers.js"></script>
 	<script src="/src/client/js/richmarker.js"></script>
 	<script src="/src/client/js/scripts.js"></script>

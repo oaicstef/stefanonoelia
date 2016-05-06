@@ -25,11 +25,11 @@ var	mobileMenuTitle = "Menu",					//The title of the mobile menu
 	
 	
 	//COUNTDOWN VARIABLES
-	c_days = "DAYS",							//Countdown "Days" label
-	c_hours = "HOURS",							//Countdown "Hours" label
-	c_minutes = "MIN.",							//Countdown "Minutes" label
-	c_seconds = "SEC.",							//Countdown "Seconds" label
+	// c_days = "DAYS",							//Countdown "Days" label
+	// c_hours = "HOURS",							//Countdown "Hours" label
+	// c_minutes = "MIN.",							//Countdown "Minutes" label
+	// c_seconds = "SEC.",							//Countdown "Seconds" label
 	countdownEndMsg = "Que la boda empieze! / Che il matrimonio inizi!",			//Message to display when the countdown reaches the end
-	// apiUrl = "http://localhost:35825/";
-	apiUrl = "http://stenoeapi.azurewebsites.net/";
+	apiUrl = "http://localhost:35825/";
+	//apiUrl = "http://stenoeapi.azurewebsites.net/";
 	

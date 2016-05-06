@@ -1,4 +1,5 @@
-﻿using System.Configuration;
+﻿using System.Collections.Generic;
+using System.Configuration;
 using System.Linq;
 using System.Threading.Tasks;
 using System.Web.Http;
@@ -9,24 +10,24 @@ using Newtonsoft.Json.Linq;
 
 namespace Api.Controllers
 {
-    [RoutePrefix("api/mongo")]
-    public class MongoController : ApiController
+    [RoutePrefix("api/music")]
+    public class MusicController : ApiController
     {
         private readonly string connectionString = ConfigurationManager.AppSettings["mongoConnectionString"];
-        private readonly IMongoCollection<Confirmation> collection;
+        private readonly IMongoCollection<Song> collection;
 
-        public MongoController()
+        public MusicController()
         {
             var client = new MongoClient(connectionString);
             var database = client.GetDatabase("stenoe");
-            collection = database.GetCollection<Confirmation>("confirmations");
+            collection = database.GetCollection<Song>("songs");
         }
 
         [Route()]
         [HttpGet]
         public async Task<IHttpActionResult> Get()
         {
-            var result = await collection.Find(c => c.Name != null).ToListAsync();
+            var result = await collection.Find(c => c.Title != null).ToListAsync();
             return Ok(result);
         }
 
@@ -39,26 +40,23 @@ namespace Api.Controllers
                 return BadRequest();
             }
 
-            var conf = data.ToObject<Confirmation>();
-            
-            var exists = collection.AsQueryable().Any(c => c.Email.Equals(conf.Email));
-            if (exists)
-            {
-                conf.Name += "------REPEATED-----";
-            }
+            var songs = new List<Song>();
 
             foreach (var prop in data.Properties()
                 .Where(prop => 
-                              prop.Name.Contains("guest") && !string.IsNullOrWhiteSpace(prop.Value.ToString())
+                              prop.Name.Contains("song") && !string.IsNullOrWhiteSpace(prop.Value.ToString())
                       ))
             {
-                conf.Guests.Add(prop.Value.ToString());
+                var existingSong = collection.AsQueryable().Any(s => s.Title == prop.Value.ToString());
+
+                if (!existingSong)
+                {
+                    songs.Add(new Song(prop.Value.ToString()));
+                }
             }
 
-            await collection.InsertOneAsync(conf);
+            await collection.InsertManyAsync(songs);
             return Ok("ok");
         }
-
-
     }
 }

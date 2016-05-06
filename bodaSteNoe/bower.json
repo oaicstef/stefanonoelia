@@ -29,7 +29,9 @@
     "toastr": "^2.1.2",
     "angular-animate": "^1.5.3",
     "angular-bootstrap": "^1.2.5",
-    "modernizr": "3.3.1"
+    "modernizr": "3.3.1",
+    "angular-translate": "^2.11.0",
+    "angular-translate-loader-static-files": "^2.11.0"
   },
   "resolutions": {
     "angular": "1.5.3"
