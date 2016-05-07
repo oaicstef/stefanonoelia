@@ -9,9 +9,11 @@
 /*global google, window, RichMarker, jQuery, mobileMenuTitle, hero100PercentHeight, twitter_username, map_canvas_id, map_color, map_initial_zoom, map_initial_latitude, map_initial_longitude, use_default_map_style, contact_form_success_msg, contact_form_error_msg, c_days, c_hours, c_minutes, c_seconds, countdownEndMsg, Waypoint, Freewall, map_markers  */
 
 var Lilac;
-function media(data){
-    var i =0;    
+function media(data) {
+    var i = 0;
 }
+
+
 
 (function ($) {
     "use strict";
@@ -130,9 +132,9 @@ function media(data){
                  */
                 $tis.countdown();
 
-                 /**
-                 * Initiate Parallax
-                 */
+                /**
+                * Initiate Parallax
+                */
                 $tis.parallaxItems();
 
                 /**
@@ -161,7 +163,7 @@ function media(data){
                 $tis.contactForm();
 
                 $tis.musicForm();
-                
+
                 /**
                  * Capture buttons click event
                  */
@@ -183,11 +185,16 @@ function media(data){
             },
 
             navigation: function () {
-
+                    
                 $('.nav li a').on('click', function (event) {
                     var navActive = $(this),
                         scroll = 0;
-
+                        
+                    if (navActive.siblings('ul.dropdown-menu').length > 0){
+                        var menu = navActive.siblings(".dropdown-menu");
+                        menu.toggle();
+                    };
+                    
                     if ($.browser.mobile && (!navActive.closest(".dropdown").hasClass("open") || !navActive.closest(".dropdown-menu").css('display') === 'block' || !navActive.parent().parent().hasClass("nav"))) {
                         event.preventDefault();
                         return false;
@@ -345,10 +352,10 @@ function media(data){
                 var $tis = this;
 
                 if ($tis.hero100PercentHeight) {
-                    $("#home").css({minHeight: $(window).innerHeight() + 'px'});
+                    $("#home").css({ minHeight: $(window).innerHeight() + 'px' });
 
                     $(window).resize(function () {
-                        $("#home").css({minHeight: $(window).innerHeight() + 'px'});
+                        $("#home").css({ minHeight: $(window).innerHeight() + 'px' });
                     });
                 }
             },
@@ -359,7 +366,7 @@ function media(data){
                     $("#freewall .item").each(function () {
                         var $item = $(this);
                         $item.width(Math.floor(260 + 200 * Math.random()));
-                        $item.css({'background-image': 'url(' + $('>img', $item).attr('src') + ')'});
+                        $item.css({ 'background-image': 'url(' + $('>img', $item).attr('src') + ')' });
                         $('>img', $item).remove();
                     });
 
@@ -406,74 +413,74 @@ function media(data){
                     styles = [
                         {
                             stylers: [
-                                {hue: map_color},
-                                {saturation: -75},
-                                {lightness: 5}
+                                { hue: map_color },
+                                { saturation: -75 },
+                                { lightness: 5 }
                             ]
                         },
                         {
                             featureType: "administrative",
                             elementType: "labels.text.fill",
                             stylers: [
-                                {saturation: 20},
-                                {lightness: -70}
+                                { saturation: 20 },
+                                { lightness: -70 }
                             ]
                         },
                         {
                             featureType: "water",
                             elementType: "geometry",
                             stylers: [
-                                {saturation: -50},
-                                {lightness: 40}
+                                { saturation: -50 },
+                                { lightness: 40 }
                             ]
                         },
                         {
                             featureType: "road",
                             elementType: "geometry",
                             stylers: [
-                                {hue: map_color},
-                                {saturation: -100},
-                                {lightness: 0}
+                                { hue: map_color },
+                                { saturation: -100 },
+                                { lightness: 0 }
                             ]
                         },
                         {
                             featureType: "road.highway",
                             elementType: "geometry",
                             stylers: [
-                                {hue: map_color},
-                                {saturation: 5},
-                                {lightness: 5}
+                                { hue: map_color },
+                                { saturation: 5 },
+                                { lightness: 5 }
                             ]
                         },
                         {
                             featureType: "road",
                             elementType: "geometry.stroke",
                             stylers: [
-                                {saturation: 10},
-                                {lightness: 0}
+                                { saturation: 10 },
+                                { lightness: 0 }
                             ]
                         },
                         {
                             featureType: "road.highway",
                             elementType: "geometry.stroke",
                             stylers: [
-                                {saturation: 0},
-                                {lightness: 20}
+                                { saturation: 0 },
+                                { lightness: 20 }
                             ]
                         },
                         {
                             featureType: "transit",
                             elementType: "geometry",
                             stylers: [
-                                {hue: map_color},
-                                {saturation: 30},
-                                {lightness: -30}
+                                { hue: map_color },
+                                { saturation: 30 },
+                                { lightness: -30 }
                             ]
                         }
                     ];
                 }
 
-                styledMap = new google.maps.StyledMapType(styles, {name: "Lilac"});
+                styledMap = new google.maps.StyledMapType(styles, { name: "Lilac" });
 
                 mapOptions = {
                     center: myLatlng,
@@ -532,7 +539,7 @@ function media(data){
 
                 $('body').append(twitterBox);
 
-                $("#twitter-box").css({display: 'none'});
+                $("#twitter-box").css({ display: 'none' });
 
                 try {
                     $("#twitter-box").tweet({
@@ -566,9 +573,9 @@ function media(data){
                 var $tis = this;
 
                 $('.instagram').html('<div class="heartbeat"></div>');
-                
+
                 var instagramUrl = apiUrl + 'api/instagram';
-                
+
                 $.ajax({
                     type: 'get',
                     url: instagramUrl,
@@ -603,7 +610,7 @@ function media(data){
 
             createPrettyPhoto: function () {
 
-                $("a[data-gal^='prettyPhoto']").prettyPhoto({theme: 'lilac', hook: 'data-gal'});
+                $("a[data-gal^='prettyPhoto']").prettyPhoto({ theme: 'lilac', hook: 'data-gal' });
             },
 
             createOwlSliders: function () {
@@ -652,7 +659,7 @@ function media(data){
                     }
 
                     scrolling = true;
-                    $gallery.animate({scrollLeft: $gallery.scrollLeft() + 380}, function () {
+                    $gallery.animate({ scrollLeft: $gallery.scrollLeft() + 380 }, function () {
                         scrolling = false;
                     });
                 });
@@ -663,7 +670,7 @@ function media(data){
                     }
 
                     scrolling = true;
-                    $gallery.animate({scrollLeft: $gallery.scrollLeft() - 380}, function () {
+                    $gallery.animate({ scrollLeft: $gallery.scrollLeft() - 380 }, function () {
                         scrolling = false;
                     });
                 });
@@ -672,18 +679,18 @@ function media(data){
             curvedText: function () {
 
                 if ($(".curve").length) {
-                    $('.curve').arctext({radius: 1000});
+                    $('.curve').arctext({ radius: 1000 });
 
                     $(window).resize(function () {
-                        $('.curve').arctext('set', {radius: 1000});
+                        $('.curve').arctext('set', { radius: 1000 });
                     });
                 }
 
                 if ($(".curve2").length) {
-                    $('.curve2').arctext({radius: 800, dir: -1});
+                    $('.curve2').arctext({ radius: 800, dir: -1 });
 
                     $(window).resize(function () {
-                        $('.curve2').arctext('set', {radius: 800, dir: -1});
+                        $('.curve2').arctext('set', { radius: 800, dir: -1 });
                     });
                 }
             },
@@ -696,9 +703,9 @@ function media(data){
                     $parent = $("" + parent);
 
                 $parent.html('<div class="days"><span>' + $tis.c_days + '</span><div></div></div>' +
-                        '<div class="hours"><span>' + $tis.c_hours + '</span><div></div></div>' +
-                        '<div class="minutes"><span>' + $tis.c_minutes + '</span><div></div></div>' +
-                        '<div class="seconds"><span>' + $tis.c_seconds + '</span><div></div></div>');
+                    '<div class="hours"><span>' + $tis.c_hours + '</span><div></div></div>' +
+                    '<div class="minutes"><span>' + $tis.c_minutes + '</span><div></div></div>' +
+                    '<div class="seconds"><span>' + $tis.c_seconds + '</span><div></div></div>');
 
                 function changeTime() {
                     var today = new Date(),
@@ -730,7 +737,7 @@ function media(data){
                 if (!$.browser.mobile) {
                     $.stellar();
                 } else {
-                    $('.parallax').css({'background-position': '50% 50%', 'background-size': 'cover', 'background-attachment': 'scroll'});
+                    $('.parallax').css({ 'background-position': '50% 50%', 'background-size': 'cover', 'background-attachment': 'scroll' });
                 }
             },
 
@@ -913,8 +920,8 @@ function media(data){
                         $submit_btn.addClass('disabled');
 
                         var dataForm = $form.serializeArray();
-                        dataForm.push({ name:'confirmationResponse', value:confirmationResponse });
-                        
+                        dataForm.push({ name: 'confirmationResponse', value: confirmationResponse });
+
                         $.ajax({
                             type: 'POST',
                             url: apiUrl + 'api/mongo',
@@ -965,7 +972,10 @@ function media(data){
                         showSuccess,
                         stopSpin,
                         spinIcon = [],
-                        confirmationResponse = '';
+                        confirmationResponse = '',
+                        $songsWrapper = $("#" + $submit_btn.data("songswrapper")),
+                        $songinput = $("#" + $submit_btn.data("songinput")),
+                        $songButton = $("#" + $submit_btn.data("songbutton"));
 
                     $fields.each(function () {
                         var $field = $(this);
@@ -1003,7 +1013,12 @@ function media(data){
                                     html += "&field" + len + "_value=" + $('.active', $field).data("value");
                                     confirmationResponse = $('.active', $field).data("value");
                                     len += 1;
-                                } else {
+                                } else if ($songsWrapper.data("count") == 0) {
+                                    $songinput.addClass('invalid');
+                                    $songButton.addClass('invalid');
+                                    error = true;
+                                }
+                                else {
                                     html += "&field" + len + "_label=" + $field.attr("name");
                                     html += "&field" + len + "_value=" + $field.val();
                                     len += 1;
@@ -1031,8 +1046,8 @@ function media(data){
                             $(this).removeClass('btn-danger');
                             next();
                         });
-
-                        $(".form_status_message").html('<div class="alert alert-danger alert-dismissible" role="alert"><button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>' + contact_form_error_msg + '</div>');
+                        
+                        $(".formMusic_status_message").html('<div class="alert alert-danger alert-dismissible" role="alert"><button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>' + contact_form_error_msg + '</div>');
                     };
 
                     showSuccess = function () {
@@ -1053,7 +1068,7 @@ function media(data){
                             next();
                         });
 
-                        $(".form_status_message").html('<div class="alert alert-success alert-dismissible" role="alert"><button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>' + contact_form_success_msg + '</div>');
+                        $(".formMusic_status_message").html('<div class="alert alert-success alert-dismissible" role="alert"><button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>' + contact_form_success_msg + '</div>');
                     };
 
                     stopSpin = function () {
@@ -1079,7 +1094,7 @@ function media(data){
                         $submit_btn.addClass('disabled');
 
                         var dataForm = $form.serializeArray();
-                        
+
                         $.ajax({
                             type: 'POST',
                             url: apiUrl + 'api/music',
@@ -1141,13 +1156,13 @@ function media(data){
                         slider = t.data("slider");
 
                     if (!t.hasClass("active")) {
-                        $(".bridesmaids-groomsmen-slider").addClass("hide").css({opacity: 0});
+                        $(".bridesmaids-groomsmen-slider").addClass("hide").css({ opacity: 0 });
 
                         if (first) {
                             first = false;
                             $("#" + slider).removeClass("hide");
                         } else {
-                            $("#" + slider).removeClass("hide").animate({opacity: 1}, 500);
+                            $("#" + slider).removeClass("hide").animate({ opacity: 1 }, 500);
                         }
                     }
 
@@ -1186,9 +1201,9 @@ function media(data){
                     }
 
                     html = '<div class="input-group">' +
-                            '<input type="text" class="form-control" name="' + $t.data("input") + '_' + count + '" value="' + val + '" />' +
-                            '<span class="input-group-addon"><i class="fa fa-trash"></i></span>' +
-                            '</div>';
+                        '<input type="text" class="form-control" name="' + $t.data("input") + '_' + count + '" value="' + val + '" />' +
+                        '<span class="input-group-addon" data-wrapper="' + $wrapper + '"><i class="fa fa-trash"></i></span>' +
+                        '</div>';
 
                     $("#" + $wrapper).data("count", count).append(html);
                     $input.val('');
@@ -1197,7 +1212,11 @@ function media(data){
 
                 // Capture "Remove guest" button click event.
                 $('.add_list').on('click', '.input-group-addon', function () {
+                    var $t = $(this),
+                        $wrapper = $t.data("wrapper"),
+                        count = parseInt($("#" + $wrapper).data("count"), 10) || 1;
                     $(this).closest(".input-group").remove();
+                    $("#" + $wrapper).data("count", --count);
                 });
             },
 
@@ -1245,4 +1264,4 @@ function media(data){
 
         Lilac.init();
     });
-}(jQuery));
+} (jQuery));

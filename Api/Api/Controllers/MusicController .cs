@@ -41,7 +41,7 @@ namespace Api.Controllers
             }
 
             var songs = new List<Song>();
-
+            
             foreach (var prop in data.Properties()
                 .Where(prop => 
                               prop.Name.Contains("song") && !string.IsNullOrWhiteSpace(prop.Value.ToString())
@@ -51,7 +51,10 @@ namespace Api.Controllers
 
                 if (!existingSong)
                 {
-                    songs.Add(new Song(prop.Value.ToString()));
+                    var song = data.ToObject<Song>();
+                    song.Title = prop.Value.ToString();
+                    
+                    songs.Add(song);
                 }
             }
 

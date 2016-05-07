@@ -1,3 +1,4 @@
+using System;
 using System.Collections.Generic;
 using MongoDB.Bson;
 using Newtonsoft.Json;
@@ -9,6 +10,7 @@ namespace Api.Models
         public Confirmation()
         {
             this.Guests = new List<string>();
+            this.DateTime = DateTime.Now;
         }
 
         public ObjectId _id { get; set; }
@@ -23,5 +25,7 @@ namespace Api.Models
         public string ConfirmationResponse { get; set; }
 
         public string Message { get; set; }
+
+        public DateTime DateTime { get; set; }
     }
 }

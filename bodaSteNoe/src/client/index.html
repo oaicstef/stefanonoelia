@@ -99,7 +99,8 @@
 									</li>
 
 									<li class="dropdown">
-										<a href="#thewedding">{{ 'The Wedding' | translate }}</a>
+										<a href="#thewedding" class="dropdown-toggle">{{ 'The Wedding' | translate }}
+											<b class="caret"></b></a>
 										<ul class="dropdown-menu">
 											<li><a href="#location">{{ 'The Wedding Location' | translate }} </a></li>
 											<!--<li><a href="#bridesmaidsgroomsmen">Bridesmaids & Groomsmen</a></li>
@@ -124,7 +125,7 @@
 									</li>-->
 
 									<li><a href="#rsvp">{{ 'Confirmation' | translate }}</a></li>
-									<!--<li><a href="#music">Music</a></li>-->
+									<li><a href="#music">{{ 'Music' | translate }}</a></li>
 								</ul>
 							</nav>
 							<!-- END MAIN MENU -->
@@ -343,6 +344,69 @@
 		</section>-->
 		<!-- END BLOG SECTION -->
 
+		
+		
+		<!-- BEGIN CONTACTS SECTION -->
+		<section id="rsvp" class="bg-color pattern">
+			<div class="container">
+				<div class="row">
+					<div class="col-sm-12">
+						<h1 class="section-title">{{ 'Confirmation' | translate }}</h1>
+					</div>
+				</div>
+
+				<div class="row">
+					<div class="col-sm-8 center">
+
+						<form id="form-rsvp" method="post" action="#">
+							<div class="form-wrap">
+								<section class="highlighted">
+									<h3>
+										<i class="icon icon-arrow-right"></i>{{ 'ContactTitle' | translate }}<i class="icon icon-arrow-left"></i>
+									</h3>
+									<div data-value="attending_wedding" class="radio-lilac col-sm-12">
+										<button class="btn btn-default active" data-value="yes"><i class="fa fa-smile-o"></i>Si</button>
+										<button class="btn btn-default" data-value="no"><i class="fa fa-frown-o"></i>No</button>
+									</div>
+									<div class="col-sm-6">
+										<input type="text" name="Name" placeholder="NOME / NOMBRE*" class="form-control required fromName" />
+									</div>
+									<div class="col-sm-6">
+										<input type="email" name="Email" placeholder="EMAIL*" class="form-control required fromEmail" />
+									</div>
+
+								</section>
+
+								<section>
+									<h3><i class="icon icon-arrow-right"></i>{{ 'GuestsTitle' | translate }}<i class="icon icon-arrow-left"></i></h3>
+									<div class="col-md-8">
+										<input type="text" name="guest" id="guest" placeholder="NOME / NOMBRE" class="form-control" />
+									</div>
+									<div class="col-md-4">
+										<button id="add_guest" class="btn btn-color add_button" data-input="guest" data-wrapper="guest_list">{{ 'AddButton' | translate }}</button>
+									</div>
+									<div id="guest_list" class="add_list col-md-12" data-count="0">
+
+									</div>
+								</section>
+
+								<section class="highlighted">
+									<div class="col-sm-12">
+										<textarea name="Message" placeholder="LASCIA UNA NOTA AGLI SPOSI / DEJA UN MENSAJE PARA LOS NOVIOS" class="form-control"></textarea>
+										<div class="form_status_message"></div>
+									</div>
+								</section>
+							</div>
+
+							<div class="center">
+								<button type="submit" class="btn ribbon btn-color submit_form"><span class="line_above"></span><i class="icon icon-arrow-right"></i>Invia / Enviar<i class="icon icon-arrow-left"></i></button>
+							</div>
+						</form>
+					</div>
+				</div>
+			</div>
+		</section>
+		<!--END CONTACTS SECTION -->
 		<section id="music" class="bg-color pattern">
     <div class="container">
         <div class="row">
@@ -367,123 +431,28 @@
 								placeholder="TITULO CANCION / TITOLO CANZONE" class="form-control fromSongTitle" />
                             </div>
                             <div class="col-md-4">
-                                <button id="add_song" class="btn btn-color add_button" data-input="songTitle" data-wrapper="songs_list">+ Add</button>
+                                <button id="add_song" class="btn btn-color add_button" data-input="songTitle" data-wrapper="songs_list">{{ 'AddButton' | translate }}</button>
                             </div>
                             <div id="songs_list" class="add_list col-md-12" data-count="0">
 
                             </div>
+							<div class="col-sm-12">
+								<div class="formMusic_status_message"></div>
+							</div>
                         </section>
                     </div>
-                    <div class="center">
-                        <button type="submit" class="btn ribbon btn-color submitMusic_form"><span class="line_above"></span><i class="icon icon-arrow-right"></i>Invia / Enviar<i class="icon icon-arrow-left"></i></button>
+					
+					<div class="center">
+                        <button type="submit" class="btn ribbon btn-color submitMusic_form" 
+								data-songinput="songTitle" data-songswrapper="songs_list" data-songbutton="add_song">
+							<span class="line_above"></span><i class="icon icon-arrow-right"></i>Invia / Enviar<i class="icon icon-arrow-left"></i>
+						</button>
                     </div>
                 </form>
             </div>
         </div>
     </div>
 </section>
-		
-		<!-- BEGIN CONTACTS SECTION -->
-		<section id="rsvp" class="bg-color pattern">
-			<div class="container">
-				<div class="row">
-					<div class="col-sm-12">
-						<h1 class="section-title">Confirmation</h1>
-					</div>
-				</div>
-
-				<div class="row">
-					<div class="col-sm-8 center">
-
-						<form id="form-rsvp" method="post" action="#">
-							<div class="form-wrap">
-								<section class="highlighted">
-									<h3>
-										<i class="icon icon-arrow-right"></i>Verrai al nostro matrimonio?<i class="icon icon-arrow-left"></i>
-										<i class="icon icon-arrow-right"></i>Vendras a nuestra boda?<i class="icon icon-arrow-left"></i>
-									</h3>
-									<div data-value="attending_wedding" class="radio-lilac col-sm-12">
-										<button class="btn btn-default active" data-value="yes"><i class="fa fa-smile-o"></i>Si</button>
-										<button class="btn btn-default" data-value="no"><i class="fa fa-frown-o"></i>No</button>
-									</div>
-									<div class="col-sm-6">
-										<input type="text" name="Name" placeholder="NOME / NOMBRE*" class="form-control required fromName" />
-									</div>
-									<div class="col-sm-6">
-										<input type="email" name="Email" placeholder="EMAIL*" class="form-control required fromEmail" />
-									</div>
-
-								</section>
-
-								<section>
-									<h3><i class="icon icon-arrow-right"></i>Chi verrá con te?<i class="icon icon-arrow-left"></i></h3>
-									<h3><i class="icon icon-arrow-right"></i>Quien viene contigo?<i class="icon icon-arrow-left"></i></h3>
-									<div class="col-md-8">
-										<input type="text" name="guest" id="guest" placeholder="NOME / NOMBRE" class="form-control" />
-									</div>
-									<div class="col-md-4">
-										<button id="add_guest" class="btn btn-color add_button" data-input="guest" data-wrapper="guest_list">+ Add</button>
-									</div>
-									<div id="guest_list" class="add_list col-md-12" data-count="0">
-
-									</div>
-								</section>
-
-								<section class="highlighted">
-									<div class="col-sm-12">
-										<textarea name="Message" placeholder="LASCIA UNA NOTA AGLI SPOSI / DEJA UN MENSAJE PARA LOS NOVIOS" class="form-control"></textarea>
-										<div class="form_status_message"></div>
-									</div>
-								</section>
-							</div>
-
-							<div class="center">
-								<button type="submit" class="btn ribbon btn-color submit_form"><span class="line_above"></span><i class="icon icon-arrow-right"></i>Invia / Enviar<i class="icon icon-arrow-left"></i></button>
-							</div>
-						</form>
-					</div>
-				</div>
-			</div>
-		</section>
-		<!--END CONTACTS SECTION -->
-		<!--<section id="music" class="bg-color pattern">
-			<div class="container">
-				<div class="row">
-					<div class="col-sm-12">
-						<h1 class="section-title">Scegli una canzone per gli sposi</h1>
-						<h1 class="section-title">Elige una cancion para los novios</h1>
-					</div>
-				</div>
-				<div class="row">
-					<div class="col-sm-8 center">
-
-						<form id="form-music" method="post" action="#">
-							<div class="form-wrap">
-								<section class="highlighted">
-									<div class="col-sm-6">
-										<input type="text" name="Name" placeholder="IL TUO NOME / TU NOMBRE" class="form-control required fromName" />
-									</div>
-								</section>
-								<section>
-									<div class="col-md-8">
-										<input type="text" name="songTitle" id="songTitle" placeholder="TITULO CANCION / TITOLO CANZONE" class="form-control" />
-									</div>
-									<div class="col-md-4">
-										<button id="add_guest" class="btn btn-color add_button" data-input="guest" data-wrapper="guest_list">+ Add</button>
-									</div>
-									<div id="guest_list" class="add_list col-md-12" data-count="0">
-
-									</div>
-								</section>
-							</div>
-							<div class="center">
-								<button type="submit" class="btn ribbon btn-color submit_form"><span class="line_above"></span><i class="icon icon-arrow-right"></i>Invia / Enviar<i class="icon icon-arrow-left"></i></button>
-							</div>
-						</form>
-					</div>
-				</div>
-			</div>
-		</section>-->
 		<!-- BEGIN FOOTER -->
 		<footer id="footer" class="bg-color pattern">
 			<div class="container">
@@ -519,6 +488,7 @@
 	<script src="/bower_components/angular-bootstrap/ui-bootstrap-tpls.js"></script>
 	<script src="/bower_components/angular-translate/angular-translate.js"></script>
 	<script src="/bower_components/angular-translate-loader-static-files/angular-translate-loader-static-files.js"></script>
+	<script src="/bower_components/bootstrap-hover-dropdown/bootstrap-hover-dropdown.js"></script>
 	<!-- endbower -->
 	<!-- endbuild -->
 	<script src="/bower_components/angular-google-picasa-gallery/angular-picasa-album.js"></script>
