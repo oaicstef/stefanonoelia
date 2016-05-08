@@ -199,12 +199,17 @@ function media(data) {
                         event.preventDefault();
                         return false;
                     }
-
+                                        
                     if (navActive.attr('href').charAt(0) === "#") {
                         event.preventDefault();
 
                         if (navActive.attr('href') !== "#home") {
-                            scroll = $(navActive.attr('href')).offset().top - 65;
+                            if (navActive.attr('href') == "#"){
+                                return false;
+                            }
+                            else {
+                                scroll = $(navActive.attr('href')).offset().top - 65;
+                            }
                         }
 
                         $('html, body').stop().animate({
@@ -591,15 +596,35 @@ function media(data) {
                         if (feed !== '' && feed.hasOwnProperty("data")) {
                             feedLen = feed.data.length;
                         }
-
+                        
+                        var html = '<ul>'
                         while (i < feedLen) {
-                            if (index < len) {
-                                $(".instagram").eq(index).html('<img src="' + feed.data[i].images.standard_resolution.url + '" alt="" /><span><a href="' + feed.data[i].images.standard_resolution.url + '" data-gal="prettyPhoto[gallery]" title="' + feed.data[i].caption.text + '"><i class="fa fa-link"></i></a><a href="' + feed.data[i].link + '" target="_blank" title="View on Instagram"><i class="fa fa-external-link"></i></a></span>');
+                            if (index == 0){
+                                html+= '<ul>';
+                            }
+                            html += '<li class="instagram">';
+                                                        
+                            //if (index < len) {
+                                // $(".instagram").eq(index).html('<img src="' + feed.data[i].images.standard_resolution.url + '" alt="" /><span><a href="' + feed.data[i].images.standard_resolution.url + '" data-gal="prettyPhoto[gallery]" title="' + feed.data[i].caption.text + '"><i class="fa fa-link"></i></a><a href="' + feed.data[i].link + '" target="_blank" title="View on Instagram"><i class="fa fa-external-link"></i></a></span>');
+                                html+='<img src="' + feed.data[i].images.standard_resolution.url + '" alt="" /><span><a href="' + feed.data[i].images.standard_resolution.url + '" data-gal="prettyPhoto[gallery]" title="' + feed.data[i].caption.text + '"><i class="fa fa-link"></i></a><a href="' +     feed.data[i].link + '" target="_blank" title="View on Instagram"><i class="fa fa-external-link"></i></a></span>';
                                 index += 1;
+                            //}
+                            html+='</li>';
+                            var columns = feedLen <= 4?4:feedLen/2;
+                            if (index == Math.round(columns)){
+                                html+= '</ul>';
+                                index = 0;
                             }
                             i += 1;
                         }
-
+                        if (feedLen < 4)
+                        {
+                            for(var i=0;i<4-feedLen;i++){
+                                html += '<li><div class="heartbeat"></div></li>';
+                            }
+                        }
+                        $('.gallery-scroller').html(html);
+                        
                         $tis.createPrettyPhoto();
                     },
                     error: function (error) {
@@ -1138,7 +1163,11 @@ function media(data) {
                     event.preventDefault();
 
                     if (navActive.attr('href') !== "#home") {
-                        scroll = $(navActive.attr('href')).offset().top - 65;
+                        if (navActive.attr('href') == "#"){
+                            return false;
+                        }else{
+                            scroll = $(navActive.attr('href')).offset().top - 65;
+                        }
                     }
 
                     $('html, body').stop().animate({

@@ -38,13 +38,15 @@ module.exports = function() {
       client + 'fonts/**/*.*'
     ],
     html: client + '**/*.html',
-    htmltemplates: clientApp + '**/*.html',
+    htmltemplates: [clientApp + '**/*.html'],
     images: client + 'images/**/*.*',
+    localization: client + 'localization/*.json',
     index: client + 'index.html',
     // app js, with no specs
     js: [
       clientApp + '**/*.module.js',
       clientApp + '**/*.js',
+      clientApp + '**/*.json',
       '!' + clientApp + '**/*.spec.js',
       client + 'js/*.js',
       client + 'js/slideshow/supersized.js',

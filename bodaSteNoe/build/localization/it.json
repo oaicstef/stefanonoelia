@@ -1,7 +1,7 @@
 {
     "The Wedding": "Il Matrimonio",
     "Our Story": "Love Story",
-    "The Wedding Location": "Location delle nozze",
+    "The Wedding Location": "Location",
     "Confirmation": "Confermazione",
     "Are getting Married in": "Si sposeranno in",
     "DAYS": "Giorni",
@@ -14,6 +14,10 @@
     "Choose a Song": "Scegli una canzone per gli sposi",
     "ContactTitle": "Verrai al nostro matrimonio?",
     "GuestsTitle": "Chi verrá con te?",
-    "AddButton": "+ Aggiungilo",
-    "Music": "Musica"
+    "AddButton": "+ Aggiungere",
+    "Music": "Musica",
+    "Gallery": "Galleria",
+    "GalleryDescription": "Ci piacerebbe vedere il nostro matrimonio attraverso i vostri occhi.",
+    "GalleryDescription2": " per condividere con noi i migliori momenti.",
+    "Send": "Invia"
 }

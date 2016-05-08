@@ -1,5 +1,5 @@
 //COUNTDOWN VARIABLES
-	var c_days = "",							//Countdown "Days" label
+	var c_days = "DAYS",							//Countdown "Days" label
 	c_hours = "HOURS",							//Countdown "Hours" label
 	c_minutes = "MIN.",							//Countdown "Minutes" label
 	c_seconds = "SEC.";							//Countdown "Seconds" label
@@ -14,7 +14,7 @@
 
   app.config(function ($translateProvider) {
     $translateProvider.useStaticFilesLoader({
-      prefix: '/app/localization/',
+      prefix: '/localization/',
       suffix: '.json'
     });
     

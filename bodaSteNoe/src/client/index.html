@@ -70,7 +70,7 @@
 	<!-- endbuild -->
 </head>
 
-<body ng-controller="MainController">
+<body ng-controller="MainController as main">
 	<div id="preloader">
 		<div class="heartbeat"></div>
 	</div>
@@ -115,7 +115,7 @@
 										</ul>
 									</li>
 
-									<!--<li><a href="#gallery">Gallery</a></li>-->
+									<li><a href="#gallery">{{ 'Gallery' | translate }}</a></li>
 
 									<!--<li class="dropdown">
 										<a href="#blog" data-toggle="dropdown" data-hover="dropdown">Blog<b class="caret"></b></a>
@@ -126,10 +126,12 @@
 
 									<li><a href="#rsvp">{{ 'Confirmation' | translate }}</a></li>
 									<li><a href="#music">{{ 'Music' | translate }}</a></li>
+									<li><a href="#"><img id="IT-Flag" ng-click="main.changeLanguage($event)" src="images\IT.png"/>
+													<img id="ES-Flag" ng-click="main.changeLanguage($event)" src="images\ES.png"/></a>
 								</ul>
 							</nav>
 							<!-- END MAIN MENU -->
-
+							
 						</div>
 					</div>
 				</div>
@@ -146,7 +148,14 @@
 						<div class="hero-text">{{ 'Are getting Married in' | translate }}</div>
 						<div class="hero-divider"></div>
 
-						<div class="countdown"></div>
+						<div class="countdown" ng-controller="CountDownController as vm">
+							<div class="days"><span>{{ 'DAYS' | translate }}</span><div>{{vm.days}}</div></div>
+							<div class="hours"><span>{{ 'HOURS' | translate }}</span><div>{{vm.hours}}</div></div>
+							<div class="minutes"><span>{{ 'MIN.' | translate }}</span><div>{{vm.minutes}}</div></div>
+							<div class="seconds"><span>{{ 'SEC.' | translate }}</span><div>{{vm.seconds}}</div></div>
+						</div>
+						<span style='display:none' countdown='' date='August 19, 2016 16:30:00' >
+						</span>
 						<!-- Countdown container. Check the bottom of the document where the countdown is being initialized. -->
 
 						<div class="hero-divider"></div>
@@ -155,7 +164,7 @@
 			</div>
 		</section>
 		<!-- END HOME SECTION -->
-</section>
+		
 		<section id="ourstory">
 			<div class="container">
 				<div class="row">
@@ -336,7 +345,38 @@
 		<!-- END WEDDING GIFTS SECTION -->
 
 		<!-- BEGIN GALLERY SECTION -->
-		
+		<!-- BEGIN GALLERY SECTION -->
+<section id="gallery" class="divider-bottom-3 bg-color-overlay parallax no-padding-bottom no-padding-top" 
+		 data-stellar-background-ratio="0.5">
+	<div class="divider-top-2"></div>
+	<!-- The class "divider-top-2" can also be applied to the tag <section>. In this case, it was added on a new <div> because the tag <section> have all pseudo elements (::after and ::before) in use. -->
+	<div class="container">
+		<div class="row">
+			<div class="col-sm-12">
+				<h1 class="section-title">{{ 'Gallery' | translate }}</h1>
+			</div>
+		</div>
+
+		<div class="row">
+			<div class="col-sm-12">
+				<div class="section-desc center">
+					<h3 class="gallery-desc">{{ 'GalleryDescription' | translate }}<br>Usa <strong>Instagram</strong>{{ 'GalleryDescription2' | translate }}</h3>
+					<h1>#NoeSte2016</h1>
+				</div>
+			</div>
+		</div>
+	</div>
+
+	<div class="gallery-wrapper">
+		<div class="gallery-left"></div>
+		<div class="gallery-right"></div>
+
+		<div class="gallery-scroller">
+			
+		</div>
+	</div>
+</section>
+<!-- END GALLERY SECTION -->
 		<!-- END GALLERY SECTION -->
 
 		<!-- BEGIN BLOG SECTION -->
@@ -369,7 +409,7 @@
 										<button class="btn btn-default" data-value="no"><i class="fa fa-frown-o"></i>No</button>
 									</div>
 									<div class="col-sm-6">
-										<input type="text" name="Name" placeholder="NOME / NOMBRE*" class="form-control required fromName" />
+										<input type="text" name="Name" placeholder="NOMBRE / NOME*" class="form-control required fromName" />
 									</div>
 									<div class="col-sm-6">
 										<input type="email" name="Email" placeholder="EMAIL*" class="form-control required fromEmail" />
@@ -380,7 +420,7 @@
 								<section>
 									<h3><i class="icon icon-arrow-right"></i>{{ 'GuestsTitle' | translate }}<i class="icon icon-arrow-left"></i></h3>
 									<div class="col-md-8">
-										<input type="text" name="guest" id="guest" placeholder="NOME / NOMBRE" class="form-control" />
+										<input type="text" name="guest" id="guest" placeholder="NOMBRE / NOME*" class="form-control" />
 									</div>
 									<div class="col-md-4">
 										<button id="add_guest" class="btn btn-color add_button" data-input="guest" data-wrapper="guest_list">{{ 'AddButton' | translate }}</button>
@@ -392,14 +432,14 @@
 
 								<section class="highlighted">
 									<div class="col-sm-12">
-										<textarea name="Message" placeholder="LASCIA UNA NOTA AGLI SPOSI / DEJA UN MENSAJE PARA LOS NOVIOS" class="form-control"></textarea>
+										<textarea name="Message" placeholder="DEJA UN MENSAJE PARA LOS NOVIOS / LASCIA UNA NOTA AGLI SPOSI" class="form-control"></textarea>
 										<div class="form_status_message"></div>
 									</div>
 								</section>
 							</div>
 
 							<div class="center">
-								<button type="submit" class="btn ribbon btn-color submit_form"><span class="line_above"></span><i class="icon icon-arrow-right"></i>Invia / Enviar<i class="icon icon-arrow-left"></i></button>
+								<button type="submit" class="btn ribbon btn-color submit_form"><span class="line_above"></span><i class="icon icon-arrow-right"></i>{{ 'Send' | translate }}<i class="icon icon-arrow-left"></i></button>
 							</div>
 						</form>
 					</div>
@@ -421,14 +461,14 @@
                     <div class="form-wrap">
                         <section class="highlighted">
                             <div class="col-sm-6">
-                                <input type="text" name="Name" placeholder="IL TUO NOME / TU NOMBRE" 
+                                <input type="text" name="Name" placeholder="TU NOMBRE / IL TUO NOME*" 
 								class="form-control required fromName" />
                             </div>
                         </section>
                         <section>
                             <div class="col-md-8">
                                 <input type="text" name="songTitle" id="songTitle" 
-								placeholder="TITULO CANCION / TITOLO CANZONE" class="form-control fromSongTitle" />
+								placeholder="TITULO CANCIÓN / TITOLO CANZONE*" class="form-control fromSongTitle" />
                             </div>
                             <div class="col-md-4">
                                 <button id="add_song" class="btn btn-color add_button" data-input="songTitle" data-wrapper="songs_list">{{ 'AddButton' | translate }}</button>
@@ -445,7 +485,7 @@
 					<div class="center">
                         <button type="submit" class="btn ribbon btn-color submitMusic_form" 
 								data-songinput="songTitle" data-songswrapper="songs_list" data-songbutton="add_song">
-							<span class="line_above"></span><i class="icon icon-arrow-right"></i>Invia / Enviar<i class="icon icon-arrow-left"></i>
+							<span class="line_above"></span><i class="icon icon-arrow-right"></i>{{ 'Send' | translate }}<i class="icon icon-arrow-left"></i>
 						</button>
                     </div>
                 </form>
@@ -488,10 +528,8 @@
 	<script src="/bower_components/angular-bootstrap/ui-bootstrap-tpls.js"></script>
 	<script src="/bower_components/angular-translate/angular-translate.js"></script>
 	<script src="/bower_components/angular-translate-loader-static-files/angular-translate-loader-static-files.js"></script>
-	<script src="/bower_components/bootstrap-hover-dropdown/bootstrap-hover-dropdown.js"></script>
 	<!-- endbower -->
 	<!-- endbuild -->
-	<script src="/bower_components/angular-google-picasa-gallery/angular-picasa-album.js"></script>
 	<!-- inject:customJs -->
 	<!-- endinject -->
 
@@ -502,6 +540,7 @@
 	<script src="/src/client/js/slideshow/1supersized.js"></script>
 	<script src="/src/client/js/slideshow/2slideshow.js"></script>
 	<script src="/src/client/js/common.js"></script>
+	<script src="/src/client/app/countdownController.js"></script>
 	<script src="/src/client/js/freewall.js"></script>
 	<script src="/src/client/app/mainController.js"></script>
 	<script src="/src/client/js/map.markers.js"></script>
@@ -534,14 +573,14 @@
 	<script src="src/client/js/scripts.js"></script>-->
 
 	<script type="text/javascript">
-		$(document).ready(function () {
+		//$(document).ready(function () {
 			/**
 			 * Initiate countdown
 			 * Usage: Lilac.countdown("COUNTDOWN CONTAINER", "DATE");
 			 * You can change the countdowns labels in the file variables.js
 			 */
-			Lilac.countdown(".countdown", "2016/08/19 4:30 PM");
-		});
+			//Lilac.countdown(".countdown", "2016/08/19 4:30 PM");
+		//});
 	</script>
 </body>
 

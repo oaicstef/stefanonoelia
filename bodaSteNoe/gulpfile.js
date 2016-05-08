@@ -98,6 +98,15 @@ gulp.task('images', ['clean-images'], function() {
     .pipe(gulp.dest(config.build + 'images'));
 });
 
+gulp.task('lacalization', function() {
+  log('Compressing and copying localization json');
+
+  return gulp
+    .src(config.localization)
+    .pipe(gulp.dest(config.build + 'localization'));
+});
+
+
 gulp.task('less-watcher', function() {
   gulp.watch([config.less], ['styles']);
 });
@@ -193,7 +202,7 @@ gulp.task('build-specs', ['templatecache'], function(done) {
  * This is separate so we can run tests on
  * optimize before handling image or fonts
  */
-gulp.task('build', ['styles','optimize', 'images', 'fonts'], function() {
+gulp.task('build', ['styles','optimize', 'images', 'lacalization','fonts'], function() {
   log('Building everything');
 
   var msg = {
@@ -233,7 +242,7 @@ gulp.task('optimize', ['inject'], function() {
     .pipe(assets) // Gather all assets from the html with useref
     // Get the css
     .pipe(cssFilter)
-    //.pipe($.minifyCss())
+    .pipe($.minifyCss())
     .pipe(cssFilter.restore())
     // Get the custom javascript
     .pipe(jsAppFilter)
