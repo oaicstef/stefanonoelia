@@ -36,11 +36,15 @@
           firstLanguage = lang;
         }
       }, this);
-    } else {
+    } else if (window.navigator.language)
+    {
       // For IE
       firstLanguage = window.navigator.language.substring(0, 2);
     }
-    
+    else {
+      firstLanguage = 'es';
+    }
+        
     if (!supportedLanguages.find(e => e == firstLanguage)) {
       firstLanguage = "it";
     }
