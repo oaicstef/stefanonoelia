@@ -13,8 +13,7 @@
   
 (function () {
   'use strict';
-  var supportedLanguages = ['es', 'it'];
-  
+    
   var app = angular.module('app', [
     'pascalprecht.translate'
   ]);
@@ -25,6 +24,7 @@
       suffix: '.json'
     });
     
+    var supportedLanguages = ['es', 'it'];
     var firstLanguage = null;
     
     //For Chrome and Mozilla
@@ -32,7 +32,7 @@
       window.navigator.languages.forEach(function (lang) {
         lang = lang.substring(0,2);
         
-        if (supportedLanguages.find(e => e == lang) && !firstLanguage) {
+        if (supportedLanguages.indexOf(lang) > 0 && !firstLanguage) {
           firstLanguage = lang;
         }
       }, this);
@@ -45,7 +45,7 @@
       firstLanguage = 'es';
     }
         
-    if (!supportedLanguages.find(e => e == firstLanguage)) {
+    if (supportedLanguages.indexOf(firstLanguage) < 0) {
       firstLanguage = "it";
     }
     $translateProvider.preferredLanguage(firstLanguage);
