@@ -349,7 +349,12 @@ function media(data) {
 
                         if (navActive.attr('href') !== "#home") {
                             if (navActive.attr('href') == "#"){
-                                return false;
+                                $navMobile.getNiceScroll().hide();
+                                $wrapper.removeClass('open');
+                                $navMobile.removeClass('open');
+                                $(document).off(etype);
+                                event.preventDefault();
+                                return;
                             }else {
                                 scroll = $(navActive.attr('href')).offset().top - 65;
                             }
