@@ -1,9 +1,4 @@
-//COUNTDOWN VARIABLES
-	var c_days = "DAYS",							//Countdown "Days" label
-	c_hours = "HOURS",							//Countdown "Hours" label
-	c_minutes = "MIN.",							//Countdown "Minutes" label
-	c_seconds = "SEC.";							//Countdown "Seconds" label
-  
+ 
 (function () {
   'use strict';
     

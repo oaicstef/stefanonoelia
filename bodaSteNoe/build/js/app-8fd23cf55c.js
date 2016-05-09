@@ -5,12 +5,7 @@
  * @link 
  * @license 
  */
-//COUNTDOWN VARIABLES
-	var c_days = "DAYS",							//Countdown "Days" label
-	c_hours = "HOURS",							//Countdown "Hours" label
-	c_minutes = "MIN.",							//Countdown "Minutes" label
-	c_seconds = "SEC.";							//Countdown "Seconds" label
-  
+ 
 (function () {
   'use strict';
     
@@ -2767,17 +2762,32 @@ function media(data) {
                 }
 
                 if (w <= 975 && !$tis.mobMenuFlag) {
+                    
+                    var mobileMenuHtml = '<nav class="nav-mobile"><i class="fa fa-times"></i><h2><i class="fa fa-bars"></i>' + $tis.mobileMenuTitle + '</h2><ul>' + $('.nav').html() + '</ul></nav>';
+                    //$('body').prepend('<nav class="nav-mobile"><i class="fa fa-times"></i><h2><i class="fa fa-bars"></i>' + $tis.mobileMenuTitle + '</h2><ul></ul></nav>');
+                    
+                    //$('.nav-mobile > ul').html($('.nav').html());
 
-                    $('body').prepend('<nav class="nav-mobile"><i class="fa fa-times"></i><h2><i class="fa fa-bars"></i>' + $tis.mobileMenuTitle + '</h2><ul></ul></nav>');
-
-                    $('.nav-mobile > ul').html($('.nav').html());
-
-                    $('.nav-mobile b').remove();
-
-                    $('.nav-mobile ul.dropdown-menu').removeClass().addClass("dropdown-mobile");
+                    //$('.nav-mobile b').remove();
 
                     $navMobile = $(".nav-mobile");
-
+                    
+                    angular.element(document).injector().invoke(['$compile', function ($compile) {
+                        // Create a scope.
+                        var $scope = angular.element(document.body).scope();
+                        // Specify what it is we'll be compiling.
+                        var to_compile = mobileMenuHtml;
+                        // Compile the tag, retrieving the compiled output.
+                        $navMobile = $compile(to_compile)($scope);
+                        // Ensure the scope and been signalled to digest our data.
+                        $scope.$digest();
+                        // Append the compiled output to the page.
+                        $navMobile.appendTo(document.body);
+                        
+                        $('.nav-mobile ul.dropdown-menu').removeClass().addClass("dropdown-mobile");
+                        $('.nav-mobile b').remove();
+                    }]);
+                    
                     $("#nav-mobile-btn").on(etype, function (e) {
                         e.stopPropagation();
                         e.preventDefault();
@@ -2823,7 +2833,11 @@ function media(data) {
                         var scroll = 0;
 
                         if (navActive.attr('href') !== "#home") {
-                            scroll = $(navActive.attr('href')).offset().top - 65;
+                            if (navActive.attr('href') == "#"){
+                                return false;
+                            }else {
+                                scroll = $(navActive.attr('href')).offset().top - 65;
+                            }
                         }
 
                         $('html, body').stop().animate({
@@ -3889,10 +3903,10 @@ var	mobileMenuTitle = "Menu",					//The title of the mobile menu
 	
 	
 	//COUNTDOWN VARIABLES
-	// c_days = "DAYS",							//Countdown "Days" label
-	// c_hours = "HOURS",							//Countdown "Hours" label
-	// c_minutes = "MIN.",							//Countdown "Minutes" label
-	// c_seconds = "SEC.",							//Countdown "Seconds" label
+	c_days = "DAYS",							//Countdown "Days" label
+	c_hours = "HOURS",							//Countdown "Hours" label
+	c_minutes = "MIN.",							//Countdown "Minutes" label
+	c_seconds = "SEC.",							//Countdown "Seconds" label
 	countdownEndMsg = "Que la boda empieze! / Che il matrimonio inizi!",			//Message to display when the countdown reaches the end
 	//apiUrl = "http://localhost:35825/";
 	apiUrl = "http://stenoeapi.azurewebsites.net/";
