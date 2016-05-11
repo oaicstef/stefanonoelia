@@ -51,7 +51,7 @@
       window.navigator.languages.forEach(function (lang) {
         lang = lang.substring(0, 2);
 
-        if (supportedLanguages.indexOf(lang) > 0 && !firstLanguage) {
+        if (supportedLanguages.indexOf(lang) >= 0 && !firstLanguage) {
           firstLanguage = lang;
         }
       }, this);
