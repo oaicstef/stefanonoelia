@@ -185,26 +185,30 @@ function media(data) {
             },
 
             navigation: function () {
-                    
+
                 $('.nav li a').on('click', function (event) {
                     var navActive = $(this),
                         scroll = 0;
-                        
-                    if (navActive.siblings('ul.dropdown-menu').length > 0){
+
+                    if (navActive.siblings('ul.dropdown-menu').length > 0 ||
+                        navActive.parents('ul.dropdown-menu').length > 0) {
                         var menu = navActive.siblings(".dropdown-menu");
+                        if (menu.length == 0) {
+                            menu = navActive.parents(".dropdown-menu");
+                        }
                         menu.toggle();
                     };
-                    
+
                     if ($.browser.mobile && (!navActive.closest(".dropdown").hasClass("open") || !navActive.closest(".dropdown-menu").css('display') === 'block' || !navActive.parent().parent().hasClass("nav"))) {
                         event.preventDefault();
                         return false;
                     }
-                                        
+
                     if (navActive.attr('href').charAt(0) === "#") {
                         event.preventDefault();
 
                         if (navActive.attr('href') !== "#home") {
-                            if (navActive.attr('href') == "#"){
+                            if (navActive.attr('href') == "#") {
                                 return false;
                             }
                             else {
@@ -277,16 +281,16 @@ function media(data) {
                 }
 
                 if (w <= 975 && !$tis.mobMenuFlag) {
-                    
+
                     var mobileMenuHtml = '<nav class="nav-mobile"><i class="fa fa-times"></i><h2><i class="fa fa-bars"></i>' + $tis.mobileMenuTitle + '</h2><ul>' + $('.nav').html() + '</ul></nav>';
                     //$('body').prepend('<nav class="nav-mobile"><i class="fa fa-times"></i><h2><i class="fa fa-bars"></i>' + $tis.mobileMenuTitle + '</h2><ul></ul></nav>');
-                    
+
                     //$('.nav-mobile > ul').html($('.nav').html());
 
                     //$('.nav-mobile b').remove();
 
                     $navMobile = $(".nav-mobile");
-                    
+
                     angular.element(document).injector().invoke(['$compile', function ($compile) {
                         // Create a scope.
                         var $scope = angular.element(document.body).scope();
@@ -298,11 +302,11 @@ function media(data) {
                         $scope.$digest();
                         // Append the compiled output to the page.
                         $navMobile.appendTo(document.body);
-                        
+
                         $('.nav-mobile ul.dropdown-menu').removeClass().addClass("dropdown-mobile");
                         $('.nav-mobile b').remove();
                     }]);
-                    
+
                     $("#nav-mobile-btn").on(etype, function (e) {
                         e.stopPropagation();
                         e.preventDefault();
@@ -348,14 +352,14 @@ function media(data) {
                         var scroll = 0;
 
                         if (navActive.attr('href') !== "#home") {
-                            if (navActive.attr('href') == "#"){
+                            if (navActive.attr('href') == "#") {
                                 $navMobile.getNiceScroll().hide();
                                 $wrapper.removeClass('open');
                                 $navMobile.removeClass('open');
                                 $(document).off(etype);
                                 event.preventDefault();
                                 return;
-                            }else {
+                            } else {
                                 scroll = $(navActive.attr('href')).offset().top - 65;
                             }
                         }
@@ -620,35 +624,34 @@ function media(data) {
                         if (feed !== '' && feed.hasOwnProperty("data")) {
                             feedLen = feed.data.length;
                         }
-                        
+
                         var html = '<ul>'
                         while (i < feedLen) {
-                            if (index == 0){
-                                html+= '<ul>';
+                            if (index == 0) {
+                                html += '<ul>';
                             }
                             html += '<li class="instagram">';
-                                                        
+
                             //if (index < len) {
-                                // $(".instagram").eq(index).html('<img src="' + feed.data[i].images.standard_resolution.url + '" alt="" /><span><a href="' + feed.data[i].images.standard_resolution.url + '" data-gal="prettyPhoto[gallery]" title="' + feed.data[i].caption.text + '"><i class="fa fa-link"></i></a><a href="' + feed.data[i].link + '" target="_blank" title="View on Instagram"><i class="fa fa-external-link"></i></a></span>');
-                                html+='<img src="' + feed.data[i].images.standard_resolution.url + '" alt="" /><span><a href="' + feed.data[i].images.standard_resolution.url + '" data-gal="prettyPhoto[gallery]" title="' + feed.data[i].caption.text + '"><i class="fa fa-link"></i></a><a href="' +     feed.data[i].link + '" target="_blank" title="View on Instagram"><i class="fa fa-external-link"></i></a></span>';
-                                index += 1;
+                            // $(".instagram").eq(index).html('<img src="' + feed.data[i].images.standard_resolution.url + '" alt="" /><span><a href="' + feed.data[i].images.standard_resolution.url + '" data-gal="prettyPhoto[gallery]" title="' + feed.data[i].caption.text + '"><i class="fa fa-link"></i></a><a href="' + feed.data[i].link + '" target="_blank" title="View on Instagram"><i class="fa fa-external-link"></i></a></span>');
+                            html += '<img src="' + feed.data[i].images.standard_resolution.url + '" alt="" /><span><a href="' + feed.data[i].images.standard_resolution.url + '" data-gal="prettyPhoto[gallery]" title="' + feed.data[i].caption.text + '"><i class="fa fa-link"></i></a><a href="' + feed.data[i].link + '" target="_blank" title="View on Instagram"><i class="fa fa-external-link"></i></a></span>';
+                            index += 1;
                             //}
-                            html+='</li>';
-                            var columns = feedLen <= 4?4:feedLen/2;
-                            if (index == Math.round(columns)){
-                                html+= '</ul>';
+                            html += '</li>';
+                            var columns = feedLen <= 4 ? 4 : feedLen / 2;
+                            if (index == Math.round(columns)) {
+                                html += '</ul>';
                                 index = 0;
                             }
                             i += 1;
                         }
-                        if (feedLen < 4)
-                        {
-                            for(var i=0;i<4-feedLen;i++){
+                        if (feedLen < 4) {
+                            for (var i = 0; i < 4 - feedLen; i++) {
                                 html += '<li><div class="heartbeat"></div></li>';
                             }
                         }
                         $('.gallery-scroller').html(html);
-                        
+
                         $tis.createPrettyPhoto();
                     },
                     error: function (error) {
@@ -1095,7 +1098,7 @@ function media(data) {
                             $(this).removeClass('btn-danger');
                             next();
                         });
-                        
+
                         $(".formMusic_status_message").html('<div class="alert alert-danger alert-dismissible" role="alert"><button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>' + contact_form_error_msg + '</div>');
                     };
 
@@ -1187,9 +1190,9 @@ function media(data) {
                     event.preventDefault();
 
                     if (navActive.attr('href') !== "#home") {
-                        if (navActive.attr('href') == "#"){
+                        if (navActive.attr('href') == "#") {
                             return false;
-                        }else{
+                        } else {
                             scroll = $(navActive.attr('href')).offset().top - 65;
                         }
                     }

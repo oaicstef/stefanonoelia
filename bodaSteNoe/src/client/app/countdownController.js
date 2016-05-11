@@ -10,9 +10,8 @@ var CountDownController = (function () {
           
         var $tis = this,
             future = new Date("2016/08/19 4:30 PM"),
-            counter,
-            $parent = $(".countdown");
-
+            counter;
+        
         // $parent.html('<div class="days"><span>' + $tis.c_days + '</span><div></div></div>' +
         //     '<div class="hours"><span>' + $tis.c_hours + '</span><div></div></div>' +
         //     '<div class="minutes"><span>' + $tis.c_minutes + '</span><div></div></div>' +
@@ -24,10 +23,11 @@ var CountDownController = (function () {
     
     function changeTime (scope, future) {
         var today = new Date(),
-            _dd = future - today;
+            _dd = future - today,
+            $parent = $(".countdown");
 
         if (_dd < 0) {
-            $parent.html('<div class="end">' + $tis.countdownEndMsg + '</div>');
+            $parent.html('<div class="end">' + countdownEndMsg + '</div>');
             clearInterval(counter);
 
             return false;

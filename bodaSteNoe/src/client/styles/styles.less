@@ -2740,7 +2740,116 @@ fieldset[disabled] .btn.ribbon.active {
 		}
 	}
 }
-
+.Gifts{
+	list-style:none;
+	margin-bottom:5px;
+	margin-top:2px;
+	padding:0;
+	
+	li{
+		position:relative;
+		min-height:10em;
+		width:100%;
+		display:inline-block;
+		float:left;
+		text-align:center;
+		margin:0 1% 20px 1%;
+		border:1px solid @color;
+		background-position:center center;
+		background-repeat:no-repeat;
+		background-size:cover;
+		color:@color;
+		padding:18px;
+		.border-radius(1px);
+		
+		// &::before{
+		// 	position:absolute;
+		// 	content:"";
+		// 	top:0;
+		// 	left:0;
+		// 	width:100%;
+		// 	height:100%;
+		// 	background-color:fade(#fff, 90%);
+		// 	z-index:1;
+		// 	border:0px solid transparent;
+		// 	-webkit-box-shadow:inset 0px 0px 0px 2px fade(#fff, 0%);
+		// 	   -moz-box-shadow:inset 0px 0px 0px 2px fade(#fff, 0%);
+		// 			box-shadow:inset 0px 0px 0px 2px fade(#fff, 0%);
+		// 	.transition(all 0.3s ease-out);
+		// }
+		
+		// &:hover::before{
+		// 	background-color:fadeout(@color, 10%);
+		// 	border:15px solid transparent;
+		// 	-webkit-box-shadow:inset 0px 0px 0px 2px fade(#fff, 50%);
+		// 	   -moz-box-shadow:inset 0px 0px 0px 2px fade(#fff, 50%);
+		// 			box-shadow:inset 0px 0px 0px 2px fade(#fff, 50%);
+		// }
+		
+		>i{
+			position:relative;
+			font-size:44pt;
+			//margin-top:2em;
+			//margin-bottom:1em;
+			z-index:2;
+			//.transition(all 0.3s ease-out);
+		}
+		
+		// &:hover >i{
+		// 	color:#fff;
+		// 	margin-top:5px;
+		// }
+		
+		// h3{
+		// 	position:relative;
+		// 	z-index:2;
+		// 	.transition(all 0.3s ease-out);
+		// }
+		
+		// &:hover h3{
+		// 	color:#fff;
+		// }
+		
+		.info{
+			position:relative;
+			z-index:2;
+			.opacity(0);
+			.transition(all 0.3s ease-out);
+			margin-top:-80px;
+			
+			img{
+				background:rgba(255,255,255, 0.15);
+				margin:5px auto;
+				padding:5px 10px;
+			}
+			
+			.btn{
+				margin:4px 8px;
+			}
+		}
+		
+		&:hover{
+			border:2px solid rgba(255,255,255,.5);
+			
+			.info{
+				.opacity(1);
+				margin-top:20px;
+			}
+		}
+	}
+	
+	#gift-list{
+		background-image: url("../images/wedding-gift1.jpg");
+	}
+	
+	#help-wedding{
+		background-image: url("../images/wedding-gift2.jpg");
+	}
+	
+	#help-honeymoon{
+		background-image: url("../images/wedding-gift3.jpg");
+	}
+}
 
 /* #Wedding Gifts
 ================================================== */

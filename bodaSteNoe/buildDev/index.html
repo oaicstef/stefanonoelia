@@ -34,7 +34,7 @@
 	<meta http-equiv="X-UA-Compatible" content="IE=edge, chrome=1" />
 	<!-- Mobile Meta Tag -->
 	<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1" />
-	<!--<base href="/">-->
+	<base href="/buildDev">
 	<!-- Fav and touch icons -->
 	<link rel="shortcut icon" type="image/jpg" href="images/fav_touch_icons/favicon.jpg" />
 	<link rel="apple-touch-icon" href="images/fav_touch_icons/apple-touch-icon.png" />
@@ -49,18 +49,18 @@
 	<link href='http://fonts.googleapis.com/css?family=Dancing+Script:700%7COpen+Sans%7COpen+Sans+Condensed:300' rel='stylesheet'
 		type='text/css'>
 
-	<link rel="stylesheet" href="styles/lib-c4c6e50fae.css">
+	<link rel="stylesheet" href="styles/lib-bd72d1f310.css">
 
-	<link rel="stylesheet" href="styles/app-e5534b0fea.css">
+	<link rel="stylesheet" href="styles/app-91991c600a.css">
 </head>
 
-<body>
+<body ng-controller="MainController as main">
 	<div id="preloader">
 		<div class="heartbeat"></div>
 	</div>
 	<!-- PRELOADER -->
 	<!-- BEGIN WRAPPER -->
-	<div id="wrapper">
+	<div id="wrapper" >
 
 		<!-- BEGIN HEADER -->
 		<header id="header">
@@ -79,15 +79,16 @@
 									<li><a href="#home">Home</a></li>
 
 									<li class="dropdown">
-										<a href="#ourstory">Our Story</a>
+										<a href="#ourstory" translate>Our Story</a>
 									</li>
 
 									<li class="dropdown">
-										<a href="#thewedding">The Wedding</a>
+										<a href="#thewedding" class="dropdown-toggle" translate>The WeddingMenu</a>
 										<ul class="dropdown-menu">
-											<li><a href="#location">The Wedding Location</a></li>
+											<li><a href="#location" translate>The Wedding Location</a></li>
+											<li><a href="#weddinggifts" translate>Wedding Gifts</a></li>
 											<!--<li><a href="#bridesmaidsgroomsmen">Bridesmaids & Groomsmen</a></li>
-											<li><a href="#weddinggifts">Wedding Gifts</a></li>
+											
 											<li class="dropdown-submenu">
 												<a href="#">Another Menu</a>
 												<ul class="dropdown-menu">
@@ -98,7 +99,7 @@
 										</ul>
 									</li>
 
-									<!--<li><a href="#gallery">Gallery</a></li>-->
+									<li><a href="#gallery" translate>Gallery</a></li>
 
 									<!--<li class="dropdown">
 										<a href="#blog" data-toggle="dropdown" data-hover="dropdown">Blog<b class="caret"></b></a>
@@ -107,12 +108,14 @@
 										</ul>
 									</li>-->
 
-									<li><a href="#rsvp">Confirmation</a></li>
-									<!--<li><a href="#music">Music</a></li>-->
+									<li><a href="#rsvp" translate>Confirmation</a></li>
+									<li><a href="#music" translate>Music</a></li>
+									<li><a href="#"><img id="IT-Flag" ng-click="main.changeLanguage($event)" src="images\IT.png"/>
+													<img id="ES-Flag" ng-click="main.changeLanguage($event)" src="images\ES.png"/></a>
 								</ul>
 							</nav>
 							<!-- END MAIN MENU -->
-
+							
 						</div>
 					</div>
 				</div>
@@ -121,15 +124,22 @@
 		<!-- END HEADER -->
 
 		<!-- BEGIN HOME SECTION -->
-		<section id="home" class="divider-bottom-1">
+		<section id="home" class="divider-bottom-1" >
 			<div class="container">
 				<div class="row">
 					<div class="col-sm-12">
 						<div class="hero-title curve">Noelia & Stefano</div>
-						<div class="hero-text">Are getting Married in</div>
+						<div class="hero-text">{{ 'Are getting Married in' | translate }}</div>
 						<div class="hero-divider"></div>
 
-						<div class="countdown"></div>
+						<div class="countdown" ng-controller="CountDownController as vm">
+							<div class="days"><span>{{ 'DAYS' | translate }}</span><div>{{vm.days}}</div></div>
+							<div class="hours"><span>{{ 'HOURS' | translate }}</span><div>{{vm.hours}}</div></div>
+							<div class="minutes"><span>{{ 'MIN.' | translate }}</span><div>{{vm.minutes}}</div></div>
+							<div class="seconds"><span>{{ 'SEC.' | translate }}</span><div>{{vm.seconds}}</div></div>
+						</div>
+						<span style='display:none' countdown='' date='August 19, 2016 16:30:00' >
+						</span>
 						<!-- Countdown container. Check the bottom of the document where the countdown is being initialized. -->
 
 						<div class="hero-divider"></div>
@@ -138,29 +148,16 @@
 			</div>
 		</section>
 		<!-- END HOME SECTION -->
-</section>
+		
+		<section id="otherPage" ui-view />
+		
 		<section id="ourstory">
 			<div class="container">
 				<div class="row">
 					<div class="col-sm-12">
 						<h1 class="section-title">Our Love Story...</h1>
 						<p class="section-desc">
-							Como casi todos ya sabeis, nuestra historia viene de lejos, pues hace 10 anos que el destino quiso que nuestras miradas se
-							cruzaron en un pub tipico de la ciudad de Leiden (Holanda). Poco despues llegaron las tardes de te y lavanderia, mientras
-							charlabamos, reiamos y nos comiamos unas cuantas stroopwafels. Asi se nos pasaban las tardes lluviosas de inviernos.
-							Poco a poco y sin darnos cuenta lo que empezo como una amistad se convirtio en verdadero AMOR. Desde entonces hemos
-							continuado juntos sin importar el idioma o la distancia que hubiera entre los dos... Por todo esto nos sentimos muy
-							felices y orgullosos de poder compartir junto a vosotros uno de los dias mas especiales de nuestra vida. Gracias a
-							todos por estar ahi.
-						</p>
-						<p class="section-desc">
-							Come giá tutti saprete, la nostra storia é lunga, tutto inizió 10 anni fa quando il destino volle che i nostri sguardi s'incrociassero
-							in un pub tipico di Leiden (Olanda). Poco dopo arrivarono i pomeriggi di tee e lavatrici, mentre chiaccheravamo, ridevamo
-							e mangiavamo varie stroopwafels. Cosí passavano i pomeriggi piovosi d'inverno. Poco a poco e senza accorgerci ció
-							che inizió come una semplice amicizia si trasformó in vero AMORE. Da allora siamo stati insieme, senza dare importanza
-							alla lingua o alla distanza che ci rendevano le cose difficili... Per tutto questo siamo molto felici e orgogliosi
-							di poter condividere insieme a tutti voi uno dei giorni piú speciali della nostra vita. Grazie a tutti per celebrarlo
-							con noi.'
+							{{ 'StoryDescription' | translate }}
 						</p>
 					</div>
 				</div>
@@ -228,7 +225,7 @@
 			<div class="container">
 				<div class="row">
 					<div class="col-sm-12">
-						<h1 class="section-title">The Wedding</h1>
+						<h1 class="section-title">{{ 'The Wedding' | translate }}</h1>
 					</div>
 				</div>
 				<div class="row center">
@@ -238,10 +235,7 @@
 							<span><i class="icon icon-arrow-right"></i>And<i class="icon icon-arrow-left"></i></span> Stefano
 						</div>
 
-						<div class="invite_info">
-							Os invitamos a celebrar nuestro matrimonio
-							<div class="separate"> </div>
-							Vi invitiamo a celebrare il nostro matrimonio
+						<div class="invite_info"> {{ 'INVITE.INFO' | translate }}
 							<div class="date">
 								19 . 08 . 2016
 							</div>
@@ -258,7 +252,7 @@
 			<div class="container">
 				<div class="row">
 					<div class="col-sm-12">
-						<h2 class="section-title">The Wedding Location</h2>
+						<h2 class="section-title">{{ 'The Wedding Location' | translate }}</h2>
 					</div>
 				</div>
 			</div>
@@ -315,7 +309,7 @@
 						</div>
 
 						<div class="center">
-							<a href="#rsvp" class="btn ribbon btn-color scrollto"><i class="icon icon-arrow-right"></i>Conferma / Confirmanos<i class="icon icon-arrow-left"></i></a>
+							<a href="#rsvp" class="btn ribbon btn-color scrollto"><i class="icon icon-arrow-right"></i>{{ 'Confirm' | translate }}<i class="icon icon-arrow-left"></i></a>
 						</div>
 					</div>
 				</div>
@@ -331,13 +325,44 @@
 		<!-- END BRIDESMAIDS & GROOMSMEN SECTION -->
 
 		<!-- BEGIN WEDDING GIFTS SECTION -->
-		<!--<section id="weddinggifts" ng-include="'app/views/gifts.html'">
+		<section id="weddinggifts" ng-include="'app/views/gifts.html'">
 
-		</section>-->
+		</section>
 		<!-- END WEDDING GIFTS SECTION -->
 
 		<!-- BEGIN GALLERY SECTION -->
-		
+		<!-- BEGIN GALLERY SECTION -->
+<section id="gallery" class="divider-bottom-3 bg-color-overlay parallax no-padding-bottom no-padding-top" 
+		 data-stellar-background-ratio="0.5">
+	<div class="divider-top-2"></div>
+	<!-- The class "divider-top-2" can also be applied to the tag <section>. In this case, it was added on a new <div> because the tag <section> have all pseudo elements (::after and ::before) in use. -->
+	<div class="container">
+		<div class="row">
+			<div class="col-sm-12">
+				<h1 class="section-title">{{ 'Gallery' | translate }}</h1>
+			</div>
+		</div>
+
+		<div class="row">
+			<div class="col-sm-12">
+				<div class="section-desc center">
+					<h3 class="gallery-desc">{{ 'GalleryDescription' | translate }}<br>Usa <strong>Instagram</strong>{{ 'GalleryDescription2' | translate }}</h3>
+					<h1>#NoeSte2016</h1>
+				</div>
+			</div>
+		</div>
+	</div>
+
+	<div class="gallery-wrapper">
+		<div class="gallery-left"></div>
+		<div class="gallery-right"></div>
+
+		<div class="gallery-scroller">
+			
+		</div>
+	</div>
+</section>
+<!-- END GALLERY SECTION -->
 		<!-- END GALLERY SECTION -->
 
 		<!-- BEGIN BLOG SECTION -->
@@ -345,12 +370,14 @@
 		</section>-->
 		<!-- END BLOG SECTION -->
 
+		
+		
 		<!-- BEGIN CONTACTS SECTION -->
 		<section id="rsvp" class="bg-color pattern">
 			<div class="container">
 				<div class="row">
 					<div class="col-sm-12">
-						<h1 class="section-title">Confirmation</h1>
+						<h1 class="section-title">{{ 'Confirmation' | translate }}</h1>
 					</div>
 				</div>
 
@@ -361,15 +388,14 @@
 							<div class="form-wrap">
 								<section class="highlighted">
 									<h3>
-										<i class="icon icon-arrow-right"></i>Verrai al nostro matrimonio?<i class="icon icon-arrow-left"></i>
-										<i class="icon icon-arrow-right"></i>Vendras a nuestra boda?<i class="icon icon-arrow-left"></i>
+										<i class="icon icon-arrow-right"></i>{{ 'ContactTitle' | translate }}<i class="icon icon-arrow-left"></i>
 									</h3>
 									<div data-value="attending_wedding" class="radio-lilac col-sm-12">
 										<button class="btn btn-default active" data-value="yes"><i class="fa fa-smile-o"></i>Si</button>
 										<button class="btn btn-default" data-value="no"><i class="fa fa-frown-o"></i>No</button>
 									</div>
 									<div class="col-sm-6">
-										<input type="text" name="Name" placeholder="NOME / NOMBRE*" class="form-control required fromName" />
+										<input type="text" name="Name" placeholder="NOMBRE / NOME*" class="form-control required fromName" />
 									</div>
 									<div class="col-sm-6">
 										<input type="email" name="Email" placeholder="EMAIL*" class="form-control required fromEmail" />
@@ -378,13 +404,12 @@
 								</section>
 
 								<section>
-									<h3><i class="icon icon-arrow-right"></i>Chi verrá con te?<i class="icon icon-arrow-left"></i></h3>
-									<h3><i class="icon icon-arrow-right"></i>Quien viene contigo?<i class="icon icon-arrow-left"></i></h3>
+									<h3><i class="icon icon-arrow-right"></i>{{ 'GuestsTitle' | translate }}<i class="icon icon-arrow-left"></i></h3>
 									<div class="col-md-8">
-										<input type="text" name="guest" id="guest" placeholder="NOME / NOMBRE" class="form-control" />
+										<input type="text" name="guest" id="guest" placeholder="NOMBRE / NOME*" class="form-control" />
 									</div>
 									<div class="col-md-4">
-										<button id="add_guest" class="btn btn-color add_button" data-input="guest" data-wrapper="guest_list">+ Add</button>
+										<button id="add_guest" class="btn btn-color add_button" data-input="guest" data-wrapper="guest_list">{{ 'AddButton' | translate }}</button>
 									</div>
 									<div id="guest_list" class="add_list col-md-12" data-count="0">
 
@@ -393,14 +418,14 @@
 
 								<section class="highlighted">
 									<div class="col-sm-12">
-										<textarea name="Message" placeholder="LASCIA UNA NOTA AGLI SPOSI / DEJA UN MENSAJE PARA LOS NOVIOS" class="form-control"></textarea>
+										<textarea name="Message" placeholder="DEJA UN MENSAJE PARA LOS NOVIOS / LASCIA UNA NOTA AGLI SPOSI" class="form-control"></textarea>
 										<div class="form_status_message"></div>
 									</div>
 								</section>
 							</div>
 
 							<div class="center">
-								<button type="submit" class="btn ribbon btn-color submit_form"><span class="line_above"></span><i class="icon icon-arrow-right"></i>Invia / Enviar<i class="icon icon-arrow-left"></i></button>
+								<button type="submit" class="btn ribbon btn-color submit_form"><span class="line_above"></span><i class="icon icon-arrow-right"></i>{{ 'Send' | translate }}<i class="icon icon-arrow-left"></i></button>
 							</div>
 						</form>
 					</div>
@@ -408,44 +433,52 @@
 			</div>
 		</section>
 		<!--END CONTACTS SECTION -->
-		<!--<section id="music" class="bg-color pattern">
-			<div class="container">
-				<div class="row">
-					<div class="col-sm-12">
-						<h1 class="section-title">Scegli una canzone per gli sposi</h1>
-						<h1 class="section-title">Elige una cancion para los novios</h1>
-					</div>
-				</div>
-				<div class="row">
-					<div class="col-sm-8 center">
+		<section id="music" class="bg-color pattern">
+    <div class="container">
+        <div class="row">
+            <div class="col-sm-12">
+                <h1 class="section-title">{{ 'Choose a Song' | translate }}</h1>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-sm-8 center">
 
-						<form id="form-music" method="post" action="#">
-							<div class="form-wrap">
-								<section class="highlighted">
-									<div class="col-sm-6">
-										<input type="text" name="Name" placeholder="IL TUO NOME / TU NOMBRE" class="form-control required fromName" />
-									</div>
-								</section>
-								<section>
-									<div class="col-md-8">
-										<input type="text" name="songTitle" id="songTitle" placeholder="TITULO CANCION / TITOLO CANZONE" class="form-control" />
-									</div>
-									<div class="col-md-4">
-										<button id="add_guest" class="btn btn-color add_button" data-input="guest" data-wrapper="guest_list">+ Add</button>
-									</div>
-									<div id="guest_list" class="add_list col-md-12" data-count="0">
+                <form id="form-music" method="post" action="#">
+                    <div class="form-wrap">
+                        <section class="highlighted">
+                            <div class="col-sm-6">
+                                <input type="text" name="Name" placeholder="TU NOMBRE / IL TUO NOME*" 
+								class="form-control required fromName" />
+                            </div>
+                        </section>
+                        <section>
+                            <div class="col-md-8">
+                                <input type="text" name="songTitle" id="songTitle" 
+								placeholder="TITULO CANCIÓN / TITOLO CANZONE*" class="form-control fromSongTitle" />
+                            </div>
+                            <div class="col-md-4">
+                                <button id="add_song" class="btn btn-color add_button" data-input="songTitle" data-wrapper="songs_list">{{ 'AddButton' | translate }}</button>
+                            </div>
+                            <div id="songs_list" class="add_list col-md-12" data-count="0">
 
-									</div>
-								</section>
+                            </div>
+							<div class="col-sm-12">
+								<div class="formMusic_status_message"></div>
 							</div>
-							<div class="center">
-								<button type="submit" class="btn ribbon btn-color submit_form"><span class="line_above"></span><i class="icon icon-arrow-right"></i>Invia / Enviar<i class="icon icon-arrow-left"></i></button>
-							</div>
-						</form>
-					</div>
-				</div>
-			</div>
-		</section>-->
+                        </section>
+                    </div>
+					
+					<div class="center">
+                        <button type="submit" class="btn ribbon btn-color submitMusic_form" 
+								data-songinput="songTitle" data-songswrapper="songs_list" data-songbutton="add_song">
+							<span class="line_above"></span><i class="icon icon-arrow-right"></i>{{ 'Send' | translate }}<i class="icon icon-arrow-left"></i>
+						</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</section>
 		<!-- BEGIN FOOTER -->
 		<footer id="footer" class="bg-color pattern">
 			<div class="container">
@@ -467,13 +500,12 @@
 		<!-- END FOOTER -->
 
 	</div>
-	<script src="js/lib-1ec672e2d9.js"></script>
-	<script src="/bower_components/angular-google-picasa-gallery/angular-picasa-album.js"></script>
+	<script src="js/lib-53a85b58ee.js"></script>
 	<!-- inject:customJs -->
 	<!-- endinject -->
 
 	<script src="http://maps.google.com/maps/api/js?sensor=false" type="text/javascript"></script>
-	<script src="js/app-65a97f8740.js"></script>
+	<script src="js/app-e6a6da8256.js"></script>
 
 	<!-- Libs -->
 	
@@ -494,14 +526,14 @@
 	<script src="src/client/js/scripts.js"></script>-->
 
 	<script type="text/javascript">
-		$(document).ready(function () {
+		//$(document).ready(function () {
 			/**
 			 * Initiate countdown
 			 * Usage: Lilac.countdown("COUNTDOWN CONTAINER", "DATE");
 			 * You can change the countdowns labels in the file variables.js
 			 */
-			Lilac.countdown(".countdown", "2016/08/19 4:30 PM");
-		});
+			//Lilac.countdown(".countdown", "2016/08/19 4:30 PM");
+		//});
 	</script>
 </body>
 
