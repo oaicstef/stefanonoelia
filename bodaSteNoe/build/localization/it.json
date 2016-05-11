@@ -1,5 +1,6 @@
 {
     "The Wedding": "Il Matrimonio",
+    "The WeddingMenu": "Il Matrimonio <b class='caret'></b>",
     "Our Story": "Love Story",
     "The Wedding Location": "Location",
     "Confirmation": "Confermazione",
@@ -19,5 +20,10 @@
     "Gallery": "Galleria",
     "GalleryDescription": "Ci piacerebbe vedere il nostro matrimonio attraverso i vostri occhi.",
     "GalleryDescription2": " per condividere con noi i migliori momenti.",
-    "Send": "Invia"
+    "Send": "Invia",
+    "Wedding Gifts": "Regali",
+    "GiftDescription": "Il regalo più bello che ci possiate fare è condividere con noi il giorno del nostro matrimonio. Se tuttavia vi facesse piacere contribuire alla nostra felicità, qui di seguito vi lasciamo il nostro conto, per collaborare nel nostro viaggio di Nozze.",
+    "Name:": "Titolare:",
+    "GiftSquare1": "La vostra",
+    "GiftSquare2": "Presenza"
 }

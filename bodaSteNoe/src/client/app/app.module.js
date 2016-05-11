@@ -27,7 +27,12 @@
       .state('home', {
       url: "^/",
       templateUrl: "/app/views/quote.html"
-    });
+    })
+    .state("gifts", {
+        url: "/gifts",
+        //controller: "FeedController",
+        templateUrl: "/app/views/gifts.html",
+      });
       
     //$urlRouterProvider.otherwise("/");
   }
