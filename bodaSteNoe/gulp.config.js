@@ -60,7 +60,8 @@ module.exports = function() {
     jsOrder: [
       '**/app.module.js',
       '**/*.module.js',
-      '**/*.js'
+      '**/*.js',
+      '**/*Controller.js'
     ],
     less: client + 'styles/styles.less',
     listCss: client + 'styles/*.css',

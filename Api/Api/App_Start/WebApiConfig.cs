@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Web.Http;
+using System.Xml.Serialization;
 
 namespace Api
 {
@@ -13,6 +14,7 @@ namespace Api
             //var json = config.Formatters.JsonFormatter;
             //config.Formatters.Clear();
             //config.Formatters.Add(json);
+            config.Formatters.XmlFormatter.RemoveSerializer(typeof(XmlSerializer));
             config.Formatters.JsonFormatter.SerializerSettings.PreserveReferencesHandling =
                 Newtonsoft.Json.PreserveReferencesHandling.All;
 

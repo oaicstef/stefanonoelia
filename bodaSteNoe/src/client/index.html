@@ -70,13 +70,13 @@
 	<!-- endbuild -->
 </head>
 
-<body ng-controller="MainController as main">
+<body>
 	<div id="preloader">
 		<div class="heartbeat"></div>
 	</div>
 	<!-- PRELOADER -->
 	<!-- BEGIN WRAPPER -->
-	<div id="wrapper" >
+	<div id="wrapper" ng-controller="MainController as main" >
 
 		<!-- BEGIN HEADER -->
 		<header id="header">
@@ -415,12 +415,23 @@
 		</div>
 	</div>
 
-	<div class="gallery-wrapper">
+	<div class="gallery-wrapper" ng-controller="GooglePhotosController as googleVm">
 		<div class="gallery-left"></div>
 		<div class="gallery-right"></div>
 
-		<div class="gallery-scroller">
-			
+		<div class="gallery-scroller" >
+			<ul id="galleryInstagram">
+			</ul>
+			<ul>
+				<li ng-repeat="photo in googleVm.photos">
+					<img src="{{photo.URI}}" alt=""/>
+					<span>
+						<a href="{{photo.URI}}" data-gal="prettyPhoto[gallery]" title="{{photo.title}}">
+							<i class="fa fa-link"></i>
+						</a>
+					</span>
+				</li>
+			</ul>
 		</div>
 	</div>
 </section>
@@ -590,6 +601,7 @@
 	<script src="/src/client/js/common.js"></script>
 	<script src="/src/client/app/countdownController.js"></script>
 	<script src="/src/client/js/freewall.js"></script>
+	<script src="/src/client/app/googlePhotosController.js"></script>
 	<script src="/src/client/app/mainController.js"></script>
 	<script src="/src/client/js/map.markers.js"></script>
 	<script src="/src/client/js/richmarker.js"></script>

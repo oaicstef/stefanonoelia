@@ -2,7 +2,8 @@
 # This .gitignore file was automatically created by Microsoft(R) Visual Studio.
 ################################################################################
 
-/stenoe/packages
+/bodaSteNoe/node_modules
+/bodaSteNoe/bower_components
 /Api/Api/bin
 /Api/Api/obj/Debug
 /Api/Api/obj/Release

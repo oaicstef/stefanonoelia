@@ -18,7 +18,9 @@ var CountDownController = (function () {
         //     '<div class="seconds"><span>' + $tis.c_seconds + '</span><div></div></div>');
 
         //counter = setInterval(changeTime(_this, future), 1000);
-        var time = $interval(changeTime, 1000, null, null, _this, future);
+        if ($interval){
+            var time = $interval(changeTime, 1000, null, null, _this, future);
+        }
     }
     
     function changeTime (scope, future) {

@@ -625,24 +625,29 @@ function media(data) {
                             feedLen = feed.data.length;
                         }
 
-                        var html = '<ul>'
+                        var html = '';
                         while (i < feedLen) {
-                            if (index == 0) {
+                            /*if (index == 0) {
                                 html += '<ul>';
-                            }
+                            }*/
                             html += '<li class="instagram">';
 
                             //if (index < len) {
                             // $(".instagram").eq(index).html('<img src="' + feed.data[i].images.standard_resolution.url + '" alt="" /><span><a href="' + feed.data[i].images.standard_resolution.url + '" data-gal="prettyPhoto[gallery]" title="' + feed.data[i].caption.text + '"><i class="fa fa-link"></i></a><a href="' + feed.data[i].link + '" target="_blank" title="View on Instagram"><i class="fa fa-external-link"></i></a></span>');
-                            html += '<img src="' + feed.data[i].images.standard_resolution.url + '" alt="" /><span><a href="' + feed.data[i].images.standard_resolution.url + '" data-gal="prettyPhoto[gallery]" title="' + feed.data[i].caption.text + '"><i class="fa fa-link"></i></a><a href="' + feed.data[i].link + '" target="_blank" title="View on Instagram"><i class="fa fa-external-link"></i></a></span>';
+                            html += '<img src="' + feed.data[i].images.standard_resolution.url + '" alt="" /><span>' +
+                                    '<a href="' + feed.data[i].images.standard_resolution.url + '" data-gal="prettyPhoto[gallery]" ' + 
+                                    ' title="' + feed.data[i].caption.text + '">' + 
+                                    '<i class="fa fa-link"></i></a><a href="' + feed.data[i].link + '" target="_blank" ' + 
+                                    'title="View on Instagram"><i class="fa fa-external-link"></i></a></span>';
                             index += 1;
                             //}
                             html += '</li>';
                             var columns = feedLen <= 4 ? 4 : feedLen / 2;
+                            /*
                             if (index == Math.round(columns)) {
                                 html += '</ul>';
                                 index = 0;
-                            }
+                            }*/
                             i += 1;
                         }
                         if (feedLen < 4) {
@@ -650,7 +655,7 @@ function media(data) {
                                 html += '<li><div class="heartbeat"></div></li>';
                             }
                         }
-                        $('.gallery-scroller').html(html);
+                        $('#galleryInstagram').html(html);
 
                         $tis.createPrettyPhoto();
                     },
