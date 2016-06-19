@@ -39,7 +39,13 @@
         url: "/gifts",
         //controller: "FeedController",
         templateUrl: "/app/views/gifts.html",
-      });
+      })
+    .state("photo", {
+      url: "/photo",
+      views: {
+        "Empty": { controller: "GooglePhotosController",  templateUrl: "/app/views/photo.html" }
+      }
+    });
       
     //$urlRouterProvider.otherwise("/");
   }
@@ -49,12 +55,13 @@
       prefix: '/localization/',
       suffix: '.json'
     });
-
+    
     var supportedLanguages = ['es', 'it'];
     var firstLanguage = null;
 
-    //For Chrome and Mozilla
-    if (window.navigator.languages) {
+    if (window.navigator.languages) 
+    {
+      //For Chrome and Mozilla
       window.navigator.languages.forEach(function (lang) {
         lang = lang.substring(0, 2);
 
@@ -62,11 +69,14 @@
           firstLanguage = lang;
         }
       }, this);
-    } else if (window.navigator.language) {
+    } 
+    else if (window.navigator.language) 
+    {
       // For IE
       firstLanguage = window.navigator.language.substring(0, 2);
     }
-    else {
+    else 
+    {
       firstLanguage = 'es';
     }
 
@@ -288,7 +298,9 @@ var CountDownController = (function () {
         //     '<div class="seconds"><span>' + $tis.c_seconds + '</span><div></div></div>');
 
         //counter = setInterval(changeTime(_this, future), 1000);
-        var time = $interval(changeTime, 1000, null, null, _this, future);
+        if ($interval){
+            var time = $interval(changeTime, 1000, null, null, _this, future);
+        }
     }
     
     function changeTime (scope, future) {
@@ -1633,6 +1645,60 @@ angular.module('app').controller('CountDownController', ['$scope', '$interval', 
  
 })(window.Zepto || window.jQuery);
 
+var GooglePhotosController = (function () {
+    function GooglePhotosController($scope, $http) {
+        var vm = this;
+        vm.photos = null;
+        vm.fileName = null;
+        
+        $http({
+            method: 'GET',
+            url: apiUrl + 'api/google/photos'
+        }).then(function successCallback(response) {
+            vm.photos = response.data.Photos;
+        }, function errorCallback(response) {
+            console.log(response);
+        });
+
+        $scope.uploadPhoto = function (input) {
+            var reader = new FileReader();
+            reader.onloadend = function loaded(params) {
+                var d = this.result;
+                var fd = new FormData();
+                fd.append('file', input.files[0]);
+                $http({
+                   method: 'POST',
+                   url: apiUrl + 'api/google',
+                   transformRequest: angular.identity,
+                   headers: {'Content-Type': undefined},
+                   data:  fd
+                }).then(function successCallback(response) {
+                        alert("ok uploaded");   
+                    }, function error(response) {
+                        alert("Error");
+                    })
+            };
+            
+            reader.readAsBinaryString(input.files[0]);
+        };
+
+        $scope.capturePhoto = function () 
+        {
+            //e.preventDefault();
+            angular.element('#browsePhoto').trigger('click');
+        };
+    }
+
+    GooglePhotosController.prototype.capturePhoto = function (e) 
+    {
+        e.preventDefault();
+        angular.element('#browsePhoto').trigger('click');
+    };
+    GooglePhotosController.$inject = ['$scope', '$http'];
+    return GooglePhotosController;
+} ());
+
+angular.module('app').controller('GooglePhotosController', GooglePhotosController);
 var MainController = (function () {
 		function MainController($scope, $filter, $translate) {
 			var _this = this;
@@ -3132,36 +3198,41 @@ function media(data) {
                             feedLen = 0,
                             i = 0;
 
-                        if (feed !== '' && feed.hasOwnProperty("data")) {
-                            feedLen = feed.data.length;
+                        if (feed !== '' && feed.hasOwnProperty("Data")) {
+                            feedLen = feed.Data.length;
                         }
 
-                        var html = '<ul>'
+                        var html = '';
                         while (i < feedLen) {
-                            if (index == 0) {
+                            /*if (index == 0) {
                                 html += '<ul>';
-                            }
+                            }*/
                             html += '<li class="instagram">';
 
                             //if (index < len) {
                             // $(".instagram").eq(index).html('<img src="' + feed.data[i].images.standard_resolution.url + '" alt="" /><span><a href="' + feed.data[i].images.standard_resolution.url + '" data-gal="prettyPhoto[gallery]" title="' + feed.data[i].caption.text + '"><i class="fa fa-link"></i></a><a href="' + feed.data[i].link + '" target="_blank" title="View on Instagram"><i class="fa fa-external-link"></i></a></span>');
-                            html += '<img src="' + feed.data[i].images.standard_resolution.url + '" alt="" /><span><a href="' + feed.data[i].images.standard_resolution.url + '" data-gal="prettyPhoto[gallery]" title="' + feed.data[i].caption.text + '"><i class="fa fa-link"></i></a><a href="' + feed.data[i].link + '" target="_blank" title="View on Instagram"><i class="fa fa-external-link"></i></a></span>';
+                            html += '<img src="' + feed.Data[i].Images.standard_resolution.Url + '" alt="" /><span>' +
+                                    '<a href="' + feed.Data[i].Images.standard_resolution.Url + '" data-gal="prettyPhoto[gallery]" ' + 
+                                    ' title="' + feed.Data[i].Caption.Text + '">' + 
+                                    '<i class="fa fa-link"></i></a><a href="' + feed.Data[i].Link + '" target="_blank" ' + 
+                                    'title="View on Instagram"><i class="fa fa-external-link"></i></a></span>';
                             index += 1;
                             //}
                             html += '</li>';
                             var columns = feedLen <= 4 ? 4 : feedLen / 2;
+                            /*
                             if (index == Math.round(columns)) {
                                 html += '</ul>';
                                 index = 0;
-                            }
+                            }*/
                             i += 1;
                         }
-                        if (feedLen < 4) {
+                        if (feedLen < 4 & feedLen > 0) {
                             for (var i = 0; i < 4 - feedLen; i++) {
                                 html += '<li><div class="heartbeat"></div></li>';
                             }
                         }
-                        $('.gallery-scroller').html(html);
+                        $('#galleryInstagram').html(html);
 
                         $tis.createPrettyPhoto();
                     },
@@ -3942,6 +4013,6 @@ var	mobileMenuTitle = "Menu",					//The title of the mobile menu
 	c_minutes = "MIN.",							//Countdown "Minutes" label
 	c_seconds = "SEC.",							//Countdown "Seconds" label
 	countdownEndMsg = "Que la boda empieze! / Che il matrimonio inizi!",			//Message to display when the countdown reaches the end
-	//apiUrl = "http://localhost:35825/";
-	apiUrl = "http://stenoeapi.azurewebsites.net/";
+	apiUrl = "https://localhost:44313/";
+	//apiUrl = "http://stenoeapi.azurewebsites.net/";
 	

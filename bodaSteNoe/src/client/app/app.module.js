@@ -32,7 +32,13 @@
         url: "/gifts",
         //controller: "FeedController",
         templateUrl: "/app/views/gifts.html",
-      });
+      })
+    .state("photo", {
+      url: "/photo",
+      views: {
+        "Empty": { controller: "GooglePhotosController",  templateUrl: "/app/views/photo.html" }
+      }
+    });
       
     //$urlRouterProvider.otherwise("/");
   }
@@ -42,12 +48,13 @@
       prefix: '/localization/',
       suffix: '.json'
     });
-
+    
     var supportedLanguages = ['es', 'it'];
     var firstLanguage = null;
 
-    //For Chrome and Mozilla
-    if (window.navigator.languages) {
+    if (window.navigator.languages) 
+    {
+      //For Chrome and Mozilla
       window.navigator.languages.forEach(function (lang) {
         lang = lang.substring(0, 2);
 
@@ -55,11 +62,14 @@
           firstLanguage = lang;
         }
       }, this);
-    } else if (window.navigator.language) {
+    } 
+    else if (window.navigator.language) 
+    {
       // For IE
       firstLanguage = window.navigator.language.substring(0, 2);
     }
-    else {
+    else 
+    {
       firstLanguage = 'es';
     }
 

@@ -16,8 +16,10 @@ namespace Api
             //config.Formatters.Add(json);
             config.Formatters.XmlFormatter.RemoveSerializer(typeof(XmlSerializer));
             config.Formatters.JsonFormatter.SerializerSettings.PreserveReferencesHandling =
-                Newtonsoft.Json.PreserveReferencesHandling.All;
-
+                Newtonsoft.Json.PreserveReferencesHandling.None;
+            config.Formatters.JsonFormatter.SerializerSettings.ReferenceLoopHandling = Newtonsoft.Json.ReferenceLoopHandling.Ignore;
+            config.Formatters.JsonFormatter.SerializerSettings.Formatting = Newtonsoft.Json.Formatting.None;
+            config.Formatters.XmlFormatter.SupportedMediaTypes.Clear();
             // Web API routes
             config.MapHttpAttributeRoutes();
 

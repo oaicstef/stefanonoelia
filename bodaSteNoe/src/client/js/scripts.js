@@ -621,8 +621,8 @@ function media(data) {
                             feedLen = 0,
                             i = 0;
 
-                        if (feed !== '' && feed.hasOwnProperty("data")) {
-                            feedLen = feed.data.length;
+                        if (feed !== '' && feed.hasOwnProperty("Data")) {
+                            feedLen = feed.Data.length;
                         }
 
                         var html = '';
@@ -634,10 +634,10 @@ function media(data) {
 
                             //if (index < len) {
                             // $(".instagram").eq(index).html('<img src="' + feed.data[i].images.standard_resolution.url + '" alt="" /><span><a href="' + feed.data[i].images.standard_resolution.url + '" data-gal="prettyPhoto[gallery]" title="' + feed.data[i].caption.text + '"><i class="fa fa-link"></i></a><a href="' + feed.data[i].link + '" target="_blank" title="View on Instagram"><i class="fa fa-external-link"></i></a></span>');
-                            html += '<img src="' + feed.data[i].images.standard_resolution.url + '" alt="" /><span>' +
-                                    '<a href="' + feed.data[i].images.standard_resolution.url + '" data-gal="prettyPhoto[gallery]" ' + 
-                                    ' title="' + feed.data[i].caption.text + '">' + 
-                                    '<i class="fa fa-link"></i></a><a href="' + feed.data[i].link + '" target="_blank" ' + 
+                            html += '<img src="' + feed.Data[i].Images.standard_resolution.Url + '" alt="" /><span>' +
+                                    '<a href="' + feed.Data[i].Images.standard_resolution.Url + '" data-gal="prettyPhoto[gallery]" ' + 
+                                    ' title="' + feed.Data[i].Caption.Text + '">' + 
+                                    '<i class="fa fa-link"></i></a><a href="' + feed.Data[i].Link + '" target="_blank" ' + 
                                     'title="View on Instagram"><i class="fa fa-external-link"></i></a></span>';
                             index += 1;
                             //}
@@ -650,7 +650,7 @@ function media(data) {
                             }*/
                             i += 1;
                         }
-                        if (feedLen < 4) {
+                        if (feedLen < 4 & feedLen > 0) {
                             for (var i = 0; i < 4 - feedLen; i++) {
                                 html += '<li><div class="heartbeat"></div></li>';
                             }

@@ -76,7 +76,7 @@
 	</div>
 	<!-- PRELOADER -->
 	<!-- BEGIN WRAPPER -->
-	<div id="wrapper" ng-controller="MainController as main" >
+	<div id="wrapper" ng-controller="MainController as main" ui-view="Empty">
 
 		<!-- BEGIN HEADER -->
 		<header id="header">
@@ -431,6 +431,7 @@
 						</a>
 					</span>
 				</li>
+				<li><div class="heartbeat"></div></li><li><div class="heartbeat"></div></li><li><div class="heartbeat"></div></li><li><div class="heartbeat"></div></li>
 			</ul>
 		</div>
 	</div>
@@ -587,6 +588,7 @@
 	<script src="/bower_components/angular-bootstrap/ui-bootstrap-tpls.js"></script>
 	<script src="/bower_components/angular-translate/angular-translate.js"></script>
 	<script src="/bower_components/angular-translate-loader-static-files/angular-translate-loader-static-files.js"></script>
+	<script src="/bower_components/angular-translate-loader-partial/angular-translate-loader-partial.js"></script>
 	<!-- endbower -->
 	<!-- endbuild -->
 	<!-- inject:customJs -->

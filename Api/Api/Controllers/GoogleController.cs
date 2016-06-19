@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.IO;
 using System.Threading;
 using System.Threading.Tasks;
+using System.Web;
 using System.Web.Hosting;
 using System.Web.Http;
 using Google.Apis.Auth.OAuth2;
@@ -11,22 +12,23 @@ using Google.Apis.Util.Store;
 using Google.GData.Client;
 using Google.GData.Photos;
 using Google.Picasa;
+using Newtonsoft.Json.Linq;
 
 namespace Api.Controllers
 {
     [RoutePrefix("api/google")]
     public class GoogleController : ApiController
     {
-        string[] Scopes = { DriveService.Scope.DrivePhotosReadonly,
-            DriveService.Scope.Drive, "http://picasaweb.google.com/data/" };
+        string[] Scopes = { DriveService.Scope.Drive, "http://picasaweb.google.com/data/" };
         const string ApplicationName = "ApiSteNoe";
         const string username = "damicos@gmail.com";
+        const string albumId = "6264127277017962641"; // BodaSteNoe
 
         [Route("photos")]
         [HttpGet]
         public async Task<IHttpActionResult> Get()
         {
-            var albumId = "6264127277017962641"; // BodaSteNoe
+            
             var picasaService = getPicasaService();
             PhotoQuery photoQuery = new PhotoQuery(PicasaQuery.CreatePicasaUri(username, albumId));
             PicasaFeed feed = picasaService.Query(photoQuery);
@@ -77,6 +79,33 @@ namespace Api.Controllers
             {
                 Albums = result
             });
+        }
+
+        [Route]
+        [HttpPost]
+        public async Task<IHttpActionResult> PostPhoto()
+        {
+            try
+            {
+                if (HttpContext.Current.Request.Files.Count == 0)
+                    return BadRequest("No file has been sent");
+
+                var file = HttpContext.Current.Request.Files[0];
+                
+                using (var dataStream = file.InputStream)
+                {
+                    var filePath = $"{Environment.GetFolderPath(Environment.SpecialFolder.Personal)}\\postedPhoto.jpg";
+                    var picasaService = getPicasaService();
+                    var postUri = new Uri(PicasaQuery.CreatePicasaUri("damicos", albumId));
+                    PicasaEntry entry =
+                            (PicasaEntry) picasaService.Insert(postUri, dataStream, file.ContentType, file.FileName);
+                }
+                return Ok();
+            }
+            catch (Exception ex)
+            {
+                throw;
+            }
         }
 
         private PicasaService getPicasaService()
