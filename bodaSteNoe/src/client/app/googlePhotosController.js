@@ -3,6 +3,7 @@ var GooglePhotosController = (function () {
         var vm = this;
         vm.photos = null;
         vm.fileName = null;
+        vm.googleAlbum = googlePhotosAlbum;
         
         $http({
             method: 'GET',

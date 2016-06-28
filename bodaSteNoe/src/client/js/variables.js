@@ -31,5 +31,6 @@ var	mobileMenuTitle = "Menu",					//The title of the mobile menu
 	c_seconds = "SEC.",							//Countdown "Seconds" label
 	countdownEndMsg = "Que la boda empieze! / Che il matrimonio inizi!",			//Message to display when the countdown reaches the end
 	//apiUrl = "https://localhost:44313/";
-	apiUrl = "http://stenoeapi.azurewebsites.net/";
+	apiUrl = "http://stenoeapi.azurewebsites.net/",
+	googlePhotosAlbum = "https://photos.google.com/share/AF1QipMsWqgDR_l_Z7vO6XYPPGZQR7XjTjolmdHkXG58UaRnsLE46adLutrfxybmfP71CQ?key=VFlLbFhncFJBVUFDbVRYcC1ia09wLVYxZy12UXlB";
 	

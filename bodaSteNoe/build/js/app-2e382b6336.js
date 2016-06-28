@@ -1650,6 +1650,7 @@ var GooglePhotosController = (function () {
         var vm = this;
         vm.photos = null;
         vm.fileName = null;
+        vm.googleAlbum = googlePhotosAlbum;
         
         $http({
             method: 'GET',
@@ -3233,6 +3234,11 @@ function media(data) {
 
                             //if (index < len) {
                             // $(".instagram").eq(index).html('<img src="' + feed.data[i].images.standard_resolution.url + '" alt="" /><span><a href="' + feed.data[i].images.standard_resolution.url + '" data-gal="prettyPhoto[gallery]" title="' + feed.data[i].caption.text + '"><i class="fa fa-link"></i></a><a href="' + feed.data[i].link + '" target="_blank" title="View on Instagram"><i class="fa fa-external-link"></i></a></span>');
+                            // html += '<img src="' + feed.Data[i].Images.standard_resolution.Url + '" alt="" /><span>' +
+                            //         '<a href="' + feed.Data[i].Images.standard_resolution.Url + '" data-gal="prettyPhoto[gallery]" ' + 
+                            //         ' title="' + feed.Data[i].Caption.Text + '">' + 
+                            //         '<i class="fa fa-link"></i></a><a href="' + feed.Data[i].Link + '" target="_blank" ' + 
+                            //         'title="View on Instagram"><i class="fa fa-external-link"></i></a></span>';
                             html += '<img src="' + feed.Data[i].Images.standard_resolution.Url + '" alt="" /><span>' +
                                     '<a href="' + feed.Data[i].Images.standard_resolution.Url + '" data-gal="prettyPhoto[gallery]" ' + 
                                     ' title="' + feed.Data[i].Caption.Text + '">' + 
@@ -4036,5 +4042,6 @@ var	mobileMenuTitle = "Menu",					//The title of the mobile menu
 	c_seconds = "SEC.",							//Countdown "Seconds" label
 	countdownEndMsg = "Que la boda empieze! / Che il matrimonio inizi!",			//Message to display when the countdown reaches the end
 	//apiUrl = "https://localhost:44313/";
-	apiUrl = "http://stenoeapi.azurewebsites.net/";
+	apiUrl = "http://stenoeapi.azurewebsites.net/",
+	googlePhotosAlbum = "https://photos.google.com/share/AF1QipMsWqgDR_l_Z7vO6XYPPGZQR7XjTjolmdHkXG58UaRnsLE46adLutrfxybmfP71CQ?key=VFlLbFhncFJBVUFDbVRYcC1ia09wLVYxZy12UXlB";
 	

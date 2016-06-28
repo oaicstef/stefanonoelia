@@ -634,6 +634,11 @@ function media(data) {
 
                             //if (index < len) {
                             // $(".instagram").eq(index).html('<img src="' + feed.data[i].images.standard_resolution.url + '" alt="" /><span><a href="' + feed.data[i].images.standard_resolution.url + '" data-gal="prettyPhoto[gallery]" title="' + feed.data[i].caption.text + '"><i class="fa fa-link"></i></a><a href="' + feed.data[i].link + '" target="_blank" title="View on Instagram"><i class="fa fa-external-link"></i></a></span>');
+                            // html += '<img src="' + feed.Data[i].Images.standard_resolution.Url + '" alt="" /><span>' +
+                            //         '<a href="' + feed.Data[i].Images.standard_resolution.Url + '" data-gal="prettyPhoto[gallery]" ' + 
+                            //         ' title="' + feed.Data[i].Caption.Text + '">' + 
+                            //         '<i class="fa fa-link"></i></a><a href="' + feed.Data[i].Link + '" target="_blank" ' + 
+                            //         'title="View on Instagram"><i class="fa fa-external-link"></i></a></span>';
                             html += '<img src="' + feed.Data[i].Images.standard_resolution.Url + '" alt="" /><span>' +
                                     '<a href="' + feed.Data[i].Images.standard_resolution.Url + '" data-gal="prettyPhoto[gallery]" ' + 
                                     ' title="' + feed.Data[i].Caption.Text + '">' + 

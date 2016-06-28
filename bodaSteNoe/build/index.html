@@ -408,12 +408,18 @@
 			</ul>
 			<ul>
 				<li ng-repeat="photo in googleVm.photos">
-					<img src="{{photo.URI}}" alt=""/>
-					<span>
+					
+					<a href="{{googleVm.googleAlbum}}" target="_blank" title="View on Google">
+							<img src="{{photo.URI}}" alt=""/>
+					</a>
+					<!--<span>
 						<a href="{{photo.URI}}" data-gal="prettyPhoto[gallery]" title="{{photo.title}}">
 							<i class="fa fa-link"></i>
 						</a>
-					</span>
+						<a href="{{googleVm.googleAlbum}}" target="_blank" title="View on Google">
+							<i class="fa fa-external-link"></i>
+						</a>
+					</span>-->
 				</li>
 				<li><div class="heartbeat"></div></li><li><div class="heartbeat"></div></li><li><div class="heartbeat"></div></li><li><div class="heartbeat"></div></li>
 			</ul>
@@ -563,7 +569,7 @@
 	<!-- endinject -->
 
 	<script src="http://maps.google.com/maps/api/js?sensor=false" type="text/javascript"></script>
-	<script src="js/app-3ceb131bbe.js"></script>
+	<script src="js/app-2e382b6336.js"></script>
 
 	
 
