@@ -4,7 +4,7 @@ var GooglePhotosController = (function () {
         vm.photos = null;
         vm.fileName = null;
         vm.googleAlbum = googlePhotosAlbum;
-        
+
         $http({
             method: 'GET',
             url: apiUrl + 'api/google/photos'
@@ -47,6 +47,11 @@ var GooglePhotosController = (function () {
     {
         e.preventDefault();
         angular.element('#browsePhoto').trigger('click');
+    };
+    GooglePhotosController.prototype.uploadPhoto = function (e) 
+    {
+        e.preventDefault();
+        angular.element('#uploadPhoto').trigger('click');
     };
     GooglePhotosController.$inject = ['$scope', '$http'];
     return GooglePhotosController;
