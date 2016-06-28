@@ -41,6 +41,11 @@ var GooglePhotosController = (function () {
             //e.preventDefault();
             angular.element('#browsePhoto').trigger('click');
         };
+        $scope.triggerUploadPhoto = function () 
+        {
+            //e.preventDefault();
+            angular.element('#uploadPhoto').trigger('click');
+        };
     }
 
     GooglePhotosController.prototype.capturePhoto = function (e) 
@@ -48,7 +53,7 @@ var GooglePhotosController = (function () {
         e.preventDefault();
         angular.element('#browsePhoto').trigger('click');
     };
-    GooglePhotosController.prototype.uploadPhoto = function (e) 
+    GooglePhotosController.prototype.triggerUploadPhoto = function (e) 
     {
         e.preventDefault();
         angular.element('#uploadPhoto').trigger('click');
