@@ -1686,12 +1686,12 @@ var GooglePhotosController = (function () {
         $scope.capturePhoto = function () 
         {
             //e.preventDefault();
-            angular.element('#browsePhoto').trigger('click');
+            angular.element('#capturePhoto').trigger('click');
         };
         $scope.triggerUploadPhoto = function () 
         {
             //e.preventDefault();
-            angular.element('#uploadPhoto').trigger('click');
+            angular.element('#browsePhoto').trigger('click');
         };
     }
 

@@ -5,11 +5,86 @@
  * @link 
  * @license 
  */
-(function() {
+
+(function () {
   'use strict';
 
-  angular.module('app', []);
+  var app = angular.module('app', [
+    'pascalprecht.translate',
+    'ui.router'
+  ]);
 
+  app.config(['$translateProvider', '$stateProvider', '$urlRouterProvider', function ($translateProvider, $stateProvider, $urlRouterProvider) {
+    translationConfiguration($translateProvider);
+
+    routeConfiguration($stateProvider, $urlRouterProvider);
+  }]);
+
+  app.run(["$http", "$translate", "$filter", function ($http, $translate, $filter) {
+    
+  }]);
+
+  function routeConfiguration($stateProvider, $urlRouterProvider) {
+    $stateProvider
+      .state("blog", {
+        url: "/blog",
+        //controller: "FeedController",
+        templateUrl: "app/views/blog.html",
+      })
+      .state('home', {
+      url: "^/",
+      templateUrl: "app/views/quote.html"
+    })
+    .state("gifts", {
+        url: "/gifts",
+        //controller: "FeedController",
+        templateUrl: "app/views/gifts.html",
+      })
+    .state("photo", {
+      url: "/photo",
+      views: {
+        "Empty": { controller: "GooglePhotosController",  templateUrl: "app/views/photo.html" }
+      }
+    });
+      
+    //$urlRouterProvider.otherwise("/");
+  }
+
+  function translationConfiguration($translateProvider) {
+    $translateProvider.useStaticFilesLoader({
+      prefix: '/localization/',
+      suffix: '.json'
+    });
+    
+    var supportedLanguages = ['es', 'it'];
+    var firstLanguage = null;
+
+    if (window.navigator.languages) 
+    {
+      //For Chrome and Mozilla
+      window.navigator.languages.forEach(function (lang) {
+        lang = lang.substring(0, 2);
+
+        if (supportedLanguages.indexOf(lang) >= 0 && !firstLanguage) {
+          firstLanguage = lang;
+        }
+      }, this);
+    } 
+    else if (window.navigator.language) 
+    {
+      // For IE
+      firstLanguage = window.navigator.language.substring(0, 2);
+    }
+    else 
+    {
+      firstLanguage = 'es';
+    }
+
+    if (supportedLanguages.indexOf(firstLanguage) < 0) {
+      firstLanguage = "it";
+    }
+    $translateProvider.preferredLanguage(firstLanguage);
+  }
 })();
 
 /*
@@ -203,22 +278,99 @@ if (typeof google !== 'undefined'){
 
 /*! Stellar.js v0.6.2 | Copyright 2014, Mark Dalgleish | http://markdalgleish.com/projects/stellar.js | http://markdalgleish.mit-license.org */
 !function(a,b,c,d){function e(b,c){this.element=b,this.options=a.extend({},g,c),this._defaults=g,this._name=f,this.init()}var f="stellar",g={scrollProperty:"scroll",positionProperty:"position",horizontalScrolling:!0,verticalScrolling:!0,horizontalOffset:0,verticalOffset:0,responsive:!1,parallaxBackgrounds:!0,parallaxElements:!0,hideDistantElements:!0,hideElement:function(a){a.hide()},showElement:function(a){a.show()}},h={scroll:{getLeft:function(a){return a.scrollLeft()},setLeft:function(a,b){a.scrollLeft(b)},getTop:function(a){return a.scrollTop()},setTop:function(a,b){a.scrollTop(b)}},position:{getLeft:function(a){return-1*parseInt(a.css("left"),10)},getTop:function(a){return-1*parseInt(a.css("top"),10)}},margin:{getLeft:function(a){return-1*parseInt(a.css("margin-left"),10)},getTop:function(a){return-1*parseInt(a.css("margin-top"),10)}},transform:{getLeft:function(a){var b=getComputedStyle(a[0])[k];return"none"!==b?-1*parseInt(b.match(/(-?[0-9]+)/g)[4],10):0},getTop:function(a){var b=getComputedStyle(a[0])[k];return"none"!==b?-1*parseInt(b.match(/(-?[0-9]+)/g)[5],10):0}}},i={position:{setLeft:function(a,b){a.css("left",b)},setTop:function(a,b){a.css("top",b)}},transform:{setPosition:function(a,b,c,d,e){a[0].style[k]="translate3d("+(b-c)+"px, "+(d-e)+"px, 0)"}}},j=function(){var b,c=/^(Moz|Webkit|Khtml|O|ms|Icab)(?=[A-Z])/,d=a("script")[0].style,e="";for(b in d)if(c.test(b)){e=b.match(c)[0];break}return"WebkitOpacity"in d&&(e="Webkit"),"KhtmlOpacity"in d&&(e="Khtml"),function(a){return e+(e.length>0?a.charAt(0).toUpperCase()+a.slice(1):a)}}(),k=j("transform"),l=a("<div />",{style:"background:#fff"}).css("background-position-x")!==d,m=l?function(a,b,c){a.css({"background-position-x":b,"background-position-y":c})}:function(a,b,c){a.css("background-position",b+" "+c)},n=l?function(a){return[a.css("background-position-x"),a.css("background-position-y")]}:function(a){return a.css("background-position").split(" ")},o=b.requestAnimationFrame||b.webkitRequestAnimationFrame||b.mozRequestAnimationFrame||b.oRequestAnimationFrame||b.msRequestAnimationFrame||function(a){setTimeout(a,1e3/60)};e.prototype={init:function(){this.options.name=f+"_"+Math.floor(1e9*Math.random()),this._defineElements(),this._defineGetters(),this._defineSetters(),this._handleWindowLoadAndResize(),this._detectViewport(),this.refresh({firstLoad:!0}),"scroll"===this.options.scrollProperty?this._handleScrollEvent():this._startAnimationLoop()},_defineElements:function(){this.element===c.body&&(this.element=b),this.$scrollElement=a(this.element),this.$element=this.element===b?a("body"):this.$scrollElement,this.$viewportElement=this.options.viewportElement!==d?a(this.options.viewportElement):this.$scrollElement[0]===b||"scroll"===this.options.scrollProperty?this.$scrollElement:this.$scrollElement.parent()},_defineGetters:function(){var a=this,b=h[a.options.scrollProperty];this._getScrollLeft=function(){return b.getLeft(a.$scrollElement)},this._getScrollTop=function(){return b.getTop(a.$scrollElement)}},_defineSetters:function(){var b=this,c=h[b.options.scrollProperty],d=i[b.options.positionProperty],e=c.setLeft,f=c.setTop;this._setScrollLeft="function"==typeof e?function(a){e(b.$scrollElement,a)}:a.noop,this._setScrollTop="function"==typeof f?function(a){f(b.$scrollElement,a)}:a.noop,this._setPosition=d.setPosition||function(a,c,e,f,g){b.options.horizontalScrolling&&d.setLeft(a,c,e),b.options.verticalScrolling&&d.setTop(a,f,g)}},_handleWindowLoadAndResize:function(){var c=this,d=a(b);c.options.responsive&&d.bind("load."+this.name,function(){c.refresh()}),d.bind("resize."+this.name,function(){c._detectViewport(),c.options.responsive&&c.refresh()})},refresh:function(c){var d=this,e=d._getScrollLeft(),f=d._getScrollTop();c&&c.firstLoad||this._reset(),this._setScrollLeft(0),this._setScrollTop(0),this._setOffsets(),this._findParticles(),this._findBackgrounds(),c&&c.firstLoad&&/WebKit/.test(navigator.userAgent)&&a(b).load(function(){var a=d._getScrollLeft(),b=d._getScrollTop();d._setScrollLeft(a+1),d._setScrollTop(b+1),d._setScrollLeft(a),d._setScrollTop(b)}),this._setScrollLeft(e),this._setScrollTop(f)},_detectViewport:function(){var a=this.$viewportElement.offset(),b=null!==a&&a!==d;this.viewportWidth=this.$viewportElement.width(),this.viewportHeight=this.$viewportElement.height(),this.viewportOffsetTop=b?a.top:0,this.viewportOffsetLeft=b?a.left:0},_findParticles:function(){{var b=this;this._getScrollLeft(),this._getScrollTop()}if(this.particles!==d)for(var c=this.particles.length-1;c>=0;c--)this.particles[c].$element.data("stellar-elementIsActive",d);this.particles=[],this.options.parallaxElements&&this.$element.find("[data-stellar-ratio]").each(function(){var c,e,f,g,h,i,j,k,l,m=a(this),n=0,o=0,p=0,q=0;if(m.data("stellar-elementIsActive")){if(m.data("stellar-elementIsActive")!==this)return}else m.data("stellar-elementIsActive",this);b.options.showElement(m),m.data("stellar-startingLeft")?(m.css("left",m.data("stellar-startingLeft")),m.css("top",m.data("stellar-startingTop"))):(m.data("stellar-startingLeft",m.css("left")),m.data("stellar-startingTop",m.css("top"))),f=m.position().left,g=m.position().top,h="auto"===m.css("margin-left")?0:parseInt(m.css("margin-left"),10),i="auto"===m.css("margin-top")?0:parseInt(m.css("margin-top"),10),k=m.offset().left-h,l=m.offset().top-i,m.parents().each(function(){var b=a(this);return b.data("stellar-offset-parent")===!0?(n=p,o=q,j=b,!1):(p+=b.position().left,void(q+=b.position().top))}),c=m.data("stellar-horizontal-offset")!==d?m.data("stellar-horizontal-offset"):j!==d&&j.data("stellar-horizontal-offset")!==d?j.data("stellar-horizontal-offset"):b.horizontalOffset,e=m.data("stellar-vertical-offset")!==d?m.data("stellar-vertical-offset"):j!==d&&j.data("stellar-vertical-offset")!==d?j.data("stellar-vertical-offset"):b.verticalOffset,b.particles.push({$element:m,$offsetParent:j,isFixed:"fixed"===m.css("position"),horizontalOffset:c,verticalOffset:e,startingPositionLeft:f,startingPositionTop:g,startingOffsetLeft:k,startingOffsetTop:l,parentOffsetLeft:n,parentOffsetTop:o,stellarRatio:m.data("stellar-ratio")!==d?m.data("stellar-ratio"):1,width:m.outerWidth(!0),height:m.outerHeight(!0),isHidden:!1})})},_findBackgrounds:function(){var b,c=this,e=this._getScrollLeft(),f=this._getScrollTop();this.backgrounds=[],this.options.parallaxBackgrounds&&(b=this.$element.find("[data-stellar-background-ratio]"),this.$element.data("stellar-background-ratio")&&(b=b.add(this.$element)),b.each(function(){var b,g,h,i,j,k,l,o=a(this),p=n(o),q=0,r=0,s=0,t=0;if(o.data("stellar-backgroundIsActive")){if(o.data("stellar-backgroundIsActive")!==this)return}else o.data("stellar-backgroundIsActive",this);o.data("stellar-backgroundStartingLeft")?m(o,o.data("stellar-backgroundStartingLeft"),o.data("stellar-backgroundStartingTop")):(o.data("stellar-backgroundStartingLeft",p[0]),o.data("stellar-backgroundStartingTop",p[1])),h="auto"===o.css("margin-left")?0:parseInt(o.css("margin-left"),10),i="auto"===o.css("margin-top")?0:parseInt(o.css("margin-top"),10),j=o.offset().left-h-e,k=o.offset().top-i-f,o.parents().each(function(){var b=a(this);return b.data("stellar-offset-parent")===!0?(q=s,r=t,l=b,!1):(s+=b.position().left,void(t+=b.position().top))}),b=o.data("stellar-horizontal-offset")!==d?o.data("stellar-horizontal-offset"):l!==d&&l.data("stellar-horizontal-offset")!==d?l.data("stellar-horizontal-offset"):c.horizontalOffset,g=o.data("stellar-vertical-offset")!==d?o.data("stellar-vertical-offset"):l!==d&&l.data("stellar-vertical-offset")!==d?l.data("stellar-vertical-offset"):c.verticalOffset,c.backgrounds.push({$element:o,$offsetParent:l,isFixed:"fixed"===o.css("background-attachment"),horizontalOffset:b,verticalOffset:g,startingValueLeft:p[0],startingValueTop:p[1],startingBackgroundPositionLeft:isNaN(parseInt(p[0],10))?0:parseInt(p[0],10),startingBackgroundPositionTop:isNaN(parseInt(p[1],10))?0:parseInt(p[1],10),startingPositionLeft:o.position().left,startingPositionTop:o.position().top,startingOffsetLeft:j,startingOffsetTop:k,parentOffsetLeft:q,parentOffsetTop:r,stellarRatio:o.data("stellar-background-ratio")===d?1:o.data("stellar-background-ratio")})}))},_reset:function(){var a,b,c,d,e;for(e=this.particles.length-1;e>=0;e--)a=this.particles[e],b=a.$element.data("stellar-startingLeft"),c=a.$element.data("stellar-startingTop"),this._setPosition(a.$element,b,b,c,c),this.options.showElement(a.$element),a.$element.data("stellar-startingLeft",null).data("stellar-elementIsActive",null).data("stellar-backgroundIsActive",null);for(e=this.backgrounds.length-1;e>=0;e--)d=this.backgrounds[e],d.$element.data("stellar-backgroundStartingLeft",null).data("stellar-backgroundStartingTop",null),m(d.$element,d.startingValueLeft,d.startingValueTop)},destroy:function(){this._reset(),this.$scrollElement.unbind("resize."+this.name).unbind("scroll."+this.name),this._animationLoop=a.noop,a(b).unbind("load."+this.name).unbind("resize."+this.name)},_setOffsets:function(){var c=this,d=a(b);d.unbind("resize.horizontal-"+this.name).unbind("resize.vertical-"+this.name),"function"==typeof this.options.horizontalOffset?(this.horizontalOffset=this.options.horizontalOffset(),d.bind("resize.horizontal-"+this.name,function(){c.horizontalOffset=c.options.horizontalOffset()})):this.horizontalOffset=this.options.horizontalOffset,"function"==typeof this.options.verticalOffset?(this.verticalOffset=this.options.verticalOffset(),d.bind("resize.vertical-"+this.name,function(){c.verticalOffset=c.options.verticalOffset()})):this.verticalOffset=this.options.verticalOffset},_repositionElements:function(){var a,b,c,d,e,f,g,h,i,j,k=this._getScrollLeft(),l=this._getScrollTop(),n=!0,o=!0;if(this.currentScrollLeft!==k||this.currentScrollTop!==l||this.currentWidth!==this.viewportWidth||this.currentHeight!==this.viewportHeight){for(this.currentScrollLeft=k,this.currentScrollTop=l,this.currentWidth=this.viewportWidth,this.currentHeight=this.viewportHeight,j=this.particles.length-1;j>=0;j--)a=this.particles[j],b=a.isFixed?1:0,this.options.horizontalScrolling?(f=(k+a.horizontalOffset+this.viewportOffsetLeft+a.startingPositionLeft-a.startingOffsetLeft+a.parentOffsetLeft)*-(a.stellarRatio+b-1)+a.startingPositionLeft,h=f-a.startingPositionLeft+a.startingOffsetLeft):(f=a.startingPositionLeft,h=a.startingOffsetLeft),this.options.verticalScrolling?(g=(l+a.verticalOffset+this.viewportOffsetTop+a.startingPositionTop-a.startingOffsetTop+a.parentOffsetTop)*-(a.stellarRatio+b-1)+a.startingPositionTop,i=g-a.startingPositionTop+a.startingOffsetTop):(g=a.startingPositionTop,i=a.startingOffsetTop),this.options.hideDistantElements&&(o=!this.options.horizontalScrolling||h+a.width>(a.isFixed?0:k)&&h<(a.isFixed?0:k)+this.viewportWidth+this.viewportOffsetLeft,n=!this.options.verticalScrolling||i+a.height>(a.isFixed?0:l)&&i<(a.isFixed?0:l)+this.viewportHeight+this.viewportOffsetTop),o&&n?(a.isHidden&&(this.options.showElement(a.$element),a.isHidden=!1),this._setPosition(a.$element,f,a.startingPositionLeft,g,a.startingPositionTop)):a.isHidden||(this.options.hideElement(a.$element),a.isHidden=!0);for(j=this.backgrounds.length-1;j>=0;j--)c=this.backgrounds[j],b=c.isFixed?0:1,d=this.options.horizontalScrolling?(k+c.horizontalOffset-this.viewportOffsetLeft-c.startingOffsetLeft+c.parentOffsetLeft-c.startingBackgroundPositionLeft)*(b-c.stellarRatio)+"px":c.startingValueLeft,e=this.options.verticalScrolling?(l+c.verticalOffset-this.viewportOffsetTop-c.startingOffsetTop+c.parentOffsetTop-c.startingBackgroundPositionTop)*(b-c.stellarRatio)+"px":c.startingValueTop,m(c.$element,d,e)}},_handleScrollEvent:function(){var a=this,b=!1,c=function(){a._repositionElements(),b=!1},d=function(){b||(o(c),b=!0)};this.$scrollElement.bind("scroll."+this.name,d),d()},_startAnimationLoop:function(){var a=this;this._animationLoop=function(){o(a._animationLoop),a._repositionElements()},this._animationLoop()}},a.fn[f]=function(b){var c=arguments;return b===d||"object"==typeof b?this.each(function(){a.data(this,"plugin_"+f)||a.data(this,"plugin_"+f,new e(this,b))}):"string"==typeof b&&"_"!==b[0]&&"init"!==b?this.each(function(){var d=a.data(this,"plugin_"+f);d instanceof e&&"function"==typeof d[b]&&d[b].apply(d,Array.prototype.slice.call(c,1)),"destroy"===b&&a.data(this,"plugin_"+f,null)}):void 0},a[f]=function(){var c=a(b);return c.stellar.apply(c,Array.prototype.slice.call(arguments,0))},a[f].scrollProperty=h,a[f].positionProperty=i,b.Stellar=e}(jQuery,this,document);
-function TestController($scope) {
-    var data = { "Id": 3, "FirstName": "Test", "LastName": "User", "Username": "testuser", "IsApproved": true, "IsOnlineNow": true, "IsChecked": true };
-    $http.post(
-        '/api/values',
-        JSON.stringify(data),
-        {
-            headers: {
-                'Content-Type': 'application/json'
-            }
-        }
-    ).success(function (data) {
-        $scope.person = data;
-    });
-}
+var CountDownController = (function () {
+    function CountDownController($scope,$interval) {
 
-angular.module('app').controller('TestController', ['$scope']);
+        var _this = this;
+        this.$scope = $scope;
+        _this.days = 0;
+        _this.hours = 0;
+        _this.minutes = 0;
+        _this.seconds = 0;
+          
+        var $tis = this,
+            future = new Date("2016/08/19 4:30 PM"),
+            counter;
+        
+        // $parent.html('<div class="days"><span>' + $tis.c_days + '</span><div></div></div>' +
+        //     '<div class="hours"><span>' + $tis.c_hours + '</span><div></div></div>' +
+        //     '<div class="minutes"><span>' + $tis.c_minutes + '</span><div></div></div>' +
+        //     '<div class="seconds"><span>' + $tis.c_seconds + '</span><div></div></div>');
+
+        //counter = setInterval(changeTime(_this, future), 1000);
+        if ($interval){
+            var time = $interval(changeTime, 1000, null, null, _this, future);
+        }
+    }
+    
+    function changeTime (scope, future) {
+        var today = new Date(),
+            _dd = future - today,
+            $parent = $(".countdown");
+
+        if (_dd < 0) {
+            $parent.html('<div class="end">' + countdownEndMsg + '</div>');
+            clearInterval(counter);
+
+            return false;
+        }
+
+        var days = Math.floor(_dd / (60 * 60 * 1000 * 24) * 1);
+        var hours = Math.floor((_dd % (60 * 60 * 1000 * 24)) / (60 * 60 * 1000) * 1);
+        var minutes = Math.floor(((_dd % (60 * 60 * 1000 * 24)) % (60 * 60 * 1000)) / (60 * 1000) * 1);
+        var seconds = Math.floor((((_dd % (60 * 60 * 1000 * 24)) % (60 * 60 * 1000)) % (60 * 1000)) / 1000 * 1);
+
+        scope.days =days;
+        scope.hours = hours;
+        scope.minutes = minutes;
+        scope.seconds = seconds;
+    };
+
+    return CountDownController;
+} ());
+
+angular.module('app').controller('CountDownController', ['$scope', '$interval', CountDownController]);
+
+(function () {
+    angular.module('app').directive('countdown', [
+        'Util',
+        '$interval',
+        function (Util, $interval) {
+            return {
+                restrict: 'A',
+                scope: { date: '@' },
+                link: function (scope, element) {
+                    var future;
+                    future = new Date(scope.date);
+                    $interval(function () {
+                        var diff;
+                        diff = Math.floor((future.getTime() - new Date().getTime()) / 1000);
+                        return element.text(Util.dhms(diff));
+                    }, 1000);
+                }
+            };
+        }
+    ]).factory('Util', [function () {
+            return {
+                dhms: function (t) {
+                    var days, hours, minutes, seconds;
+                    days = Math.floor(t / 86400);
+                    t -= days * 86400;
+                    hours = Math.floor(t / 3600) % 24;
+                    t -= hours * 3600;
+                    minutes = Math.floor(t / 60) % 60;
+                    t -= minutes * 60;
+                    seconds = t % 60;
+                    return [
+                        days + 'd',
+                        hours + 'h',
+                        minutes + 'm',
+                        seconds + 's'
+                    ].join(' ');
+                }
+            };
+        }]);
+}.call(this));
 // created by Minh Nguyen;
 // version 1.04;
 
@@ -1493,6 +1645,101 @@ angular.module('app').controller('TestController', ['$scope']);
  
 })(window.Zepto || window.jQuery);
 
+var GooglePhotosController = (function () {
+    function GooglePhotosController($scope, $http) {
+        var vm = this;
+        vm.photos = null;
+        vm.fileName = null;
+        vm.googleAlbum = googlePhotosAlbum;
+
+        $http({
+            method: 'GET',
+            url: apiUrl + 'api/google/photos'
+        }).then(function successCallback(response) {
+            vm.photos = response.data.Photos;
+        }, function errorCallback(response) {
+            console.log(response);
+        });
+
+        $scope.uploadPhoto = function (input) {
+            var reader = new FileReader();
+            reader.onloadend = function loaded(params) {
+                var d = this.result;
+                var fd = new FormData();
+                fd.append('file', input.files[0]);
+                $http({
+                   method: 'POST',
+                   url: apiUrl + 'api/google',
+                   transformRequest: angular.identity,
+                   headers: {'Content-Type': undefined},
+                   data:  fd
+                }).then(function successCallback(response) {
+                        alert("ok uploaded");   
+                    }, function error(response) {
+                        alert("Error");
+                    })
+            };
+            
+            reader.readAsBinaryString(input.files[0]);
+        };
+
+        $scope.capturePhoto = function () 
+        {
+            //e.preventDefault();
+            angular.element('#capturePhoto').trigger('click');
+        };
+        $scope.triggerUploadPhoto = function () 
+        {
+            //e.preventDefault();
+            angular.element('#browsePhoto').trigger('click');
+        };
+    }
+
+    GooglePhotosController.prototype.capturePhoto = function (e) 
+    {
+        e.preventDefault();
+        angular.element('#browsePhoto').trigger('click');
+    };
+    GooglePhotosController.prototype.triggerUploadPhoto = function (e) 
+    {
+        e.preventDefault();
+        angular.element('#uploadPhoto').trigger('click');
+    };
+    GooglePhotosController.$inject = ['$scope', '$http'];
+    return GooglePhotosController;
+} ());
+
+angular.module('app').controller('GooglePhotosController', GooglePhotosController);
+var MainController = (function () {
+		function MainController($scope, $filter, $translate) {
+			var _this = this;
+			var tran = $filter('translate');
+			this.$scope = $scope;
+			this.$filter = $filter;
+			this.$translate = $translate;
+			
+			//COUNTDOWN VARIABLES
+			this.$translate("DAYS").then(function (data) {
+				c_days = data;	
+			});			//Countdown "Days" label
+			c_hours = tran('HOURS');						//Countdown "Hours" label
+			c_minutes = tran("MIN.");							//Countdown "Minutes" label
+			c_seconds = tran("SEC.");							//Countdown "Seconds" label
+		}
+		
+		MainController.prototype.changeLanguage = function ($event) {
+				var img = $event.currentTarget;
+				if (img.id == 'IT-Flag') {
+					this.$translate.use('it');
+				} else {
+					this.$translate.use('es')
+				}
+				alert("I'm in.")
+		};
+		return MainController;
+	} ());
+
+angular.module('app').controller('MainController', ['$scope', '$filter', '$translate', MainController])
 //List of map markers
 var map_markers = [
 	{
@@ -1518,6 +1765,27 @@ var map_markers = [
 	// 	"icon":"fa-plane", //Check the full list of icons at http://fortawesome.github.io/Font-Awesome/icons/
 	// 	"infoWindow":"Seal Beach VORTAC SLI <br> Los Alamitos, CA 90720"
 	// },
+var NavBarController = (function () {
+		function NavBarController($scope, $filter, $translate) {
+			var _this = this;
+			var tran = $filter('translate');
+			this.$scope = $scope;
+			this.$filter = $filter;
+			this.$translate = $translate;
+		}
+		
+		NavBarController.prototype.changeLanguage = function ($event) {
+				var img = $event.currentTarget;
+				if (img.id == 'IT-Flag') {
+					this.$translate.use('it');
+				} else {
+					this.$translate.use('es')
+				}
+	    };
+		return NavBarController;
+	} ());
+
+angular.module('app').controller('NavBarController', ['$scope', '$filter', '$translate', NavBarController])
 // ==ClosureCompiler==
 // @compilation_level ADVANCED_OPTIMIZATIONS
 // @externs_url http://closure-compiler.googlecode.com/svn/trunk/contrib/externs/maps/google_maps_api_v3.js
@@ -2351,9 +2619,11 @@ window['RichMarkerPosition'] = RichMarkerPosition;
 /*global google, window, RichMarker, jQuery, mobileMenuTitle, hero100PercentHeight, twitter_username, map_canvas_id, map_color, map_initial_zoom, map_initial_latitude, map_initial_longitude, use_default_map_style, contact_form_success_msg, contact_form_error_msg, c_days, c_hours, c_minutes, c_seconds, countdownEndMsg, Waypoint, Freewall, map_markers  */
 
 var Lilac;
-function media(data){
-    var i =0;    
+function media(data) {
+    var i = 0;
 }
+
+
 
 (function ($) {
     "use strict";
@@ -2472,9 +2742,9 @@ function media(data){
                  */
                 $tis.countdown();
 
-                 /**
-                 * Initiate Parallax
-                 */
+                /**
+                * Initiate Parallax
+                */
                 $tis.parallaxItems();
 
                 /**
@@ -2502,6 +2772,8 @@ function media(data){
                  */
                 $tis.contactForm();
 
+                $tis.musicForm();
+
                 /**
                  * Capture buttons click event
                  */
@@ -2528,6 +2800,15 @@ function media(data){
                     var navActive = $(this),
                         scroll = 0;
 
+                    if (navActive.siblings('ul.dropdown-menu').length > 0 ||
+                        navActive.parents('ul.dropdown-menu').length > 0) {
+                        var menu = navActive.siblings(".dropdown-menu");
+                        if (menu.length == 0) {
+                            menu = navActive.parents(".dropdown-menu");
+                        }
+                        menu.toggle();
+                    };
+
                     if ($.browser.mobile && (!navActive.closest(".dropdown").hasClass("open") || !navActive.closest(".dropdown-menu").css('display') === 'block' || !navActive.parent().parent().hasClass("nav"))) {
                         event.preventDefault();
                         return false;
@@ -2537,7 +2818,12 @@ function media(data){
                         event.preventDefault();
 
                         if (navActive.attr('href') !== "#home") {
-                            scroll = $(navActive.attr('href')).offset().top - 65;
+                            if (navActive.attr('href') == "#") {
+                                return false;
+                            }
+                            else {
+                                scroll = $(navActive.attr('href')).offset().top - 65;
+                            }
                         }
 
                         $('html, body').stop().animate({
@@ -2606,15 +2892,30 @@ function media(data){
 
                 if (w <= 975 && !$tis.mobMenuFlag) {
 
-                    $('body').prepend('<nav class="nav-mobile"><i class="fa fa-times"></i><h2><i class="fa fa-bars"></i>' + $tis.mobileMenuTitle + '</h2><ul></ul></nav>');
+                    var mobileMenuHtml = '<nav class="nav-mobile" ng-controller="NavBarController as nav"><i class="fa fa-times"></i><h2><i class="fa fa-bars"></i>' + $tis.mobileMenuTitle + '</h2><ul>' + $('.nav').html() + '</ul></nav>';
+                    //$('body').prepend('<nav class="nav-mobile"><i class="fa fa-times"></i><h2><i class="fa fa-bars"></i>' + $tis.mobileMenuTitle + '</h2><ul></ul></nav>');
 
-                    $('.nav-mobile > ul').html($('.nav').html());
+                    //$('.nav-mobile > ul').html($('.nav').html());
 
-                    $('.nav-mobile b').remove();
-
-                    $('.nav-mobile ul.dropdown-menu').removeClass().addClass("dropdown-mobile");
+                    //$('.nav-mobile b').remove();
 
                     $navMobile = $(".nav-mobile");
+
+                    angular.element(document).injector().invoke(['$compile', function ($compile) {
+                        // Create a scope.
+                        var $scope = angular.element(document.body).scope();
+                        // Specify what it is we'll be compiling.
+                        var to_compile = mobileMenuHtml;
+                        // Compile the tag, retrieving the compiled output.
+                        $navMobile = $compile(to_compile)($scope);
+                        // Ensure the scope and been signalled to digest our data.
+                        $scope.$digest();
+                        // Append the compiled output to the page.
+                        $navMobile.appendTo(document.body);
+
+                        $('.nav-mobile ul.dropdown-menu').removeClass().addClass("dropdown-mobile");
+                        $('.nav-mobile b').remove();
+                    }]);
 
                     $("#nav-mobile-btn").on(etype, function (e) {
                         e.stopPropagation();
@@ -2661,7 +2962,16 @@ function media(data){
                         var scroll = 0;
 
                         if (navActive.attr('href') !== "#home") {
-                            scroll = $(navActive.attr('href')).offset().top - 65;
+                            if (navActive.attr('href') == "#") {
+                                $navMobile.getNiceScroll().hide();
+                                $wrapper.removeClass('open');
+                                $navMobile.removeClass('open');
+                                $(document).off(etype);
+                                event.preventDefault();
+                                return;
+                            } else {
+                                scroll = $(navActive.attr('href')).offset().top - 65;
+                            }
                         }
 
                         $('html, body').stop().animate({
@@ -2685,10 +2995,10 @@ function media(data){
                 var $tis = this;
 
                 if ($tis.hero100PercentHeight) {
-                    $("#home").css({minHeight: $(window).innerHeight() + 'px'});
+                    $("#home").css({ minHeight: $(window).innerHeight() + 'px' });
 
                     $(window).resize(function () {
-                        $("#home").css({minHeight: $(window).innerHeight() + 'px'});
+                        $("#home").css({ minHeight: $(window).innerHeight() + 'px' });
                     });
                 }
             },
@@ -2699,7 +3009,7 @@ function media(data){
                     $("#freewall .item").each(function () {
                         var $item = $(this);
                         $item.width(Math.floor(260 + 200 * Math.random()));
-                        $item.css({'background-image': 'url(' + $('>img', $item).attr('src') + ')'});
+                        $item.css({ 'background-image': 'url(' + $('>img', $item).attr('src') + ')' });
                         $('>img', $item).remove();
                     });
 
@@ -2746,74 +3056,74 @@ function media(data){
                     styles = [
                         {
                             stylers: [
-                                {hue: map_color},
-                                {saturation: -75},
-                                {lightness: 5}
+                                { hue: map_color },
+                                { saturation: -75 },
+                                { lightness: 5 }
                             ]
                         },
                         {
                             featureType: "administrative",
                             elementType: "labels.text.fill",
                             stylers: [
-                                {saturation: 20},
-                                {lightness: -70}
+                                { saturation: 20 },
+                                { lightness: -70 }
                             ]
                         },
                         {
                             featureType: "water",
                             elementType: "geometry",
                             stylers: [
-                                {saturation: -50},
-                                {lightness: 40}
+                                { saturation: -50 },
+                                { lightness: 40 }
                             ]
                         },
                         {
                             featureType: "road",
                             elementType: "geometry",
                             stylers: [
-                                {hue: map_color},
-                                {saturation: -100},
-                                {lightness: 0}
+                                { hue: map_color },
+                                { saturation: -100 },
+                                { lightness: 0 }
                             ]
                         },
                         {
                             featureType: "road.highway",
                             elementType: "geometry",
                             stylers: [
-                                {hue: map_color},
-                                {saturation: 5},
-                                {lightness: 5}
+                                { hue: map_color },
+                                { saturation: 5 },
+                                { lightness: 5 }
                             ]
                         },
                         {
                             featureType: "road",
                             elementType: "geometry.stroke",
                             stylers: [
-                                {saturation: 10},
-                                {lightness: 0}
+                                { saturation: 10 },
+                                { lightness: 0 }
                             ]
                         },
                         {
                             featureType: "road.highway",
                             elementType: "geometry.stroke",
                             stylers: [
-                                {saturation: 0},
-                                {lightness: 20}
+                                { saturation: 0 },
+                                { lightness: 20 }
                             ]
                         },
                         {
                             featureType: "transit",
                             elementType: "geometry",
                             stylers: [
-                                {hue: map_color},
-                                {saturation: 30},
-                                {lightness: -30}
+                                { hue: map_color },
+                                { saturation: 30 },
+                                { lightness: -30 }
                             ]
                         }
                     ];
                 }
 
-                styledMap = new google.maps.StyledMapType(styles, {name: "Lilac"});
+                styledMap = new google.maps.StyledMapType(styles, { name: "Lilac" });
 
                 mapOptions = {
                     center: myLatlng,
@@ -2872,7 +3182,7 @@ function media(data){
 
                 $('body').append(twitterBox);
 
-                $("#twitter-box").css({display: 'none'});
+                $("#twitter-box").css({ display: 'none' });
 
                 try {
                     $("#twitter-box").tweet({
@@ -2906,9 +3216,9 @@ function media(data){
                 var $tis = this;
 
                 $('.instagram').html('<div class="heartbeat"></div>');
-                
+
                 var instagramUrl = apiUrl + 'api/instagram';
-                
+
                 $.ajax({
                     type: 'get',
                     url: instagramUrl,
@@ -2921,17 +3231,46 @@ function media(data){
                             feedLen = 0,
                             i = 0;
 
-                        if (feed !== '' && feed.hasOwnProperty("data")) {
-                            feedLen = feed.data.length;
+                        if (feed !== '' && feed.hasOwnProperty("Data")) {
+                            feedLen = feed.Data.length;
                         }
 
+                        var html = '';
                         while (i < feedLen) {
-                            if (index < len) {
-                                $(".instagram").eq(index).html('<img src="' + feed.data[i].images.standard_resolution.url + '" alt="" /><span><a href="' + feed.data[i].images.standard_resolution.url + '" data-gal="prettyPhoto[gallery]" title="' + feed.data[i].caption.text + '"><i class="fa fa-link"></i></a><a href="' + feed.data[i].link + '" target="_blank" title="View on Instagram"><i class="fa fa-external-link"></i></a></span>');
-                                index += 1;
-                            }
+                            /*if (index == 0) {
+                                html += '<ul>';
+                            }*/
+                            html += '<li class="instagram">';
+
+                            //if (index < len) {
+                            // $(".instagram").eq(index).html('<img src="' + feed.data[i].images.standard_resolution.url + '" alt="" /><span><a href="' + feed.data[i].images.standard_resolution.url + '" data-gal="prettyPhoto[gallery]" title="' + feed.data[i].caption.text + '"><i class="fa fa-link"></i></a><a href="' + feed.data[i].link + '" target="_blank" title="View on Instagram"><i class="fa fa-external-link"></i></a></span>');
+                            // html += '<img src="' + feed.Data[i].Images.standard_resolution.Url + '" alt="" /><span>' +
+                            //         '<a href="' + feed.Data[i].Images.standard_resolution.Url + '" data-gal="prettyPhoto[gallery]" ' + 
+                            //         ' title="' + feed.Data[i].Caption.Text + '">' + 
+                            //         '<i class="fa fa-link"></i></a><a href="' + feed.Data[i].Link + '" target="_blank" ' + 
+                            //         'title="View on Instagram"><i class="fa fa-external-link"></i></a></span>';
+                            html += '<img src="' + feed.Data[i].Images.standard_resolution.Url + '" alt="" /><span>' +
+                                    '<a href="' + feed.Data[i].Images.standard_resolution.Url + '" data-gal="prettyPhoto[gallery]" ' + 
+                                    ' title="' + feed.Data[i].Caption.Text + '">' + 
+                                    '<i class="fa fa-link"></i></a><a href="' + feed.Data[i].Link + '" target="_blank" ' + 
+                                    'title="View on Instagram"><i class="fa fa-external-link"></i></a></span>';
+                            index += 1;
+                            //}
+                            html += '</li>';
+                            var columns = feedLen <= 4 ? 4 : feedLen / 2;
+                            /*
+                            if (index == Math.round(columns)) {
+                                html += '</ul>';
+                                index = 0;
+                            }*/
                             i += 1;
                         }
+                        if (feedLen < 4 & feedLen > 0) {
+                            for (var i = 0; i < 4 - feedLen; i++) {
+                                html += '<li><div class="heartbeat"></div></li>';
+                            }
+                        }
+                        $('#galleryInstagram').html(html);
 
                         $tis.createPrettyPhoto();
                     },
@@ -2943,7 +3282,7 @@ function media(data){
 
             createPrettyPhoto: function () {
 
-                $("a[data-gal^='prettyPhoto']").prettyPhoto({theme: 'lilac', hook: 'data-gal'});
+                $("a[data-gal^='prettyPhoto']").prettyPhoto({ theme: 'lilac', hook: 'data-gal' });
             },
 
             createOwlSliders: function () {
@@ -2992,7 +3331,7 @@ function media(data){
                     }
 
                     scrolling = true;
-                    $gallery.animate({scrollLeft: $gallery.scrollLeft() + 380}, function () {
+                    $gallery.animate({ scrollLeft: $gallery.scrollLeft() + 380 }, function () {
                         scrolling = false;
                     });
                 });
@@ -3003,7 +3342,7 @@ function media(data){
                     }
 
                     scrolling = true;
-                    $gallery.animate({scrollLeft: $gallery.scrollLeft() - 380}, function () {
+                    $gallery.animate({ scrollLeft: $gallery.scrollLeft() - 380 }, function () {
                         scrolling = false;
                     });
                 });
@@ -3012,18 +3351,18 @@ function media(data){
             curvedText: function () {
 
                 if ($(".curve").length) {
-                    $('.curve').arctext({radius: 1000});
+                    $('.curve').arctext({ radius: 1000 });
 
                     $(window).resize(function () {
-                        $('.curve').arctext('set', {radius: 1000});
+                        $('.curve').arctext('set', { radius: 1000 });
                     });
                 }
 
                 if ($(".curve2").length) {
-                    $('.curve2').arctext({radius: 800, dir: -1});
+                    $('.curve2').arctext({ radius: 800, dir: -1 });
 
                     $(window).resize(function () {
-                        $('.curve2').arctext('set', {radius: 800, dir: -1});
+                        $('.curve2').arctext('set', { radius: 800, dir: -1 });
                     });
                 }
             },
@@ -3036,9 +3375,9 @@ function media(data){
                     $parent = $("" + parent);
 
                 $parent.html('<div class="days"><span>' + $tis.c_days + '</span><div></div></div>' +
-                        '<div class="hours"><span>' + $tis.c_hours + '</span><div></div></div>' +
-                        '<div class="minutes"><span>' + $tis.c_minutes + '</span><div></div></div>' +
-                        '<div class="seconds"><span>' + $tis.c_seconds + '</span><div></div></div>');
+                    '<div class="hours"><span>' + $tis.c_hours + '</span><div></div></div>' +
+                    '<div class="minutes"><span>' + $tis.c_minutes + '</span><div></div></div>' +
+                    '<div class="seconds"><span>' + $tis.c_seconds + '</span><div></div></div>');
 
                 function changeTime() {
                     var today = new Date(),
@@ -3070,7 +3409,7 @@ function media(data){
                 if (!$.browser.mobile) {
                     $.stellar();
                 } else {
-                    $('.parallax').css({'background-position': '50% 50%', 'background-size': 'cover', 'background-attachment': 'scroll'});
+                    $('.parallax').css({ 'background-position': '50% 50%', 'background-size': 'cover', 'background-attachment': 'scroll' });
                 }
             },
 
@@ -3253,8 +3592,8 @@ function media(data){
                         $submit_btn.addClass('disabled');
 
                         var dataForm = $form.serializeArray();
-                        dataForm.push({ name:'confirmationResponse', value:confirmationResponse });
-                        
+                        dataForm.push({ name: 'confirmationResponse', value: confirmationResponse });
+
                         $.ajax({
                             type: 'POST',
                             url: apiUrl + 'api/mongo',
@@ -3287,7 +3626,179 @@ function media(data){
                     return false;
                 });
             },
+            musicForm: function () {
 
+                var $tis = this;
+
+                $(".submitMusic_form").on('click', function (e) {
+                    e.preventDefault();
+
+                    var $submit_btn = $(this),
+                        $form = $submit_btn.closest("form"),
+                        $fields = $("input, textarea, .radio-lilac", $form),
+                        len = 0,
+                        re = /\S+@\S+\.\S+/,
+                        html = "music",
+                        error = false,
+                        showError,
+                        showSuccess,
+                        stopSpin,
+                        spinIcon = [],
+                        confirmationResponse = '',
+                        $songsWrapper = $("#" + $submit_btn.data("songswrapper")),
+                        $songinput = $("#" + $submit_btn.data("songinput")),
+                        $songButton = $("#" + $submit_btn.data("songbutton"));
+
+                    $fields.each(function () {
+                        var $field = $(this);
+
+                        if ($field.attr('type') === "hidden") {
+                            if ($field.hasClass('subject')) {
+                                html += "&subject=" + $field.val();
+                            } else if ($field.hasClass('fromName') || $field.hasClass('fromname')) {
+                                html += "&fromname=" + $field.val();
+                            } else if ($field.hasClass('fromsongtitle') || $field.hasClass('fromSongTitle')) {
+                                html += "&fromemail=" + $field.val();
+                            } else if ($field.hasClass('emailTo') || $field.hasClass('emailto')) {
+                                html += "&emailto=" + $field.val();
+                            }
+                        } else {
+                            if ($field.hasClass('required') && $field.val() === "") {
+                                $field.addClass('invalid');
+                                error = true;
+                            } else if ($field.attr('type') === "email" && $field.val() !== "" && re.test($field.val()) === false) {
+                                $field.addClass('invalid');
+                                error = true;
+                            } else if ($field.attr('id') !== "recaptcha_response_field") {
+                                $field.removeClass('invalid');
+                                if ($field.hasClass('subject')) {
+                                    html += "&subject=" + $field.val();
+                                    html += "&subject_label=" + $field.attr("name");
+                                } else if ($field.hasClass('fromName') || $field.hasClass('fromname')) {
+                                    html += "&fromname=" + $field.val();
+                                    html += "&fromname_label=" + $field.attr("name");
+                                } else if ($field.hasClass('fromEmail') || $field.hasClass('fromemail')) {
+                                    html += "&fromemail=" + $field.val();
+                                    html += "&fromemail_label=" + $field.attr("name");
+                                } else if ($field.hasClass('radio-lilac')) {
+                                    html += "&field" + len + "_label=" + $field.data("value");
+                                    html += "&field" + len + "_value=" + $('.active', $field).data("value");
+                                    confirmationResponse = $('.active', $field).data("value");
+                                    len += 1;
+                                } else if ($songsWrapper.data("count") == 0) {
+                                    $songinput.addClass('invalid');
+                                    $songButton.addClass('invalid');
+                                    error = true;
+                                }
+                                else {
+                                    html += "&field" + len + "_label=" + $field.attr("name");
+                                    html += "&field" + len + "_value=" + $field.val();
+                                    len += 1;
+                                }
+                            }
+                        }
+                    });
+
+                    html += "&len=" + len;
+
+                    showError = function () {
+                        $submit_btn.width($submit_btn.width());
+
+                        $('i', $submit_btn).each(function () {
+                            var $icon = $(this),
+                                iClass = $icon.attr("class");
+
+                            $icon.removeClass(iClass).addClass('fa fa-times').delay(1500).queue(function (next) {
+                                $(this).removeClass('fa fa-times').addClass(iClass);
+                                next();
+                            });
+                        });
+
+                        $submit_btn.addClass('btn-danger').delay(1500).queue(function (next) {
+                            $(this).removeClass('btn-danger');
+                            next();
+                        });
+
+                        $(".formMusic_status_message").html('<div class="alert alert-danger alert-dismissible" role="alert"><button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>' + contact_form_error_msg + '</div>');
+                    };
+
+                    showSuccess = function () {
+                        $submit_btn.width($submit_btn.width());
+
+                        $('i', $submit_btn).each(function () {
+                            var $icon = $(this),
+                                iClass = $icon.attr("class");
+
+                            $icon.removeClass(iClass).addClass('fa fa-check').delay(1500).queue(function (next) {
+                                $(this).removeClass('fa fa-check').addClass(iClass);
+                                next();
+                            });
+                        });
+
+                        $submit_btn.addClass('btn-success').delay(1500).queue(function (next) {
+                            $(this).removeClass('btn-success');
+                            next();
+                        });
+
+                        $(".formMusic_status_message").html('<div class="alert alert-success alert-dismissible" role="alert"><button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>' + contact_form_success_msg + '</div>');
+                    };
+
+                    stopSpin = function () {
+                        $('i', $submit_btn).each(function (i) {
+                            var $icon = $(this);
+
+                            $icon.removeClass('fa fa-cog fa-spin').addClass(spinIcon[i]);
+                        });
+
+                        $submit_btn.removeClass('disabled');
+                    };
+
+                    if (!error && !$tis.sendingMail) {
+                        $tis.sendingMail = true;
+
+                        $('i', $submit_btn).each(function (i) {
+                            var $icon = $(this);
+
+                            spinIcon[i] = $icon.attr("class");
+
+                            $icon.removeClass(spinIcon[i]).addClass('fa fa-cog fa-spin');
+                        });
+                        $submit_btn.addClass('disabled');
+
+                        var dataForm = $form.serializeArray();
+
+                        $.ajax({
+                            type: 'POST',
+                            url: apiUrl + 'api/music',
+                            data: dataForm,
+                            success: function (msg) {
+                                stopSpin();
+
+                                if (msg === 'ok') {
+                                    showSuccess();
+                                    $form[0].reset();
+                                    $('#songs_list').html("");
+                                } else {
+                                    showError();
+                                }
+
+                                $tis.sendingMail = false;
+                            },
+                            error: function (error) {
+                                stopSpin();
+
+                                showError();
+                                $tis.sendingMail = false;
+                            }
+                        });
+
+                    } else {
+                        showError();
+                    }
+
+                    return false;
+                });
+            },
             buttons: function () {
 
                 var first = true;
@@ -3299,7 +3810,11 @@ function media(data){
                     event.preventDefault();
 
                     if (navActive.attr('href') !== "#home") {
-                        scroll = $(navActive.attr('href')).offset().top - 65;
+                        if (navActive.attr('href') == "#") {
+                            return false;
+                        } else {
+                            scroll = $(navActive.attr('href')).offset().top - 65;
+                        }
                     }
 
                     $('html, body').stop().animate({
@@ -3317,13 +3832,13 @@ function media(data){
                         slider = t.data("slider");
 
                     if (!t.hasClass("active")) {
-                        $(".bridesmaids-groomsmen-slider").addClass("hide").css({opacity: 0});
+                        $(".bridesmaids-groomsmen-slider").addClass("hide").css({ opacity: 0 });
 
                         if (first) {
                             first = false;
                             $("#" + slider).removeClass("hide");
                         } else {
-                            $("#" + slider).removeClass("hide").animate({opacity: 1}, 500);
+                            $("#" + slider).removeClass("hide").animate({ opacity: 1 }, 500);
                         }
                     }
 
@@ -3362,9 +3877,9 @@ function media(data){
                     }
 
                     html = '<div class="input-group">' +
-                            '<input type="text" class="form-control" name="' + $t.data("input") + '_' + count + '" value="' + val + '" />' +
-                            '<span class="input-group-addon"><i class="fa fa-trash"></i></span>' +
-                            '</div>';
+                        '<input type="text" class="form-control" name="' + $t.data("input") + '_' + count + '" value="' + val + '" />' +
+                        '<span class="input-group-addon" data-wrapper="' + $wrapper + '"><i class="fa fa-trash"></i></span>' +
+                        '</div>';
 
                     $("#" + $wrapper).data("count", count).append(html);
                     $input.val('');
@@ -3373,7 +3888,11 @@ function media(data){
 
                 // Capture "Remove guest" button click event.
                 $('.add_list').on('click', '.input-group-addon', function () {
+                    var $t = $(this),
+                        $wrapper = $t.data("wrapper"),
+                        count = parseInt($("#" + $wrapper).data("count"), 10) || 1;
                     $(this).closest(".input-group").remove();
+                    $("#" + $wrapper).data("count", --count);
                 });
             },
 
@@ -3421,7 +3940,7 @@ function media(data){
 
         Lilac.init();
     });
-}(jQuery));
+} (jQuery));
 // var App;
 // (function (App) {
 //     var Common;
@@ -3515,7 +4034,7 @@ var	mobileMenuTitle = "Menu",					//The title of the mobile menu
 	//GOOGLE MAP VARIABLES
 	map_canvas_id = "map_canvas",				//The HTML "id" of the map canvas
 	map_color = "#f58b8a",						//Google map color
-	map_initial_zoom = 13,						//The initial zoom when Google map loads
+	map_initial_zoom = 11,						//The initial zoom when Google map loads
 	map_initial_latitude = 38.2264595,			//Google map initial Latitude. If "null", the latitude of the first marked will be used
 	map_initial_longitude = 15.2398074,		//Google map initial Longitude. If "null", the longitude of the first marked will be used
 	use_default_map_style = true,				//If true, default map style will be used
@@ -3532,6 +4051,7 @@ var	mobileMenuTitle = "Menu",					//The title of the mobile menu
 	c_minutes = "MIN.",							//Countdown "Minutes" label
 	c_seconds = "SEC.",							//Countdown "Seconds" label
 	countdownEndMsg = "Que la boda empieze! / Che il matrimonio inizi!",			//Message to display when the countdown reaches the end
-	// apiUrl = "http://localhost:35825/";
-	apiUrl = "http://stenoeapi.azurewebsites.net/";
+	//apiUrl = "https://localhost:44313/";
+	apiUrl = "http://stenoeapi.azurewebsites.net/",
+	googlePhotosAlbum = "https://photos.google.com/share/AF1QipMsWqgDR_l_Z7vO6XYPPGZQR7XjTjolmdHkXG58UaRnsLE46adLutrfxybmfP71CQ?key=VFlLbFhncFJBVUFDbVRYcC1ia09wLVYxZy12UXlB";
 	

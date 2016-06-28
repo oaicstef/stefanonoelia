@@ -34,7 +34,7 @@
 	<meta http-equiv="X-UA-Compatible" content="IE=edge, chrome=1" />
 	<!-- Mobile Meta Tag -->
 	<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1" />
-	<base href="/buildDev">
+	<base href="/">
 	<!-- Fav and touch icons -->
 	<link rel="shortcut icon" type="image/jpg" href="images/fav_touch_icons/favicon.jpg" />
 	<link rel="apple-touch-icon" href="images/fav_touch_icons/apple-touch-icon.png" />
@@ -54,13 +54,13 @@
 	<link rel="stylesheet" href="styles/app-91991c600a.css">
 </head>
 
-<body ng-controller="MainController as main">
+<body>
 	<div id="preloader">
 		<div class="heartbeat"></div>
 	</div>
 	<!-- PRELOADER -->
 	<!-- BEGIN WRAPPER -->
-	<div id="wrapper" >
+	<div id="wrapper" ng-controller="MainController as main" ui-view="Empty">
 
 		<!-- BEGIN HEADER -->
 		<header id="header">
@@ -71,7 +71,7 @@
 							<a href="#home" class="nav-logo"><img src="images/logo.svg" alt="" /></a>
 
 							<!-- BEGIN MAIN MENU -->
-							<nav class="navbar">
+							<nav class="navbar" ng-controller="NavBarController as nav">
 								<button id="nav-mobile-btn"><i class="fa fa-bars"></i>
 								</button>
 
@@ -110,8 +110,8 @@
 
 									<li><a href="#rsvp" translate>Confirmation</a></li>
 									<li><a href="#music" translate>Music</a></li>
-									<li><a href="#"><img id="IT-Flag" ng-click="main.changeLanguage($event)" src="images\IT.png"/>
-													<img id="ES-Flag" ng-click="main.changeLanguage($event)" src="images\ES.png"/></a>
+									<li><a href="#"><img id="IT-Flag" ng-click="nav.changeLanguage($event)" src="images\IT.png"/>
+													<img id="ES-Flag" ng-click="nav.changeLanguage($event)" src="images\ES.png"/></a>
 								</ul>
 							</nav>
 							<!-- END MAIN MENU -->
@@ -325,9 +325,55 @@
 		<!-- END BRIDESMAIDS & GROOMSMEN SECTION -->
 
 		<!-- BEGIN WEDDING GIFTS SECTION -->
-		<section id="weddinggifts" ng-include="'app/views/gifts.html'">
+		<section id="weddinggifts">
+			<div class="container">
+	<div class="row">
+		<div class="col-sm-12">
+			<h2 class="section-title" translate>Wedding Gifts</h2>
+		</div>
+	</div>
 
-		</section>
+	<div class="row">
+		<div class="col-sm-3">
+			<ul class="Gifts clearfix">
+				<li id="gift-list" data-animation-direction="from-left" data-animation-delay="250">
+					<i class="fa fa-gift"></i><br>
+					<h3 translate>GiftSquare1</h3>
+					<h3 translate>GiftSquare2</h3>
+				</li>
+			</ul>
+		</div>
+		<div class="col-sm-9">
+			<p style="font-size:1.2em;" translate>GiftDescription</p>
+			<div class="row">
+				<div class="col-sm-2">
+					<h3 style="font-size:2em" translate>Name:</h3>
+				</div>
+				<div class="col-sm-10">
+					<h2 style="font-size: 2em;color:#73777b">Stefano D'Amico</h2>
+				</div>
+			</div>
+			<div class="row">
+				<div class="col-sm-2">
+					<h3 style="font-size:2em">IBAN:</h3>
+				</div>
+				<div class="col-sm-10">
+					<h2 style="font-size: 2em;color:#73777b">ES80 0239 2017 3400 2086 9525</h2>
+				</div>
+			</div>
+			<div class="row">
+				<div class="col-sm-2">
+					<h3 style="font-size:2em">SWIFT/BIC:</h3>
+				</div>
+				<div class="col-sm-10">
+					<h2 style="font-size: 2em;color:#73777b">EVOBESMMXXX</h2>
+				</div>
+			</div>
+		</div>
+		<div class="col-sm-1" />
+	</div>
+</div>
+</section>
 		<!-- END WEDDING GIFTS SECTION -->
 
 		<!-- BEGIN GALLERY SECTION -->
@@ -353,12 +399,30 @@
 		</div>
 	</div>
 
-	<div class="gallery-wrapper">
+	<div class="gallery-wrapper" ng-controller="GooglePhotosController as googleVm">
 		<div class="gallery-left"></div>
 		<div class="gallery-right"></div>
 
-		<div class="gallery-scroller">
-			
+		<div class="gallery-scroller" >
+			<ul id="galleryInstagram">
+			</ul>
+			<ul>
+				<li ng-repeat="photo in googleVm.photos">
+					
+					<a href="{{googleVm.googleAlbum}}" target="_blank" title="View on Google">
+							<img src="{{photo.URI}}" alt=""/>
+					</a>
+					<!--<span>
+						<a href="{{photo.URI}}" data-gal="prettyPhoto[gallery]" title="{{photo.title}}">
+							<i class="fa fa-link"></i>
+						</a>
+						<a href="{{googleVm.googleAlbum}}" target="_blank" title="View on Google">
+							<i class="fa fa-external-link"></i>
+						</a>
+					</span>-->
+				</li>
+				<li><div class="heartbeat"></div></li><li><div class="heartbeat"></div></li><li><div class="heartbeat"></div></li><li><div class="heartbeat"></div></li>
+			</ul>
 		</div>
 	</div>
 </section>
@@ -500,12 +564,14 @@
 		<!-- END FOOTER -->
 
 	</div>
-	<script src="js/lib-53a85b58ee.js"></script>
+	<script src="js/lib-d0969d252a.js"></script>
 	<!-- inject:customJs -->
 	<!-- endinject -->
 
 	<script src="http://maps.google.com/maps/api/js?sensor=false" type="text/javascript"></script>
-	<script src="js/app-e6a6da8256.js"></script>
+	<script src="js/app-dc28da6e0c.js"></script>
+
+	
 
 	<!-- Libs -->
 	
