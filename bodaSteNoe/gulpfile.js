@@ -106,6 +106,13 @@ gulp.task('lacalization', function() {
     .pipe(gulp.dest(config.build + 'localization'));
 });
 
+gulp.task('views', function() {
+  log('Compressing and copying views html');
+
+  return gulp
+    .src(config.htmltemplates)
+    .pipe(gulp.dest(config.build + 'app'));
+});
 
 gulp.task('less-watcher', function() {
   gulp.watch([config.less], ['styles']);
@@ -202,7 +209,7 @@ gulp.task('build-specs', ['templatecache'], function(done) {
  * This is separate so we can run tests on
  * optimize before handling image or fonts
  */
-gulp.task('build', ['styles','optimize', 'images', 'lacalization','fonts'], function() {
+gulp.task('build', ['styles','optimize', 'images', 'lacalization','views','fonts'], function() {
   log('Building everything');
 
   var msg = {

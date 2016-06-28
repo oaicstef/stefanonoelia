@@ -282,7 +282,7 @@ function media(data) {
 
                 if (w <= 975 && !$tis.mobMenuFlag) {
 
-                    var mobileMenuHtml = '<nav class="nav-mobile"><i class="fa fa-times"></i><h2><i class="fa fa-bars"></i>' + $tis.mobileMenuTitle + '</h2><ul>' + $('.nav').html() + '</ul></nav>';
+                    var mobileMenuHtml = '<nav class="nav-mobile" ng-controller="NavBarController as nav"><i class="fa fa-times"></i><h2><i class="fa fa-bars"></i>' + $tis.mobileMenuTitle + '</h2><ul>' + $('.nav').html() + '</ul></nav>';
                     //$('body').prepend('<nav class="nav-mobile"><i class="fa fa-times"></i><h2><i class="fa fa-bars"></i>' + $tis.mobileMenuTitle + '</h2><ul></ul></nav>');
 
                     //$('.nav-mobile > ul').html($('.nav').html());

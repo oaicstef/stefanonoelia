@@ -14,7 +14,7 @@
   }]);
 
   app.run(["$http", "$translate", "$filter", function ($http, $translate, $filter) {
-
+    
   }]);
 
   function routeConfiguration($stateProvider, $urlRouterProvider) {
@@ -22,21 +22,21 @@
       .state("blog", {
         url: "/blog",
         //controller: "FeedController",
-        templateUrl: "/app/views/blog.html",
+        templateUrl: "app/views/blog.html",
       })
       .state('home', {
       url: "^/",
-      templateUrl: "/app/views/quote.html"
+      templateUrl: "app/views/quote.html"
     })
     .state("gifts", {
         url: "/gifts",
         //controller: "FeedController",
-        templateUrl: "/app/views/gifts.html",
+        templateUrl: "app/views/gifts.html",
       })
     .state("photo", {
       url: "/photo",
       views: {
-        "Empty": { controller: "GooglePhotosController",  templateUrl: "/app/views/photo.html" }
+        "Empty": { controller: "GooglePhotosController",  templateUrl: "app/views/photo.html" }
       }
     });
       

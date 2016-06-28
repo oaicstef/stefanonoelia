@@ -91,14 +91,16 @@ namespace Api.Controllers
                     return BadRequest("No file has been sent");
 
                 var file = HttpContext.Current.Request.Files[0];
-                
-                using (var dataStream = file.InputStream)
+                if (file != null)
                 {
-                    var filePath = $"{Environment.GetFolderPath(Environment.SpecialFolder.Personal)}\\postedPhoto.jpg";
-                    var picasaService = getPicasaService();
-                    var postUri = new Uri(PicasaQuery.CreatePicasaUri("damicos", albumId));
-                    PicasaEntry entry =
-                            (PicasaEntry) picasaService.Insert(postUri, dataStream, file.ContentType, file.FileName);
+                    using (var dataStream = file.InputStream)
+                    {
+                        var filePath = $"{Environment.GetFolderPath(Environment.SpecialFolder.Personal)}\\postedPhoto.jpg";
+                        var picasaService = getPicasaService();
+                        var postUri = new Uri(PicasaQuery.CreatePicasaUri("damicos", albumId));
+                        PicasaEntry entry =
+                                (PicasaEntry)picasaService.Insert(postUri, dataStream, file.ContentType, file.FileName);
+                    }
                 }
                 return Ok();
             }

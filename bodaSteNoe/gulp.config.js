@@ -38,7 +38,7 @@ module.exports = function() {
       client + 'fonts/**/*.*'
     ],
     html: client + '**/*.html',
-    htmltemplates: [clientApp + '**/*.html'],
+    htmltemplates: [clientApp + '**/photo.html', clientApp + '**/quote.html'],
     images: client + 'images/**/*.*',
     localization: client + 'localization/*.json',
     index: client + 'index.html',

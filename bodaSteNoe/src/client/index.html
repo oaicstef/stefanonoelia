@@ -87,7 +87,7 @@
 							<a href="#home" class="nav-logo"><img src="images/logo.svg" alt="" /></a>
 
 							<!-- BEGIN MAIN MENU -->
-							<nav class="navbar">
+							<nav class="navbar" ng-controller="NavBarController as nav">
 								<button id="nav-mobile-btn"><i class="fa fa-bars"></i>
 								</button>
 
@@ -126,8 +126,8 @@
 
 									<li><a href="#rsvp" translate>Confirmation</a></li>
 									<li><a href="#music" translate>Music</a></li>
-									<li><a href="#"><img id="IT-Flag" ng-click="main.changeLanguage($event)" src="images\IT.png"/>
-													<img id="ES-Flag" ng-click="main.changeLanguage($event)" src="images\ES.png"/></a>
+									<li><a href="#"><img id="IT-Flag" ng-click="nav.changeLanguage($event)" src="images\IT.png"/>
+													<img id="ES-Flag" ng-click="nav.changeLanguage($event)" src="images\ES.png"/></a>
 								</ul>
 							</nav>
 							<!-- END MAIN MENU -->
@@ -606,15 +606,19 @@
 	<script src="/src/client/app/googlePhotosController.js"></script>
 	<script src="/src/client/app/mainController.js"></script>
 	<script src="/src/client/js/map.markers.js"></script>
+	<script src="/src/client/app/navBarController.js"></script>
 	<script src="/src/client/js/richmarker.js"></script>
 	<script src="/src/client/js/scripts.js"></script>
 	<script src="/src/client/app/services/apiService.js"></script>
 	<script src="/src/client/js/variables.js"></script>
 	<!-- endinject -->
-
-	<!-- inject:templates:js -->
+	
+	<!-- inject:templates -->
 	<!-- endinject -->
+
 	<!-- endbuild -->
+
+	
 
 	<!-- Libs -->
 	

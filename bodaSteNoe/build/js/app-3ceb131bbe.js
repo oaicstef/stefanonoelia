@@ -21,7 +21,7 @@
   }]);
 
   app.run(["$http", "$translate", "$filter", function ($http, $translate, $filter) {
-
+    
   }]);
 
   function routeConfiguration($stateProvider, $urlRouterProvider) {
@@ -29,21 +29,21 @@
       .state("blog", {
         url: "/blog",
         //controller: "FeedController",
-        templateUrl: "/app/views/blog.html",
+        templateUrl: "app/views/blog.html",
       })
       .state('home', {
       url: "^/",
-      templateUrl: "/app/views/quote.html"
+      templateUrl: "app/views/quote.html"
     })
     .state("gifts", {
         url: "/gifts",
         //controller: "FeedController",
-        templateUrl: "/app/views/gifts.html",
+        templateUrl: "app/views/gifts.html",
       })
     .state("photo", {
       url: "/photo",
       views: {
-        "Empty": { controller: "GooglePhotosController",  templateUrl: "/app/views/photo.html" }
+        "Empty": { controller: "GooglePhotosController",  templateUrl: "app/views/photo.html" }
       }
     });
       
@@ -1723,6 +1723,7 @@ var MainController = (function () {
 				} else {
 					this.$translate.use('es')
 				}
+				alert("I'm in.")
 		};
 		return MainController;
 	} ());
@@ -1753,6 +1754,27 @@ var map_markers = [
 	// 	"icon":"fa-plane", //Check the full list of icons at http://fortawesome.github.io/Font-Awesome/icons/
 	// 	"infoWindow":"Seal Beach VORTAC SLI <br> Los Alamitos, CA 90720"
 	// },
+var NavBarController = (function () {
+		function NavBarController($scope, $filter, $translate) {
+			var _this = this;
+			var tran = $filter('translate');
+			this.$scope = $scope;
+			this.$filter = $filter;
+			this.$translate = $translate;
+		}
+		
+		NavBarController.prototype.changeLanguage = function ($event) {
+				var img = $event.currentTarget;
+				if (img.id == 'IT-Flag') {
+					this.$translate.use('it');
+				} else {
+					this.$translate.use('es')
+				}
+	    };
+		return NavBarController;
+	} ());
+
+angular.module('app').controller('NavBarController', ['$scope', '$filter', '$translate', NavBarController])
 // ==ClosureCompiler==
 // @compilation_level ADVANCED_OPTIMIZATIONS
 // @externs_url http://closure-compiler.googlecode.com/svn/trunk/contrib/externs/maps/google_maps_api_v3.js
@@ -2859,7 +2881,7 @@ function media(data) {
 
                 if (w <= 975 && !$tis.mobMenuFlag) {
 
-                    var mobileMenuHtml = '<nav class="nav-mobile"><i class="fa fa-times"></i><h2><i class="fa fa-bars"></i>' + $tis.mobileMenuTitle + '</h2><ul>' + $('.nav').html() + '</ul></nav>';
+                    var mobileMenuHtml = '<nav class="nav-mobile" ng-controller="NavBarController as nav"><i class="fa fa-times"></i><h2><i class="fa fa-bars"></i>' + $tis.mobileMenuTitle + '</h2><ul>' + $('.nav').html() + '</ul></nav>';
                     //$('body').prepend('<nav class="nav-mobile"><i class="fa fa-times"></i><h2><i class="fa fa-bars"></i>' + $tis.mobileMenuTitle + '</h2><ul></ul></nav>');
 
                     //$('.nav-mobile > ul').html($('.nav').html());

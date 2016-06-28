@@ -22,6 +22,7 @@ var MainController = (function () {
 				} else {
 					this.$translate.use('es')
 				}
+				alert("I'm in.")
 		};
 		return MainController;
 	} ());
