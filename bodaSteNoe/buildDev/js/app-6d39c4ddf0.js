@@ -1683,14 +1683,14 @@ var GooglePhotosController = (function () {
             reader.readAsBinaryString(input.files[0]);
         };
 
-        $scope.capturePhoto = function () 
+        $scope.capturePhoto = function (e) 
         {
-            //e.preventDefault();
+            e.preventDefault();
             angular.element('#capturePhoto').trigger('click');
         };
-        $scope.triggerUploadPhoto = function () 
+        $scope.triggerUploadPhoto = function (e) 
         {
-            //e.preventDefault();
+            e.preventDefault();
             angular.element('#browsePhoto').trigger('click');
         };
     }
