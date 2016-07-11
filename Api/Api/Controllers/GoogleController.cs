@@ -21,8 +21,8 @@ namespace Api.Controllers
     {
         string[] Scopes = { DriveService.Scope.Drive, "http://picasaweb.google.com/data/" };
         const string ApplicationName = "ApiSteNoe";
-        const string username = "damicos@gmail.com";
-        const string albumId = "6264127277017962641"; // BodaSteNoe
+        const string username = "noeliastefano@gmail.com";
+        const string albumId = "6305744093763953121"; // Our Wedding
 
         [Route("photos")]
         [HttpGet]
@@ -97,7 +97,7 @@ namespace Api.Controllers
                     {
                         var filePath = $"{Environment.GetFolderPath(Environment.SpecialFolder.Personal)}\\postedPhoto.jpg";
                         var picasaService = getPicasaService();
-                        var postUri = new Uri(PicasaQuery.CreatePicasaUri("damicos", albumId));
+                        var postUri = new Uri(PicasaQuery.CreatePicasaUri("noeliastefano", albumId));
                         PicasaEntry entry =
                                 (PicasaEntry)picasaService.Insert(postUri, dataStream, file.ContentType, file.FileName);
                     }
@@ -115,9 +115,9 @@ namespace Api.Controllers
             var userCredential = getCredentials();
             var auth = new OAuth2Parameters
             {
-                ClientId = "419505205705-1gv7kvkiv78vshk79bd1sirtj758lpkq.apps.googleusercontent.com",
-                ClientSecret = "X8fsuHKjKvqcDRyeXdgy-5iN",
-                RedirectUri = "[ 'urn:ietf: wg: oauth: 2.0:oob', 'http://localhost:35825' ]",
+                ClientId = "951622103837-fl5hjltc91v3l75djc10cdtvok7qgsk5.apps.googleusercontent.com",
+                ClientSecret = "lbLu0g6w7gk5ckuPzSZZRQem",
+                RedirectUri = "[ 'urn:ietf: wg: oauth: 2.0:oob', 'http://localhost' ]",
                 Scope = "http://picasaweb.google.com/data/",
                 AccessToken = userCredential.Token.AccessToken,
                 RefreshToken = userCredential.Token.RefreshToken,
@@ -141,13 +141,14 @@ namespace Api.Controllers
                 new FileStream($"{credPath}/client_secret.json", FileMode.Open, FileAccess.Read))
             {
                 credPath = Path.Combine(credPath, "credentials.json");
-
+                var store = new FileDataStore(credPath, true);
+                
                 credential = GoogleWebAuthorizationBroker.AuthorizeAsync(
                     GoogleClientSecrets.Load(stream).Secrets,
                     Scopes,
                     username,
                     CancellationToken.None,
-                    new FileDataStore(credPath, true)).Result;
+                    store).Result;
 
                 if (credential.Token.IsExpired(Google.Apis.Util.SystemClock.Default))
                 {

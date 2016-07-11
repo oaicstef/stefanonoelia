@@ -1,0 +1,1 @@
+{"access_token":"ya29.Ci8bA0iKDDjGtzsHxRbXKFqI3EN8XPQ-_6vP6-z_e51uT52Ml3Fp8xPQmyWMNJgm7A","token_type":"Bearer","expires_in":3600,"refresh_token":"1/vznUlzkkncBl_TTrlGSr1qd9xI4PU4wHem1xqoGFb-k","Issued":"2016-06-19T13:41:20.838+02:00"}

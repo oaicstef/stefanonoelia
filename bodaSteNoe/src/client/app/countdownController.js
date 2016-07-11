@@ -1,5 +1,5 @@
 var CountDownController = (function () {
-    function CountDownController($scope,$interval) {
+    function CountDownController($scope,$interval, $http, $compile, $state) {
 
         var _this = this;
         this.$scope = $scope;
@@ -7,30 +7,34 @@ var CountDownController = (function () {
         _this.hours = 0;
         _this.minutes = 0;
         _this.seconds = 0;
-          
+        
         var $tis = this,
-            future = new Date("2016/08/19 4:30 PM"),
+            future = new Date("2016/08/19 0:00 AM"),
             counter;
         
-        // $parent.html('<div class="days"><span>' + $tis.c_days + '</span><div></div></div>' +
-        //     '<div class="hours"><span>' + $tis.c_hours + '</span><div></div></div>' +
-        //     '<div class="minutes"><span>' + $tis.c_minutes + '</span><div></div></div>' +
-        //     '<div class="seconds"><span>' + $tis.c_seconds + '</span><div></div></div>');
-
-        //counter = setInterval(changeTime(_this, future), 1000);
+        _this.waitTime = 1000;
+        
         if ($interval){
-            var time = $interval(changeTime, 1000, null, null, _this, future);
+            var time = $interval(changeTime, 1000, null, null, _this, future, $http, $compile, $state, $scope);
         }
     }
     
-    function changeTime (scope, future) {
+    function changeTime (scope, future, $http, $compile, $state, $scope) {
         var today = new Date(),
             _dd = future - today,
             $parent = $(".countdown");
 
         if (_dd < 0) {
-            $parent.html('<div class="end">' + countdownEndMsg + '</div>');
-            clearInterval(counter);
+            if (scope.waitTime <= 1000)
+            {
+                var title = $('.hero-text');
+                title.html("<div>{{ 'StartWedding' | translate }}</div><div>{{ 'SharePictures' | translate }}</div>");
+                var compiled = $compile(title.html())($scope);
+                title.html(compiled);
+                $parent.hide();
+                $state.go("photo");
+                scope.waitTime = 999999999999999999999;
+            }
 
             return false;
         }
@@ -40,7 +44,7 @@ var CountDownController = (function () {
         var minutes = Math.floor(((_dd % (60 * 60 * 1000 * 24)) % (60 * 60 * 1000)) / (60 * 1000) * 1);
         var seconds = Math.floor((((_dd % (60 * 60 * 1000 * 24)) % (60 * 60 * 1000)) % (60 * 1000)) / 1000 * 1);
 
-        scope.days =days;
+        scope.days = days;
         scope.hours = hours;
         scope.minutes = minutes;
         scope.seconds = seconds;
@@ -49,7 +53,7 @@ var CountDownController = (function () {
     return CountDownController;
 } ());
 
-angular.module('app').controller('CountDownController', ['$scope', '$interval', CountDownController]);
+angular.module('app').controller('CountDownController', ['$scope', '$interval','$http','$compile','$state', CountDownController]);
 
 (function () {
     angular.module('app').directive('countdown', [

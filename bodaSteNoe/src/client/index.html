@@ -144,6 +144,7 @@
 			<div class="container">
 				<div class="row">
 					<div class="col-sm-12">
+						
 						<div class="hero-title curve">Noelia & Stefano</div>
 						<div class="hero-text">{{ 'Are getting Married in' | translate }}</div>
 						<div class="hero-divider"></div>
@@ -154,19 +155,18 @@
 							<div class="minutes"><span>{{ 'MIN.' | translate }}</span><div>{{vm.minutes}}</div></div>
 							<div class="seconds"><span>{{ 'SEC.' | translate }}</span><div>{{vm.seconds}}</div></div>
 						</div>
-						<span style='display:none' countdown='' date='August 19, 2016 16:30:00' >
+						<div ui-view="Photo"/>
+						<span style='display:none' countdown='' date='July 10, 2016 22:17:00' >
 						</span>
 						<!-- Countdown container. Check the bottom of the document where the countdown is being initialized. -->
 
 						<div class="hero-divider"></div>
+						
 					</div>
 				</div>
 			</div>
 		</section>
 		<!-- END HOME SECTION -->
-		
-		<section id="otherPage" ui-view />
-		
 		<section id="ourstory">
 			<div class="container">
 				<div class="row">

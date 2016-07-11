@@ -98,7 +98,7 @@ namespace Api.Controllers
             }
             var tags = new InstaSharp.Endpoints.Tags(config, oAuthResponse);
 
-            var tagResponse = await tags.Recent("noeste");
+            var tagResponse = await tags.Recent("noeste2016");
 
             return Ok(tagResponse);
         }

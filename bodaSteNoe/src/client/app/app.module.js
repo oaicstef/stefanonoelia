@@ -34,11 +34,11 @@
         templateUrl: "app/views/gifts.html",
       })
     .state("photo", {
-      url: "/photo",
+      url: '/photo',
       views: {
-        "Empty": { controller: "GooglePhotosController",  templateUrl: "app/views/photo.html" }
+        "Photo": { controller: "GooglePhotosController",  templateUrl: "app/views/photo.html" }
       }
-    });
+    }); 
       
     //$urlRouterProvider.otherwise("/");
   }
