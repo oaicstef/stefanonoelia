@@ -252,6 +252,8 @@
     <Content Include="Config\client_secret.json">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
+    <Content Include="Config\credentials.json\credentialsNoeSte.dat" />
+    <Content Include="Config\credentials.json\Google.Apis.Auth.OAuth2.Responses.TokenResponse-damicos%40gmail.com" />
     <None Include="Project_Readme.html" />
   </ItemGroup>
   <ItemGroup>

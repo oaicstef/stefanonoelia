@@ -9,8 +9,10 @@ $(function($){
 		slide_links			:	'false',
 		slides 				:  	[			// Slideshow Images
 										{image : 'images/DSC_0856.jpg'},
-										{image : 'images/DSC_0856.jpg'},  
-										{image : 'images/DSC_0856.jpg'}
+										{image : 'images/img1.jpg'},  
+										{image : 'images/img2.jpg'},
+										{image : 'images/img3.jpg'},
+										{image : 'images/img4.jpg'}
 								]
 	});
 });

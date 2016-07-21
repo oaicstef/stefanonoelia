@@ -3,13 +3,13 @@
         <div style="margin:0 auto; float: none" >
             <input id="capturePhoto" type="file" accept="image/*" name="picture" style="display:none" capture
                 onchange="angular.element(this).scope().uploadPhoto(this)">
-            <a href="#" id="triggerCapture" class="btn ribbon btn-color" ng-click="capturePhoto($event)" >
-                Capture PHOTO
+            <a href="#" id="triggerCapture" class="btn btn-lightcolor" ng-click="capturePhoto($event)" >
+                <i class="fa fa-camera fa-4x"/>
             </a>
             <input id="browsePhoto" type="file" accept="image/*" name="picture" style="display:none"
                 onchange="angular.element(this).scope().uploadPhoto(this)">
-            <a href="#" id="triggerUpload" class="btn ribbon btn-color" ng-click="triggerUploadPhoto($event)" >
-                Upload PHOTO
+            <a href="#" id="triggerUpload" class="btn btn-lightcolor" ng-click="triggerUploadPhoto($event)" >
+                <i class="fa fa-cloud-upload fa-4x"/>
             </a>
         </div>
     </div>

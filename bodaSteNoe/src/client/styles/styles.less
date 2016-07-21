@@ -33,6 +33,7 @@
 /* Variables
 ================================================== */
 @color: #f58b8a;
+@lightcolor: #fff;
 @text-color: #73777b;
 @text-color-light: #adb1b5;
 @color-overlay: darken(@color, 0%);
@@ -531,13 +532,30 @@ h2.section-title{
 	margin:0 auto;
 }
 
+.btn2 {
+	padding: 6px 13px;
+	font-size: 20pt;
+	border: 3px solid transparent;
+	font-family:@headings-font-family2;
+	text-transform:uppercase;
+	.border-radius(6px);
+	-webkit-transition: all 0.3s;
+       -moz-transition: all 0.3s;
+         -o-transition: all 0.3s;
+            transition: all 0.3s;
+	
+	i{
+		margin-right:10px;
+	}
+}
+
 .btn {
 	padding: 6px 13px;
 	font-size: 20pt;
 	border: 3px solid transparent;
 	font-family:@headings-font-family2;
 	text-transform:uppercase;
-	.border-radius(4px);
+	.border-radius(6px);
 	-webkit-transition: all 0.3s;
        -moz-transition: all 0.3s;
          -o-transition: all 0.3s;
@@ -649,6 +667,35 @@ fieldset[disabled] .btn-default2:active,
 fieldset[disabled] .btn-default2.active {
 	background-color: #ffffff;
 	border-color: #cccccc;
+}
+
+
+.btn-lightcolor,
+.btn-lightcolor:focus,
+.btn-lightcolor.focus {
+	color: fade(@color, 65%);
+	background-color: #fff;
+	border-color: fade(#fff, 65%);
+	box-shadow: 4px 4px 4px #fff;
+	border-radius: 20px;
+	margin: 0.3em 0.3em;
+}
+.btn-lightcolor i{
+	margin-right: 0px;
+}
+.btn-lightcolor:hover,
+.btn-lightcolor:active,
+.btn-lightcolor.active,
+.open > .dropdown-toggle.btn-lightcolor {
+	color:@color;
+	background-color: #fff;
+	border-color: #fff;
+}
+
+.btn-lightcolor:active,
+.btn-lightcolor.active,
+.open > .dropdown-toggle.btn-lightcolor {
+	background-image: none;
 }
 
 .btn-color,
@@ -834,6 +881,7 @@ fieldset[disabled] .btn-color.active {
 			color: #fff;
 		}
 	}
+	
 }
 
 .btn.ribbon.disabled,
