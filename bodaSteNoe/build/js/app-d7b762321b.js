@@ -43,7 +43,8 @@
     .state("photo", {
       url: '/photo',
       views: {
-        "Photo": { controller: "GooglePhotosController",  templateUrl: "app/views/photo.html" }
+        "Photo": { controller: "GooglePhotosController",  templateUrl: "app/views/photo.html" },
+        "Empty": { controller: "GooglePhotosController",  templateUrl: "app/views/photo.html" }
       }
     }); 
       
