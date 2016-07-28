@@ -4,7 +4,8 @@
 
   var app = angular.module('app', [
     'pascalprecht.translate',
-    'ui.router'
+    'ui.router',
+    'ngTouch'
   ]);
 
   app.config(['$translateProvider', '$stateProvider', '$urlRouterProvider', function ($translateProvider, $stateProvider, $urlRouterProvider) {

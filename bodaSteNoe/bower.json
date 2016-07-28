@@ -31,7 +31,8 @@
     "modernizr": "3.3.1",
     "angular-translate": "^2.11.0",
     "angular-translate-loader-static-files": "^2.11.0",
-    "angular-translate-loader-partial": "^2.11.0"
+    "angular-translate-loader-partial": "^2.11.0",
+    "ngtouch": "^1.0.1"
   },
   "resolutions": {
     "angular": "1.5.3"
