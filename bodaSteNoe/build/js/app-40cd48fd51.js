@@ -298,7 +298,7 @@ var CountDownController = (function () {
         _this.seconds = 0;
         
         var $tis = this,
-            future = new Date("2016/07/19 0:00 AM"),
+            future = new Date("2016/08/19 0:00 AM"),
             counter;
         
         _this.waitTime = 1000;
