@@ -32,7 +32,7 @@
     "angular-translate": "^2.11.0",
     "angular-translate-loader-static-files": "^2.11.0",
     "angular-translate-loader-partial": "^2.11.0",
-    "angular-touch": "latest"
+    "angular-touch-faster": "latest"
   },
   "resolutions": {
     "angular": "1.5.3"
