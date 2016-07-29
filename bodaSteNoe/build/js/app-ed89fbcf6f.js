@@ -298,17 +298,17 @@ var CountDownController = (function () {
         _this.seconds = 0;
         
         var $tis = this,
-            future = new Date("2016/08/19 0:00 AM"),
+            future = new Date("2016/07/19 0:00 AM"),
             counter;
         
         _this.waitTime = 1000;
         
         if ($interval){
-            var time = $interval(changeTime, 1000, null, null, _this, future, $http, $compile, $state, $scope);
+            _this.refreshInterval = $interval(changeTime, 30, null, null, _this, future, $http, $compile, $state, $scope, $interval);
         }
     }
     
-    function changeTime (scope, future, $http, $compile, $state, $scope) {
+    function changeTime (scope, future, $http, $compile, $state, $scope, $interval) {
         var today = new Date(),
             _dd = future - today,
             $parent = $(".countdown");
@@ -316,6 +316,8 @@ var CountDownController = (function () {
         if (_dd < 0) {
             if (scope.waitTime <= 1000)
             {
+                $('#home').removeClass('divider-bottom-1');
+                $interval.cancel(scope.refreshInterval);
                 var title = $('.hero-text');
                 title.html("<div>{{ 'StartWedding' | translate }}</div><div>{{ 'SharePictures' | translate }}</div>");
                 var compiled = $compile(title.html())($scope);
