@@ -1661,11 +1661,15 @@ angular.module('app').controller('CountDownController', ['$scope', '$interval','
 })(window.Zepto || window.jQuery);
 
 var GooglePhotosController = (function () {
-    function GooglePhotosController($scope, $http) {
+    function GooglePhotosController($scope, $http, $state) {
         var vm = this;
         vm.photos = null;
         vm.fileName = null;
         vm.googleAlbum = googlePhotosAlbum;
+
+        if ($state.is("photo")){
+            $('#home').removeClass('divider-bottom-1');
+        }
 
         $http({
             method: 'GET',
@@ -1720,7 +1724,7 @@ var GooglePhotosController = (function () {
         e.preventDefault();
         angular.element('#uploadPhoto').trigger('click');
     };
-    GooglePhotosController.$inject = ['$scope', '$http'];
+    GooglePhotosController.$inject = ['$scope', '$http', '$state'];
     return GooglePhotosController;
 } ());
 
