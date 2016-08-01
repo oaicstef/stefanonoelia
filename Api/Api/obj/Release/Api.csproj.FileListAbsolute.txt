@@ -75,7 +75,6 @@ E:\Users\Stefano\Source\Repos\stefanonoelia\Api\Api\bin\Google.Apis.PlatformServ
 E:\Users\Stefano\Source\Repos\stefanonoelia\Api\Api\bin\log4net.xml
 E:\Users\Stefano\Source\Repos\stefanonoelia\Api\Api\bin\Zlib.Portable.xml
 E:\Users\Stefano\Source\Repos\stefanonoelia\Api\Api\obj\Release\Api.g.resources
-E:\Users\Stefano\Source\Repos\stefanonoelia\Api\Api\bin\Config\credentials.json\Google.Apis.Auth.OAuth2.Responses.TokenResponse-damicos@gmail.com
 E:\Users\Stefano\Source\Repos\stefanonoelia\Api\Api\bin\Config\client_secret.json
 E:\Users\Stefano\Source\Repos\stefanonoelia\Api\Api\bin\bouncy_castle_hmac_sha_pcl.dll
 E:\Users\Stefano\Source\Repos\stefanonoelia\Api\Api\bin\Google.Apis.Drive.v3.dll
