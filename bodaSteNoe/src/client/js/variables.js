@@ -30,8 +30,8 @@ var	mobileMenuTitle = "Menu",					//The title of the mobile menu
 	c_minutes = "MIN.",							//Countdown "Minutes" label
 	c_seconds = "SEC.",							//Countdown "Seconds" label
 	countdownEndMsg = "StartWedding",			//Message to display when the countdown reaches the end
-	apiUrl = "https://localhost:44313/";
-	//apiUrl = "http://stenoeapi.azurewebsites.net/",
+	//apiUrl = "https://localhost:44313/";
+	apiUrl = "http://stenoeapi.azurewebsites.net/",
 	// "https://goo.gl/photos/FCuRHFZ8xFHvQSDL6"
 	googlePhotosAlbum = "https://goo.gl/photos/FCuRHFZ8xFHvQSDL6";
 	//googlePhotosAlbum = "https://photos.google.com/share/AF1QipMsWqgDR_l_Z7vO6XYPPGZQR7XjTjolmdHkXG58UaRnsLE46adLutrfxybmfP71CQ?key=VFlLbFhncFJBVUFDbVRYcC1ia09wLVYxZy12UXlB";
