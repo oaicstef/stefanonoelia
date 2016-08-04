@@ -5,6 +5,5 @@
 /bodaSteNoe/node_modules
 /bodaSteNoe/bower_components
 /Api/Api/bin
-/Api/Api/obj/Debug
-/Api/Api/obj/Release
+/Api/Api/obj
 /Api/packages
