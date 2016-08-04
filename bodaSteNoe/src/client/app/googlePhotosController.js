@@ -4,6 +4,8 @@ var GooglePhotosController = (function () {
         vm.photos = null;
         vm.fileName = null;
         vm.googleAlbum = googlePhotosAlbum;
+        vm.GoogleUrl = googlePhotosAlbum;
+        vm.InstagramUrl = instagramAlbum;
 
         if ($state.is("photo")){
             $('#home').removeClass('divider-bottom-1');

@@ -31,16 +31,17 @@ namespace Api.Controllers
             
             var picasaService = getPicasaService();
             PhotoQuery photoQuery = new PhotoQuery(PicasaQuery.CreatePicasaUri(username, albumId));
+            
             PicasaFeed feed = picasaService.Query(photoQuery);
 
-            var result = new List<dynamic>();
+            var result = new Stack<dynamic>();
             foreach (var entry in feed.Entries)
             {
 
                 var photo = new Photo();
                 photo.AtomEntry = entry;
 
-                result.Add(new
+                result.Push(new
                 {
                     title = photo.Title,
                     URI = photo.PhotoUri,

@@ -1666,6 +1666,8 @@ var GooglePhotosController = (function () {
         vm.photos = null;
         vm.fileName = null;
         vm.googleAlbum = googlePhotosAlbum;
+        vm.GoogleUrl = googlePhotosAlbum;
+        vm.InstagramUrl = instagramAlbum;
 
         if ($state.is("photo")){
             $('#home').removeClass('divider-bottom-1');
@@ -4073,7 +4075,8 @@ var	mobileMenuTitle = "Menu",					//The title of the mobile menu
 	//apiUrl = "https://localhost:44313/";
 	apiUrl = "http://stenoeapi.azurewebsites.net/",
 	// "https://goo.gl/photos/FCuRHFZ8xFHvQSDL6"
-	googlePhotosAlbum = "https://goo.gl/photos/FCuRHFZ8xFHvQSDL6";
+	googlePhotosAlbum = "https://goo.gl/photos/FCuRHFZ8xFHvQSDL6",
+	instagramAlbum = "https://www.instagram.com/explore/tags/noeste2016";
 	//googlePhotosAlbum = "https://photos.google.com/share/AF1QipMsWqgDR_l_Z7vO6XYPPGZQR7XjTjolmdHkXG58UaRnsLE46adLutrfxybmfP71CQ?key=VFlLbFhncFJBVUFDbVRYcC1ia09wLVYxZy12UXlB";
 
 	
