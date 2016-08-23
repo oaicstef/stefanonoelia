@@ -1702,6 +1702,7 @@ var GooglePhotosController = (function () {
                           alert("Error");
                       })
                 });
+            };
             reader.readAsBinaryString(input.files[0]);
         };
 
