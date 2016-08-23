@@ -1697,7 +1697,7 @@ var GooglePhotosController = (function () {
                      headers: {'Content-Type': undefined},
                      data:  fd
                   }).then(function successCallback(response) {
-                          alert("ok uploaded");   
+                          //alert("ok uploaded");   
                       }, function error(response) {
                           alert("Error");
                       })
