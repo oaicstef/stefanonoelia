@@ -1683,9 +1683,11 @@ var GooglePhotosController = (function () {
         });
 
         $scope.uploadPhoto = function (input) {
-            var reader = new FileReader();
-            reader.onloadend = function loaded(params) {
-                var d = this.result;
+            //var reader = new FileReader();
+            //reader.onloadend = function loaded(params) {
+                
+            //};
+            //var d = this.result;
                 $.each(input.files, function(idx, item)
                 {
                   var fd = new FormData();
@@ -1702,8 +1704,7 @@ var GooglePhotosController = (function () {
                           alert("Error");
                       })
                 });
-            };
-            reader.readAsBinaryString(input.files[0]);
+            //reader.readAsBinaryString(input.files[0]);
         };
 
         $scope.capturePhoto = function (e) 
