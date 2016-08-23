@@ -1701,10 +1701,7 @@ var GooglePhotosController = (function () {
                       }, function error(response) {
                           alert("Error");
                       })
-                  });
-                }
-                );
-            
+                });
             reader.readAsBinaryString(input.files[0]);
         };
 
