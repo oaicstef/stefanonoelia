@@ -1686,19 +1686,21 @@ var GooglePhotosController = (function () {
             var reader = new FileReader();
             reader.onloadend = function loaded(params) {
                 var d = this.result;
-                var fd = new FormData();
-                fd.append('file', input.files[0]);
-                $http({
-                   method: 'POST',
-                   url: apiUrl + 'api/google',
-                   transformRequest: angular.identity,
-                   headers: {'Content-Type': undefined},
-                   data:  fd
-                }).then(function successCallback(response) {
-                        alert("ok uploaded");   
-                    }, function error(response) {
-                        alert("Error");
-                    })
+                input.files.forEach(function(item){
+                  var fd = new FormData();
+                  fd.append('file', item);
+                  $http({
+                     method: 'POST',
+                     url: apiUrl + 'api/google',
+                     transformRequest: angular.identity,
+                     headers: {'Content-Type': undefined},
+                     data:  fd
+                  }).then(function successCallback(response) {
+                          alert("ok uploaded");   
+                      }, function error(response) {
+                          alert("Error");
+                      })
+                  });
             };
             
             reader.readAsBinaryString(input.files[0]);
