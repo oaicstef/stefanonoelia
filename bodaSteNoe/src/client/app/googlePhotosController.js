@@ -21,24 +21,8 @@ var GooglePhotosController = (function () {
         });
 
         $scope.uploadPhoto = function (input) {
-            // var reader = new FileReader();
-            // reader.onloadend = function loaded(params) {
-            //     var d = this.result;
-            //     var fd = new FormData();
-            //     fd.append('file', input.files[0]);
-            //     $http({
-            //        method: 'POST',
-            //        url: apiUrl + 'api/google',
-            //        transformRequest: angular.identity,
-            //        headers: {'Content-Type': undefined},
-            //        data:  fd
-            //     }).then(function successCallback(response) {
-            //             alert("ok uploaded");   
-            //         }, function error(response) {
-            //             alert("Error");
-            //         })
-            // };
-            vm.FileUploaded = "";
+            vm.FileUploaded = input.files.length;
+
             $.each(input.files, function(idx, item)
                 {
                   var fd = new FormData();
@@ -62,6 +46,7 @@ var GooglePhotosController = (function () {
             e.preventDefault();
             angular.element('#capturePhoto').trigger('click');
         };
+        
         $scope.triggerUploadPhoto = function (e) 
         {
             e.preventDefault();
