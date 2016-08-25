@@ -21,25 +21,40 @@ var GooglePhotosController = (function () {
         });
 
         $scope.uploadPhoto = function (input) {
-            var reader = new FileReader();
-            reader.onloadend = function loaded(params) {
-                var d = this.result;
-                var fd = new FormData();
-                fd.append('file', input.files[0]);
-                $http({
-                   method: 'POST',
-                   url: apiUrl + 'api/google',
-                   transformRequest: angular.identity,
-                   headers: {'Content-Type': undefined},
-                   data:  fd
-                }).then(function successCallback(response) {
-                        alert("ok uploaded");   
-                    }, function error(response) {
-                        alert("Error");
-                    })
-            };
-            
-            reader.readAsBinaryString(input.files[0]);
+            // var reader = new FileReader();
+            // reader.onloadend = function loaded(params) {
+            //     var d = this.result;
+            //     var fd = new FormData();
+            //     fd.append('file', input.files[0]);
+            //     $http({
+            //        method: 'POST',
+            //        url: apiUrl + 'api/google',
+            //        transformRequest: angular.identity,
+            //        headers: {'Content-Type': undefined},
+            //        data:  fd
+            //     }).then(function successCallback(response) {
+            //             alert("ok uploaded");   
+            //         }, function error(response) {
+            //             alert("Error");
+            //         })
+            // };
+            vm.FileUploaded = "";
+            $.each(input.files, function(idx, item)
+                {
+                  var fd = new FormData();
+                  fd.append('file', item);
+                  $http({
+                     method: 'POST',
+                     url: apiUrl + 'api/google',
+                     transformRequest: angular.identity,
+                     headers: {'Content-Type': undefined},
+                     data:  fd
+                  }).then(function successCallback(response) {
+                          vm.FileUploaded += item.name + " has been uploaded. ";   
+                      }, function error(response) {
+                          alert("Error");
+                      })
+                });
         };
 
         $scope.capturePhoto = function (e) 

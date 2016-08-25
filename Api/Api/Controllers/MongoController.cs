@@ -27,7 +27,16 @@ namespace Api.Controllers
         public async Task<IHttpActionResult> Get()
         {
             var result = await collection.Find(c => c.Name != null).ToListAsync();
+            
             return Ok(result);
+        }
+
+        [Route("emails")]
+        public async Task<IHttpActionResult> GetEmails()
+        {
+            var result = (await collection.FindAsync(c => c.Name != null));
+            var r = string.Join(";", (await result.ToListAsync()).Select(c => c.Email));
+            return Ok(r);
         }
 
         [Route()]
